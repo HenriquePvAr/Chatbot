@@ -28,9 +28,10 @@ Quilombos contemporaneos sao comunidades diversas, com trajetorias historicas pr
 
 O Censo 2022 contou 1.330.186 pessoas quilombolas em 1.700 municipios, usando autodeclaracao. E uma fotografia estatistica daquele censo, nao uma definicao individual de identidade.
 
+<!-- secao: Manifestacoes e saberes afro-brasileiros -->
 ## Manifestacoes e saberes afro-brasileiros
 
-- **Capoeira:** combina jogo, movimento, musica, canto, instrumentos, rituais e transmissao de saberes; existem estilos, mestres e comunidades diferentes.
+- **Capoeira:** combina jogo, movimento, musica, canto, instrumentos, rituais e transmissao de saberes; existem estilos, mestres e comunidades diferentes. Na roda, o berimbau, junto com instrumentos como atabaque e pandeiro, conduz o ritmo; também costuma orientar os cânticos e o ritmo do jogo. A função concreta dos toques e a condução variam conforme a roda e os mestres.
 - **Jongo no Sudeste:** expressao afro-brasileira com tambores, canto e danca coletiva, desenvolvida em comunidades do Sudeste e ligada a historias de resistencia.
 - **Samba de Roda do Recôncavo Baiano:** pratica musical, coreografica e comunitaria, com variantes e contextos locais.
 - **Oficio das Baianas de Acaraje:** saber tradicional de preparo e venda de acaraje, ligado a redes de trabalho, religiosidade e cultura afro-baiana. Respeitar seu sentido religioso e o protagonismo das baianas.
@@ -50,3 +51,4 @@ Esses exemplos nao representam todas as culturas negras nem sao costumes univers
 - IPHAN Bahia, **Patrimonio imaterial**: https://www.gov.br/iphan/pt-br/superintendencias/bahia/patrimonio-imaterial
 - IPHAN Sao Paulo, **Jongo no Sudeste**: https://www.gov.br/iphan/pt-br/superintendencias/sao-paulo/patrimonio-imaterial
 - IPHAN Amapa, **Arte Kusiwa e Marabaixo**: https://www.gov.br/iphan/pt-br/superintendencias/amapa/patrimonio-imaterial
+- Ministerio da Cultura, **Roda de Capoeira: Patrimonio Cultural do Brasil une luta, danca e musica**: https://www.gov.br/cultura/pt-br/assuntos/noticias/roda-de-capoeira-patrimonio-cultural-do-brasil-une-luta-danca-e-musica/

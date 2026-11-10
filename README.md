@@ -1,28 +1,38 @@
-# Bot WhatsApp — Cultura Afro-Indígena 2026.2
+# Assistente WhatsApp - Cultura Afro-Indígena 2026.2
 
-Assistente do projeto **Falas de Maria: Lutas e Conquistas**. Responde dúvidas sobre culturas e histórias afro-brasileiras e indígenas usando os materiais em `documents/`, o Ollama local e pesquisa na web quando necessário. Atende somente conversas individuais; grupos, canais, status e listas de transmissão são ignorados.
+Assistente escolar do projeto **Falas de Maria: Lutas e Conquistas**. Responde em português sobre histórias, culturas, línguas, patrimônios e povos afro-brasileiros e indígenas. Usa materiais em `documents/`, busca local com Ollama e pesquisa na web quando necessário. O modelo nao foi treinado do zero: a base pode ser ampliada com documentos revisados e fontes públicas.
+
+O bot atende conversas individuais. Grupos, canais, status e listas de transmissao sao ignorados. Também responde perguntas institucionais basicas sobre ESBAM/UNIESBAM usando os dados documentados em `documents/informacoes_institucionais_esbam.md`.
 
 ## Preparar no Windows
 
-Instale o [Python 3.10 ou superior](https://www.python.org/downloads/windows/) e o [Ollama para Windows](https://ollama.com/download/windows). Abra o Ollama e aguarde a API local ficar disponível. Depois, no PowerShell, dentro desta pasta, execute:
+O script detecta os componentes existentes e instala o que faltar: Python 3.12 de 64 bits, Ollama, dependências Python e modelos configurados. Cria ou reutiliza `.venv`, preserva configuracoes locais, baixa apenas os modelos ausentes e reindexa os documentos quando eles mudarem.
+
+Abra o PowerShell nesta pasta e execute:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\preparar_ambiente.ps1
 ```
 
-O script cria `.venv`, instala as dependências, cria `.env.extensao` a partir do exemplo, baixa os modelos configurados e indexa os documentos. Na primeira execução, os modelos podem baixar alguns gigabytes.
+E necessário acesso a internet e espaco em disco para os modelos locais (vários gigabytes). A política da máquina pode exigir autorização administrativa para instalar programas. O script testa se a biblioteca Neonize carrega; se o Controle de Aplicativos bloquear a DLL (`WinError 4551`), a liberacao deve ser solicitada ao administrador de TI.
 
-Para iniciar o bot:
+Inicie o bot:
 
 ```powershell
 .\.venv\Scripts\python.exe .\bot_agentes.py
 ```
 
-Na primeira execução, siga o QR/pedido de pareamento exibido pelo Neonize usando **Aparelhos conectados** no WhatsApp. Mantenha o Ollama aberto e execute apenas uma instância do bot por vez. A sessão do WhatsApp fica em `sessao_whatsapp.db` e não deve ser compartilhada entre computadores.
+Para reiniciar automaticamente ao salvar arquivos Python ou `.env.extensao`:
+
+```powershell
+.\.venv\Scripts\python.exe .\rodar_com_reload.py
+```
+
+Na primeira conexão, siga o QR ou o pedido de pareamento do Neonize em **Aparelhos conectados** do WhatsApp. A sessão fica salva localmente em `sessao_whatsapp.db`. Execute somente uma instancia do bot por sessão.
 
 ## Configuração
 
-Edite `.env.extensao` para escolher modelos, endereço do Ollama ou limites da fila. O arquivo não deve ser compartilhado; o exemplo sem dados privados está em `.env.extensao.example`.
+O arquivo `.env.extensao` e criado a partir de `.env.extensao.example` quando ainda nao existe. Edite-o localmente para mudar os modelos, o endereco do Ollama ou os limites da fila. Nao compartilhe o arquivo local.
 
 ```dotenv
 OLLAMA_URL=http://localhost:11434
@@ -33,27 +43,67 @@ WHATSAPP_USER_BURST=3
 WHATSAPP_USER_PAUSE_SECONDS=5
 WHATSAPP_MAX_PENDING_PER_USER=30
 WHATSAPP_MAX_PENDING_TOTAL=2000
+WHATSAPP_MESSAGE_BURST_WINDOW_SECONDS=1.8
+WHATSAPP_OFF_TOPIC_NOTICE_SECONDS=180
+WHATSAPP_MAX_MESSAGE_AGE_SECONDS=120
+WHATSAPP_STICKER_INTERVAL=5
 ```
 
-A fila preserva a ordem de cada conversa, atende no máximo três mensagens seguidas por pessoa e espera cinco segundos antes das próximas. Assuntos fora do tema e tentativas comuns de prompt injection são bloqueados antes da chamada ao modelo.
+A fila agrupa mensagens proximas, preserva a ordem de cada conversa e limita respostas repetidas. Mensagens antigas e duplicadas podem ser ignoradas. O intervalo de avisos fora do tema reduz repeticoes.
 
-## Materiais e comandos
+## Como conversar
 
-Os três arquivos Markdown em `documents/` são a base inicial. Para acrescentar conteúdo, coloque um PDF com texto selecionável ou um Markdown nessa pasta e rode novamente:
+Escreva normalmente, sem comandos. Exemplos:
+
+- Quem foi Tereza de Benguela e por que ela e lembrada?
+- Qual e a funcao do berimbau na capoeira?
+- Como línguas africanas influenciaram o português brasileiro?
+- Quais línguas indígenas sao faladas no Brasil?
+- O que e a ESBAM? Qual o telefone ou o Instagram?
+
+Pode juntar perguntas na mesma mensagem, separando-as com `?`, ponto e virgula ou nova linha. O bot tenta responder todas em uma so mensagem, na mesma ordem. Mensagens curtas seguintes, como "e por que?", podem ser entendidas pelo contexto recente da conversa.
+
+Comandos disponíveis:
+
+- `/menu` ou `/ajuda`: exemplos e orientações.
+- `/web pergunta`: solicitar uma pesquisa na internet.
+- `/fontes`: buscar referências online ligadas a última resposta. Também pode perguntar "quais sao as fontes?".
+- `/sobre`: informações sobre o assistente.
+- `/plano`: detalhes tecnicos da última pesquisa, para depuracao.
+
+Respostas baseadas somente nos materiais locais nao recebem uma lista artificial de fontes. Quando houver pesquisa web, os links usados aparecem no fim da resposta. Se a pessoa pedir fontes de uma resposta local, o bot pesquisa referências públicas relacionadas ao assunto.
+
+## Conhecimento e materiais
+
+Os arquivos Markdown e PDFs pesquisaveis ficam em `documents/`. Revise a origem, a permissão de uso e a ausencia de dados pessoais antes de adicionar material. Para reindexar manualmente:
 
 ```powershell
 .\.venv\Scripts\python.exe .\indexar_pdfs.py
 ```
 
-O índice é recriado localmente em `dados_rag/indice.json`; ele não precisa ser copiado para outro PC. PDFs e a sessão do WhatsApp também ficam locais.
+O indice e criado em `dados_rag/indice.json` e pode ser reconstruido; nao precisa ser versionado. PDFs digitalizados sem texto selecionavel precisam de OCR. Alterações no indice sao lidas nas proximas consultas, sem reiniciar o bot. O modelo nao aprende automaticamente com as conversas.
 
-Comandos disponíveis no chat: `/menu`, `/ajuda`, `/sobre`, `/documentos`, `/plano`, `/limpar`. Para solicitar pesquisa na web, envie `/web` seguido da pergunta. O bot também pode pesquisar automaticamente.
+Os guias locais sao sinteticos e nao representam todas as comunidades. Para dados atuais, cursos, mensalidades, vestibular ou servicos da ESBAM, encaminhe a pessoa ao site oficial: https://esbam.edu.br/.
 
-## Estrutura
+## Imagens e figurinhas
 
-- `bot_agentes.py`: conexão WhatsApp, fila e comandos.
-- `agentes_autonomos.py`, `busca_web.py`: pesquisa local/web e geração de respostas.
-- `rag_local.py`, `indexar_pdfs.py`: base documental e índice local.
-- `fila_whatsapp.py`, `escopo_assunto.py`: limites da fila e filtro de assunto/injeção.
-- `documents/`: materiais de conhecimento incluídos no projeto.
-- `dados_rag/`: índice gerado no computador onde o bot roda.
+Pedidos como "Pode me mandar uma imagem da capoeira?" ou "Me manda uma figurinha de capoeira" testam o envio de mídia. Imagens podem acompanhar respostas sobre alguns temas visuais, e figurinhas podem ser enviadas automaticamente conforme `WHATSAPP_STICKER_INTERVAL`. O envio depende da rede, da disponibilidade do arquivo e do WhatsApp. O terminal e `logs/interacoes_whatsapp.jsonl` registram o resultado.
+
+## Privacidade, dados locais e Git
+
+A sessão do WhatsApp, `.env.extensao`, logs, bancos de dados e indice local nao devem ser publicados. Os logs podem conter mensagens, respostas, evidências e resultados da web. O arquivo `.gitignore` bloqueia esses itens, ambientes Python, PDFs e pastas de documentos locais/privados. `.env.extensao.example` e permitido e deve conter somente valores ficticios ou padroes sem segredo.
+
+Antes de preparar um commit, revise o estado e os arquivos staged. O guia [Segurança_E_GIT.md](./SEGURANCA_E_GIT.md) explica as verificacoes, os caminhos protegidos e o que fazer se algum segredo ja tiver sido rastreado. `.gitignore` nao remove arquivos ja rastreados; se um segredo ja foi enviado a um repositorio remoto, revogue-o e invalide a sessão exposta.
+
+Consulte [Política_Conteúdo_E_FONTES.md](./POLITICA_CONTEUDO_E_FONTES.md) para critérios de segurança, fontes e resposta escolar.
+
+## Estrutura principal
+
+- `bot_agentes.py`: conexão WhatsApp, comandos, fila, histórico e envio de mídia.
+- `agentes_autonomos.py`, `busca_web.py`: busca local/web e respostas.
+- `rag_local.py`, `indexar_pdfs.py`: indexação e recuperacao de documentos.
+- `fila_whatsapp.py`, `escopo_assunto.py`: agrupamento de mensagens e filtros.
+- `midia_whatsapp.py`: busca e preparacao de imagens e figurinhas.
+- `documents/`: materiais revisados para a base do bot.
+- `dados_rag/`: indice gerado localmente.
+- `logs/`: diagnosticos locais, ignorados pelo Git.

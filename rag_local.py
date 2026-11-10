@@ -3,6 +3,7 @@ import os
 import json
 import math
 import re
+import unicodedata
 from pathlib import Path
 
 import requests
@@ -29,6 +30,26 @@ EMBEDDING_MODEL = os.getenv(
 PASTA_DOCUMENTOS = Path("documents")
 PASTA_INDICE = Path("dados_rag")
 ARQUIVO_INDICE = PASTA_INDICE / "indice.json"
+
+PALAVRAS_VAZIAS_BUSCA = {
+    "o", "a", "os", "as", "um", "uma", "uns", "umas", "de", "do", "da",
+    "dos", "das", "em", "no", "na", "nos", "nas", "por", "para", "com",
+    "e", "ou", "que", "quem", "qual", "quais", "quando", "onde", "como",
+    "porque", "sobre", "foi", "sao", "era", "me", "diga", "explique", "fale",
+    "conte", "significa", "significado", "diz", "faz", "fez", "determina",
+}
+
+
+def _tokens_busca(texto):
+    sem_acentos = "".join(
+        caractere
+        for caractere in unicodedata.normalize("NFKD", str(texto or "").casefold())
+        if not unicodedata.combining(caractere)
+    )
+    return {
+        token for token in re.findall(r"[a-z0-9]+", sem_acentos)
+        if token not in PALAVRAS_VAZIAS_BUSCA
+    }
 
 
 # ==========================================
@@ -239,6 +260,16 @@ def similaridade(vetor_a, vetor_b):
 
 def buscar_documentos(pergunta, quantidade=3):
 
+    return buscar_documentos_multiplos([pergunta], quantidade=quantidade)[0]
+
+
+def buscar_documentos_multiplos(perguntas, quantidade=3):
+    """Busca varias perguntas em um unico lote de embeddings."""
+    perguntas = [str(pergunta or "").strip() for pergunta in perguntas]
+    perguntas = [pergunta for pergunta in perguntas if pergunta]
+    if not perguntas:
+        return []
+
     if not ARQUIVO_INDICE.exists():
         raise RuntimeError(
             "Base RAG nao encontrada. "
@@ -255,31 +286,31 @@ def buscar_documentos(pergunta, quantidade=3):
             "Reindexe os documentos."
         )
 
-    vetor_pergunta = gerar_embeddings([pergunta])[0]
-
-    resultados = []
-
-    for registro in indice["registros"]:
-
-        pontuacao = similaridade(
-            vetor_pergunta,
-            registro["embedding"]
-        )
-
-        resultados.append({
-            "arquivo": registro["arquivo"],
-            "pagina": registro["pagina"],
-            "secao": registro.get("secao"),
-            "texto": registro["texto"],
-            "similaridade": pontuacao
-        })
-
-    resultados.sort(
-        key=lambda item: item["similaridade"],
-        reverse=True
-    )
-
-    return resultados[:quantidade]
+    vetores_perguntas = gerar_embeddings(perguntas)
+    resultados_por_pergunta = []
+    for pergunta, vetor_pergunta in zip(perguntas, vetores_perguntas):
+        tokens_pergunta = _tokens_busca(pergunta)
+        resultados = []
+        for registro in indice["registros"]:
+            pontuacao = similaridade(vetor_pergunta, registro["embedding"])
+            tokens_trecho = _tokens_busca(registro["texto"])
+            cobertura_lexical = (
+                len(tokens_pergunta & tokens_trecho) / len(tokens_pergunta)
+                if tokens_pergunta
+                else 0.0
+            )
+            resultados.append({
+                "arquivo": registro["arquivo"],
+                "pagina": registro["pagina"],
+                "secao": registro.get("secao"),
+                "texto": registro["texto"],
+                "similaridade": pontuacao,
+                "cobertura_lexical": cobertura_lexical,
+                "relevancia": pontuacao + 0.35 * cobertura_lexical,
+            })
+        resultados.sort(key=lambda item: item["relevancia"], reverse=True)
+        resultados_por_pergunta.append(resultados[:quantidade])
+    return resultados_por_pergunta
 
 
 

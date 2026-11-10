@@ -16,3 +16,4 @@ try:
 except Exception as erro:
 
     print("\nErro:", repr(erro))
+    raise SystemExit(1)

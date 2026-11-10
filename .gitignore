@@ -4,15 +4,32 @@
 .env.*
 !.env.example
 !.env.extensao.example
+*.secret
+*.token
+*credentials*.json
+*secrets*.json
+*.pem
+*.key
+*.p12
+*.pfx
 
 # Documentos locais e indice derivado
-documents/*.pdf
+*.pdf
 dados_rag/*.json
+dados_rag/*.jsonl
+documents/local/
+documents/privado/
 
 # Ambiente Python
 .venv/
+.venv_*/
 venv/
 env/
+.tox/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
 
 # Cache
 __pycache__/
@@ -22,15 +39,41 @@ __pycache__/
 # Sessao WhatsApp
 sessao_whatsapp.db
 sessao_whatsapp.db-*
+sessao_whatsapp*
+*whatsapp*session*
+*whatsapp*auth*
+auth_info/
+auth/
+credentials/
+secrets/
+private/
+session/
+sessions/
+*.session
+*.session-*
+*.qr
+qr*.png
+qr*.svg
 
 # Bancos e arquivos temporarios
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
 *.db-journal
 *.db-wal
 *.db-shm
+*.tmp
+*.temp
 
 # Logs
 *.log
+*.jsonl
 logs/
+tmp/
+temp/
 
 # Editores
 .vscode/
