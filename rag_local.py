@@ -109,25 +109,50 @@ def indexar_documentos():
     registros = []
 
     arquivos = sorted(
-        PASTA_DOCUMENTOS.glob("*.pdf")
+        [*PASTA_DOCUMENTOS.glob("*.pdf"), *PASTA_DOCUMENTOS.glob("*.md")]
     )
 
     if not arquivos:
         raise RuntimeError(
-            "Nenhum PDF encontrado em documentos/."
+            "Nenhum PDF ou arquivo Markdown encontrado em documents/."
         )
 
     for arquivo in arquivos:
 
         print(f"Lendo: {arquivo.name}", flush=True)
 
-        leitor = PdfReader(str(arquivo))
+        if arquivo.suffix.lower() == ".pdf":
+            leitor = PdfReader(str(arquivo))
+            paginas = [
+                (numero, None, pagina.extract_text() or "")
+                for numero, pagina in enumerate(leitor.pages, start=1)
+            ]
+        else:
+            texto_markdown = arquivo.read_text(encoding="utf-8")
+            marcadores = list(
+                re.finditer(
+                    r"(?m)^<!-- (pagina|secao): (.*?) -->\s*$",
+                    texto_markdown,
+                )
+            )
+            if not marcadores:
+                paginas = [(None, None, texto_markdown)]
+            else:
+                paginas = []
+                for indice, marcador in enumerate(marcadores):
+                    fim = (
+                        marcadores[indice + 1].start()
+                        if indice + 1 < len(marcadores)
+                        else len(texto_markdown)
+                    )
+                    valor = marcador.group(2).strip()
+                    pagina = int(valor) if marcador.group(1) == "pagina" else None
+                    secao = valor if marcador.group(1) == "secao" else None
+                    paginas.append(
+                        (pagina, secao, texto_markdown[marcador.end():fim])
+                    )
 
-        for numero_pagina, pagina in enumerate(
-            leitor.pages, start=1
-        ):
-
-            texto = pagina.extract_text() or ""
+        for numero_pagina, secao, texto in paginas:
 
             trechos = dividir_texto(texto)
 
@@ -136,13 +161,14 @@ def indexar_documentos():
                 registros.append({
                     "arquivo": arquivo.name,
                     "pagina": numero_pagina,
+                    "secao": secao,
                     "texto": trecho
                 })
 
     if not registros:
         raise RuntimeError(
-            "Nenhum texto extraido dos PDFs. "
-            "Verifique se os arquivos sao digitalizados."
+            "Nenhum texto extraido dos documentos. "
+            "PDFs digitalizados precisam de OCR antes da indexacao."
         )
 
     print(
@@ -243,6 +269,7 @@ def buscar_documentos(pergunta, quantidade=3):
         resultados.append({
             "arquivo": registro["arquivo"],
             "pagina": registro["pagina"],
+            "secao": registro.get("secao"),
             "texto": registro["texto"],
             "similaridade": pontuacao
         })
@@ -272,14 +299,26 @@ def listar_documentos():
         nome = registro["arquivo"]
 
         if nome not in documentos:
-            documentos[nome] = set()
+            documentos[nome] = {
+                "paginas": set(),
+                "secoes": set(),
+                "trechos": 0,
+            }
 
-        documentos[nome].add(registro["pagina"])
+        pagina = registro.get("pagina")
+        secao = registro.get("secao")
+        if pagina is not None:
+            documentos[nome]["paginas"].add(pagina)
+        if secao:
+            documentos[nome]["secoes"].add(secao)
+        documentos[nome]["trechos"] += 1
 
-    return [
-        {
-            "arquivo": nome,
-            "paginas_indexadas": len(paginas)
-        }
-        for nome, paginas in sorted(documentos.items())
-    ]
+    resultado = []
+    for nome, dados in sorted(documentos.items()):
+        item = {"arquivo": nome, "trechos_indexados": dados["trechos"]}
+        if dados["paginas"]:
+            item["paginas_indexadas"] = len(dados["paginas"])
+        if dados["secoes"]:
+            item["secoes_indexadas"] = sorted(dados["secoes"])
+        resultado.append(item)
+    return resultado
