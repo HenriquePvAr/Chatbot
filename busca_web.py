@@ -1,5 +1,9 @@
 from urllib.parse import urlparse
+from collections import OrderedDict
+from copy import deepcopy
 import re
+import threading
+import time
 import unicodedata
 
 from ddgs import DDGS
@@ -10,15 +14,15 @@ FONTES_PRIORITARIAS = (
     "gov.br",
     "ibge.gov.br",
     "iphan.gov.br",
+    "planalto.gov.br",
+    "camara.leg.br",
+    "senado.leg.br",
+    "bn.gov.br",
+    "museudoindio.gov.br",
     "edu.br",
     "edu",
     "scielo.br",
     "unesco.org",
-    "uol.com.br",
-    "globo.com",
-    "folha.uol.com.br",
-    "bbc.com",
-    "apublica.org",
 )
 
 DOMINIOS_BAIXA_CONFIANCA = (
@@ -39,6 +43,12 @@ PALAVRAS_IGNORADAS = {
     "explicar", "explica", "importancia", "diferenca", "entre", "brasil",
     "brasileiro", "brasileira", "brasileiros", "brasileiras",
 }
+
+_CACHE_TTL_SEGUNDOS = 300
+_CACHE_TTL_VAZIO_SEGUNDOS = 20
+_CACHE_MAXIMO = 128
+_CACHE_LOCK = threading.Lock()
+_CACHE_RESULTADOS = OrderedDict()
 
 
 def _normalizar_texto(valor):
@@ -68,7 +78,9 @@ def _pontuacao_relevancia(consulta, titulo, trecho):
     documento = set(re.findall(r"[a-z]+|\d{4,}", texto_documento))
     for numero in re.findall(r"\b(\d{1,2})\s*\.?\s*(\d{3})\b", texto_documento):
         documento.add("".join(numero))
-    return len(termos & documento)
+    correspondencias = len(termos & documento)
+    minimo = 2 if len(termos) >= 3 else 1
+    return correspondencias if correspondencias >= minimo else 0
 
 
 def pesquisar_web(consulta, quantidade=5):
@@ -77,6 +89,34 @@ def pesquisar_web(consulta, quantidade=5):
         raise ValueError("Informe o tema que deve ser pesquisado na web.")
 
     quantidade = max(1, min(5, int(quantidade)))
+    chave = (
+        re.sub(r"\s+", " ", _normalizar_texto(consulta)).strip(),
+        quantidade,
+    )
+    agora = time.monotonic()
+    with _CACHE_LOCK:
+        item = _CACHE_RESULTADOS.get(chave)
+        ttl = (
+            _CACHE_TTL_SEGUNDOS
+            if item and item[1]
+            else _CACHE_TTL_VAZIO_SEGUNDOS
+        )
+        if item and agora - item[0] < ttl:
+            _CACHE_RESULTADOS.move_to_end(chave)
+            return deepcopy(item[1])
+        if item:
+            del _CACHE_RESULTADOS[chave]
+
+    resultados = _pesquisar_web_sem_cache(consulta, quantidade)
+    with _CACHE_LOCK:
+        _CACHE_RESULTADOS[chave] = (time.monotonic(), deepcopy(resultados))
+        _CACHE_RESULTADOS.move_to_end(chave)
+        while len(_CACHE_RESULTADOS) > _CACHE_MAXIMO:
+            _CACHE_RESULTADOS.popitem(last=False)
+    return resultados
+
+
+def _pesquisar_web_sem_cache(consulta, quantidade):
     parametros = {
         "region": "br-pt",
         # DDGS aceita "on", "moderate" ou "off"; "on" e a opcao mais restritiva.
@@ -84,7 +124,7 @@ def pesquisar_web(consulta, quantidade=5):
         "max_results": quantidade,
     }
     try:
-        resultados = DDGS(timeout=7).text(
+        resultados = DDGS(timeout=5).text(
             consulta[:300],
             backend="auto",
             **parametros,
@@ -96,7 +136,7 @@ def pesquisar_web(consulta, quantidade=5):
     # alguns provedores. O fallback Startpage/Google evita retornar vazio cedo.
     if not resultados:
         try:
-            resultados = DDGS(timeout=5).text(
+            resultados = DDGS(timeout=3).text(
                 consulta[:300],
                 backend="google",
                 **parametros,
@@ -140,10 +180,11 @@ def pesquisar_web(consulta, quantidade=5):
     if not formatados or not any(item["dominio_prioritario"] for item in formatados):
         try:
             consulta_prioritaria = (
-                f"{consulta[:240]} site:gov.br OR site:edu.br OR "
-                "site:unesco.org OR site:scielo.br"
+                consulta[:300]
+                if re.search(r"\bsite:", consulta, re.IGNORECASE)
+                else f"{consulta[:240]} site:gov.br"
             )
-            candidatos = DDGS(timeout=4).text(
+            candidatos = DDGS(timeout=3).text(
                 consulta_prioritaria,
                 backend="google",
                 **parametros,

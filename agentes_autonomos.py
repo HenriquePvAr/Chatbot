@@ -14,6 +14,8 @@ load_dotenv(".env.extensao", override=True)
 from rag_local import buscar_documentos, buscar_documentos_multiplos, listar_documentos
 from busca_web import pesquisar_web
 from escopo_assunto import (
+    TERMOS_DO_TEMA,
+    corrigir_erros_tematicos,
     eh_pedido_texto_sobre_povos,
     eh_pergunta_ampla_sobre_povos,
     eh_retomada_curta,
@@ -34,6 +36,22 @@ PROMPT_ANALISTA = """
 Voce e um assistente especializado em cultura afro-indigena para o projeto
 escolar 2026.2. Responda em portugues brasileiro, com linguagem clara,
 acolhedora, respeitosa e adequada a comunidade escolar.
+
+Converse como um bom monitor: responda primeiro ao que a pessoa perguntou,
+sem repetir a pergunta nem reiniciar a apresentacao em cada turno. Em retomadas,
+conecte a resposta ao assunto e ao que ja foi explicado, sem copiar a resposta
+anterior. Use uma ou duas frases naturais para uma pergunta simples; use itens
+numerados apenas quando houver varias perguntas ou uma lista realmente util.
+Se a retomada continuar ambigua mesmo com o historico, faca uma pergunta curta
+para esclarecer em vez de adivinhar.
+Corrija erros de digitacao sem chamar atencao para eles e use a grafia correta
+de nomes e termos na resposta; nao repita a grafia errada da mensagem.
+Cada frase deve acrescentar uma informacao; nao repita a mesma ideia com outras
+palavras. So chame uma pessoa ou acontecimento de importante se a evidencia
+explicar por que; se ela registrar apenas uma acao, diga somente o que esta
+documentado e nao invente a causa da lembranca ou da relevancia.
+Nao atribua a uma pessoa especifica caracteristicas ou acoes que o trecho
+apresente apenas como contexto geral de uma comunidade ou grupo.
 
 Responda sobre cultura, historia e povos afro-brasileiros e indigenas,
 incluindo apoio a atividades escolares desse tema. Tambem responda perguntas
@@ -124,14 +142,14 @@ demais. Mire em ate 140 palavras para uma pergunta e ate 220 quando houver varia
 """
 
 
-def chamar_ia(mensagens, esquema=None, num_predict=300):
+def chamar_ia(mensagens, esquema=None, num_predict=240):
     payload = {
         "model": MODELO,
         "messages": mensagens,
         "stream": False,
         # Respostas para WhatsApp devem ser curtas; limitar a geracao evita
         # que uma busca com muitos trechos deixe a chamada presa por minutos.
-        "options": {"temperature": 0, "num_predict": max(300, min(700, int(num_predict)))},
+        "options": {"temperature": 0, "num_predict": max(96, min(500, int(num_predict)))},
     }
     if esquema is not None:
         payload["format"] = esquema
@@ -232,7 +250,7 @@ def _separar_perguntas(pergunta):
     )
     perguntas = []
     interrogativos = (
-        r"(?:e\s+)?(?:o que|oq|quem|quando|onde|como|por que|porque|qual|quais|"
+        r"(?:e\s+)?(?:o que|oq|quem|qm|quando|qdo|qnd|onde|como|por que|pq|porque|qual|quais|"
         r"de que forma|em que)\b"
     )
     for indice, parte in enumerate(partes):
@@ -257,6 +275,13 @@ def _parece_continuacao(pergunta):
     texto = normalizar_texto(pergunta).strip()
     if eh_retomada_curta(pergunta):
         return True
+    if re.match(
+        r"^(?:e\s+)?(?:quem\s+mais|qual\s+era|qual\s+foi|em\s+que\s+ano|"
+        r"quanto\s+tempo|onde\s+ficava|quem\s+(?:participou|liderou|fundou|"
+        r"organizou|escreveu|criou|lutou))\b",
+        texto,
+    ):
+        return True
     if re.search(r"\b(ele|ela|eles|elas|isso|esse|essa|esses|essas|dele|dela|deles|delas|seu|sua|seus|suas)\b", texto):
         return True
     palavras = texto.split()
@@ -265,16 +290,64 @@ def _parece_continuacao(pergunta):
     )
 
 
+def _pergunta_tem_assunto_explicito(pergunta):
+    """Identifica retomadas com tema novo nomeado, que nao devem herdar o anterior."""
+    texto = normalizar_texto(pergunta)
+    menciona_tema = any(
+        normalizar_texto(termo) in texto
+        for termo in TERMOS_DO_TEMA
+    )
+    fala_de_referente_anterior = bool(re.search(
+        r"\b(ele|ela|eles|elas|dele|dela|deles|delas|isso|esse|essa|"
+        r"esses|essas|disto|daquilo)\b",
+        texto,
+    ))
+    construcao_dependente = bool(re.match(
+        r"^(?:e\s+)?(?:quem\s+mais|qual\s+era|qual\s+foi|em\s+que\s+ano|"
+        r"quanto\s+tempo|onde\s+ficava|quem\s+(?:participou|liderou|fundou|"
+        r"organizou|escreveu|criou|lutou))\b",
+        texto,
+    ))
+    return menciona_tema and not fala_de_referente_anterior and not construcao_dependente
+
+
 def _ultima_pergunta_com_assunto(historico):
     perguntas = [
         str(mensagem.get("content") or "").strip()
         for mensagem in reversed(historico or [])
         if mensagem.get("role") == "user" and str(mensagem.get("content") or "").strip()
     ]
-    return next(
-        (pergunta for pergunta in perguntas if not eh_retomada_curta(pergunta)),
-        perguntas[0] if perguntas else "",
-    )
+    if not perguntas:
+        return ""
+
+    # Preserve a chain of follow-ups. If the user asks "quem foi X?", then
+    # "o que ela fez?", and later "por que isso foi importante?", the latest
+    # follow-up refers to the resolved intermediate question, not only to X.
+    continuacoes = []
+    assunto = ""
+    for pergunta_anterior in perguntas:
+        if _pergunta_tem_assunto_explicito(pergunta_anterior):
+            assunto = pergunta_anterior
+            break
+        if _parece_continuacao(pergunta_anterior):
+            if len(continuacoes) < 3:
+                continuacoes.append(pergunta_anterior)
+            continue
+        assunto = pergunta_anterior
+        break
+
+    if not assunto:
+        assunto = perguntas[-1]
+    contexto = " ".join([assunto, *reversed(continuacoes)]).strip()
+    # The last assistant answer can resolve an elliptical reference such as
+    # "quem mais liderou?" -> "Ganga-Zumba" -> "o que ele fez?".
+    if historico and isinstance(historico[-1], dict) and historico[-1].get("role") == "assistant":
+        resposta_anterior = str(historico[-1].get("content") or "").strip()
+        if isinstance(historico[-1].get("content"), str):
+            resposta_anterior = re.split(r"\n\s*(?:fontes|referencias):", resposta_anterior, maxsplit=1, flags=re.IGNORECASE)[0]
+            resposta_anterior = re.split(r"(?<=[.!?])\s+", resposta_anterior, maxsplit=1)[0]
+            contexto += " " + resposta_anterior[:240]
+    return contexto
 
 
 def _tipo_resposta_povos(pergunta, historico=None):
@@ -302,13 +375,17 @@ def _tipo_resposta_povos(pergunta, historico=None):
         ):
             return "ambos"
     pede_figuras = bool(
-        re.search(r"\b(figuras?|personalidades|lideres?|liderancas?)\b", normalizado)
-        and re.search(r"\b(afro|negr[oa]s?|quilomb|historia|importantes?)\b", normalizado)
+        re.search(r"\b(figuras?|personalidades|lideres?|liderancas?|pessoas)\b", normalizado)
+        and re.search(r"\b(afro|negr[oa]s?|quilomb|indigen[a-z]*|originari[a-z]*|historia|importantes?)\b", normalizado)
     )
     # A resposta em lista so serve quando a mensagem atual pede figuras.
     # Nao a reaplique em continuacoes como "por que elas foram importantes?".
     if pede_figuras:
-        return "figuras_afro"
+        afro = bool(re.search(r"\b(afro|negr[oa]s?|quilomb)", normalizado))
+        indigena = bool(re.search(r"\b(indigen[a-z]*|originari[a-z]*)", normalizado))
+        if afro and indigena:
+            return "figuras_ambos"
+        return "figuras_afro" if afro else "figuras_indigenas"
 
     pedido_definicao = bool(
         re.search(
@@ -343,15 +420,21 @@ def _consultas_contexto(pergunta, historico=None, limite=8):
     for indice, parte in enumerate(partes):
         if re.fullmatch(r"[?!.,;:]+", parte):
             continue
-        if indice > 0 and _parece_continuacao(parte) and anterior:
+        tem_assunto_novo = _pergunta_tem_assunto_explicito(parte)
+        if indice > 0 and _parece_continuacao(parte) and anterior and not tem_assunto_novo:
             # Retome o assunto imediatamente anterior, nao sempre o primeiro
             # item da mensagem: uma pergunta sobre o berimbau pode vir depois
             # de uma pergunta sobre Tereza de Benguela.
             consulta = f"{anterior} {parte}"
-        elif eh_retomada_curta(parte) and anterior:
+        elif (
+            (_parece_continuacao(parte) or eh_retomada_curta(parte))
+            and anterior
+            and not tem_assunto_novo
+        ):
             consulta = f"{anterior} {parte}"
         else:
             consulta = parte
+        consulta = corrigir_erros_tematicos(consulta)
         consulta = re.sub(r"\boq\b", "o que", consulta, flags=re.IGNORECASE)
         consulta = re.sub(r"\bpq\b", "por que", consulta, flags=re.IGNORECASE)
         consulta = re.sub(r"\bq\b", "que", consulta, flags=re.IGNORECASE)
@@ -407,11 +490,18 @@ def pesquisar_com_ia(pergunta, historico=None, forcar_web=False):
                 "povos indigenas historia resistencia contribuicoes linguas conhecimentos territorios",
                 "povos afro-brasileiros historia quilombos resistencia cultura contribuicoes",
             ])
-        if tipo_resposta_povos == "figuras_afro":
+        if tipo_resposta_povos in {"figuras_afro", "figuras_ambos"}:
             consultas_locais.append(
-                "liderancas figuras negras Zumbi dos Palmares Ganga Zumba Tereza de Benguela "
+                "personalidades afro brasileiras liderancas figuras negras Zumbi dos Palmares Ganga Zumba Tereza de Benguela "
                 "Esperanca Garcia Maria Firmina Antonieta de Barros Carolina Maria de Jesus "
-                "Lelia Gonzalez Beatriz Nascimento Abdias do Nascimento resistencia literatura",
+                "Lelia Gonzalez Beatriz Nascimento Abdias do Nascimento Luiz Gama Laudelina de Campos Melo "
+                "Sueli Carneiro Conceicao Evaristo Milton Santos Nego Bispo resistencia literatura direitos",
+            )
+        if tipo_resposta_povos in {"figuras_indigenas", "figuras_ambos"}:
+            consultas_locais.append(
+                "personalidades liderancas indigenas Ailton Krenak Davi Kopenawa Raoni Metuktire "
+                "Joenia Wapichana Sonia Guajajara Célia Xakriaba Marcal de Souza Mario Juruna "
+                "Daniel Munduruku Eliane Potiguara direitos literatura politica",
             )
         for consulta in consultas_locais:
             registro = {"ferramenta": "rag_busca", "consulta": consulta}
@@ -604,6 +694,28 @@ def pesquisar_com_ia(pergunta, historico=None, forcar_web=False):
             "resposta_direta_texto": melhor_local[2],
             "resposta_direta_trecho": melhor_local[1],
         }
+    pede_fontes_ou_atualidade = bool(re.search(
+        r"\b(fontes?|referencias?|links?|artigos?|atual(?:izado|izada|mente)?|"
+        r"hoje|agora|recente|recentes|vigente|ultimas noticias)\b",
+        pergunta_normalizada,
+    ))
+    if (
+        not forcar_web
+        and len(consultas_contexto) == 1
+        and not pede_fontes_ou_atualidade
+        and melhor_local
+        and melhor_local[0] >= 0.65
+        and float(melhor_local[1].get("relevancia", 0)) >= 0.85
+    ):
+        # Quando o documento local cobre bem a pergunta, use o modelo para
+        # sintetizar essa evidencia sem pagar por uma busca web redundante.
+        return {
+            "categoria": "rag",
+            "evidencias": evidencias,
+            "consultas": len(registros),
+            "pedido_criativo": True,
+            "resposta_local_suficiente": True,
+        }
     if forcar_web or not pedido_criativo:
         # Consultas distintas devem ter resultados separados. Colar todas em
         # uma frase favorecia resultados sobre apenas uma pergunta e fontes
@@ -696,7 +808,7 @@ def _frase_local_relevante(texto, pergunta):
 
     termos = normalizar_tokens(pergunta)
     if not frases:
-        return texto[:700]
+        return (texto[:700], 0.0) if texto else None
     if termos:
         anos = set(re.findall(r"\b(?:1[0-9]{3}|20[0-9]{2})\b", pergunta))
         normalizada_pergunta = "".join(
@@ -773,6 +885,7 @@ def _secao_de_referencias(secao):
 
 
 def normalizar_texto(texto):
+    texto = corrigir_erros_tematicos(texto)
     return "".join(
         caractere
         for caractere in unicodedata.normalize("NFKD", str(texto).casefold())
@@ -859,6 +972,39 @@ def registrar_trace(pergunta, pesquisa, resposta_final, *, resposta_bruta=None,
         print("Falha ao gravar rastreio local:", repr(erro_log), flush=True)
 
 
+def _resposta_contextual_tereza(pergunta, pesquisa, historico):
+    if any(
+        evidencia.get("ferramenta") == "web_busca"
+        and (evidencia.get("resultado") or {}).get("resultados")
+        for evidencia in pesquisa.get("evidencias", [])
+    ):
+        return None
+    atual = normalizar_texto(pergunta)
+    contexto = f"{normalizar_texto(_ultima_pergunta_com_assunto(historico))} {atual}"
+    if "tereza de benguela" not in contexto:
+        return None
+    trechos = [
+        normalizar_texto(trecho.get("texto", ""))
+        for evidencia in pesquisa.get("evidencias", [])
+        if evidencia.get("ferramenta") == "rag_busca"
+        for trecho in (evidencia.get("resultado") or {}).get("trechos") or []
+    ]
+    material = " ".join(trechos)
+    if "liderou o quilombo do quaritere" not in material:
+        return None
+    pesquisa["resposta_local_contextual"] = True
+    if re.search(r"\b(porque|por que|pq|importante|lembrada|lembrado|relevancia)\b", atual):
+        return (
+            "Tereza de Benguela e lembrada por ter liderado o Quilombo do Quaritere, "
+            "no seculo XVIII. Os materiais consultados nao detalham outros feitos "
+            "nem explicam outros motivos para essa lembranca."
+        )
+    return (
+        "Tereza de Benguela foi uma lideranca quilombola do seculo XVIII. Ela "
+        "liderou o Quilombo do Quaritere, no atual Mato Grosso."
+    )
+
+
 def _resposta_contextual_figuras_afro(pergunta, pesquisa, historico):
     if not historico or not eh_retomada_curta(pergunta):
         return None
@@ -921,6 +1067,11 @@ def _resposta_contextual_figuras_afro(pergunta, pesquisa, historico):
 
 
 def responder_com_ia(pergunta, pesquisa, historico=None):
+    resposta_tereza = _resposta_contextual_tereza(pergunta, pesquisa, historico)
+    if resposta_tereza:
+        registrar_trace(pergunta, pesquisa, resposta_tereza, tipo="resposta_local_contextual_tereza")
+        return resposta_tereza
+
     resposta_figuras = _resposta_contextual_figuras_afro(pergunta, pesquisa, historico)
     if resposta_figuras:
         registrar_trace(pergunta, pesquisa, resposta_figuras, tipo="retomada_figuras_local")
@@ -1026,9 +1177,36 @@ def responder_com_ia(pergunta, pesquisa, historico=None):
                 "como professora, jornalista e politica; Carolina Maria de Jesus registrou "
                 "a vida e a desigualdade em sua obra. Lelia Gonzalez, Beatriz Nascimento e "
                 "Abdias do Nascimento foram intelectuais e ativistas que influenciaram o "
-                "pensamento e a luta antirracista. Sao exemplos, nao uma lista completa; "
+                "pensamento e a luta antirracista. Tambem sao referencias Luiz Gama e Andre "
+                "Reboucas, abolicionistas; Laudelina de Campos Melo, organizadora de "
+                "trabalhadoras domesticas; Sueli Carneiro, filosofa e ativista; Conceicao "
+                "Evaristo, escritora; Milton Santos, geografo; e Nego Bispo, pensador "
+                "quilombola. Sao exemplos, nao uma lista completa; "
                 "algumas biografias antigas tem lacunas documentais e devem ser tratadas "
                 "com cautela."
+            )
+        elif tipo_povos == "figuras_indigenas":
+            resposta = (
+                "Há muitas lideranças e personalidades indígenas, de diferentes povos e áreas. "
+                "Ailton Krenak é escritor e pensador do povo Krenak; Davi Kopenawa é liderança "
+                "Yanomami e autor; Raoni Metuktire, do povo Mebêngôkre (Kayapó), atua na defesa "
+                "dos direitos indígenas e da floresta. Joenia Wapichana é advogada e liderança "
+                "Wapichana; Sonia Guajajara e Célia Xakriabá atuam na política e na defesa dos "
+                "direitos dos povos. Marçal de Souza Tupã-Y, liderança Guarani, participou da "
+                "articulação do movimento indígena no período da ditadura. São apenas alguns "
+                "exemplos: nenhuma pessoa representa sozinha todos os povos indígenas."
+            )
+        elif tipo_povos == "figuras_ambos":
+            resposta = (
+                "Há muitas personalidades afro-brasileiras e indígenas, com trajetórias de épocas "
+                "e áreas diferentes. Entre as afro-brasileiras, Luiz Gama atuou como advogado e "
+                "abolicionista; Laudelina de Campos Melo organizou trabalhadoras domésticas; "
+                "Sueli Carneiro é filósofa e ativista; Conceição Evaristo é escritora. Entre as "
+                "indígenas, Ailton Krenak é escritor e pensador Krenak; Joenia Wapichana é "
+                "advogada e liderança Wapichana; Raoni Metuktire, do povo Mebêngôkre (Kayapó), "
+                "atua na defesa de direitos e territórios; e Sonia Guajajara é uma liderança "
+                "política. São exemplos, não uma lista completa, e cada pessoa tem uma trajetória "
+                "própria."
             )
         elif tipo_povos == "afro":
             resposta = (
@@ -1163,6 +1341,27 @@ def responder_com_ia(pergunta, pesquisa, historico=None):
                     item for item in itens
                     if not _secao_de_referencias(item.get("secao"))
                 ]
+                # A busca vetorial pode trazer um trecho vizinho sobre outro
+                # assunto. Passe ao modelo apenas a frase que corresponde à
+                # consulta daquele trecho, para nao misturar subperguntas.
+                itens_relevantes = []
+                for item in itens:
+                    consulta_item = (
+                        item.get("consulta")
+                        or evidencia.get("consulta")
+                        or pergunta_referencia
+                    )
+                    correspondencia = _frase_local_relevante(
+                        item.get("texto"), consulta_item
+                    )
+                    if not correspondencia:
+                        continue
+                    frase, cobertura = correspondencia
+                    item_relevante = dict(item)
+                    item_relevante["texto"] = frase[:500]
+                    item_relevante["relevancia_consulta"] = round(cobertura, 3)
+                    itens_relevantes.append(item_relevante)
+                itens = itens_relevantes
                 consultas_no_resultado = resultado.get("consultas")
                 if isinstance(consultas_no_resultado, list):
                     contagem_por_consulta = {}
@@ -1200,7 +1399,7 @@ def responder_com_ia(pergunta, pesquisa, historico=None):
         }
     )
     try:
-        tokens_saida = 500 if len(_separar_perguntas(pergunta)) > 1 else 300
+        tokens_saida = 420 if len(_separar_perguntas(pergunta)) > 1 else 240
         resposta_bruta = chamar_ia(mensagens, num_predict=tokens_saida)
     except Exception as erro:
         registrar_trace(

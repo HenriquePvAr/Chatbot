@@ -32,6 +32,7 @@ from neonize.events import (
 from neonize import extract_text
 
 from agentes_autonomos import (
+    _consultas_contexto,
     _separar_perguntas,
     pesquisar_com_ia,
     responder_com_ia,
@@ -47,6 +48,7 @@ from escopo_assunto import (
     eh_reacao_curta,
     pertence_ao_assunto,
     normalizar,
+    tipo_mensagem_social,
 )
 from fila_whatsapp import FilaMensagens
 from midia_whatsapp import buscar_imagem, buscar_imagens, ImagemNaoEncontrada
@@ -210,6 +212,7 @@ def gerar_lista_documentos():
 # ==========================================
 
 def processar_pergunta(pergunta, identificador, forcar_web=False):
+    inicio = time.perf_counter()
     # A fila ja serializa cada conversa. O lock protege apenas a memoria curta,
     # sem segurar os outros usuarios enquanto o Ollama ou a web respondem.
     with bloqueio:
@@ -222,17 +225,23 @@ def processar_pergunta(pergunta, identificador, forcar_web=False):
         historico,
         forcar_web=forcar_web,
     )
-    # Respostas factuais sem evidencias web recebem uma busca complementar,
-    # exceto quando ja foram resolvidas por uma resposta local verificada.
+    # pesquisar_com_ia ja tentou a busca web. Se ela voltou vazia, repetir uma
+    # segunda busca quase igual so acrescentava varios segundos de espera.
+    tentou_busca_web = any(
+        evidencia.get("ferramenta") == "web_busca"
+        for evidencia in pesquisa.get("evidencias", [])
+    )
     tem_resultados_web = any(
         (evidencia.get("resultado") or {}).get("resultados")
         for evidencia in pesquisa.get("evidencias", [])
         if evidencia.get("ferramenta") == "web_busca"
     )
     resposta_local_verificada = bool(
-        pesquisa.get("resposta_direta") or pesquisa.get("resposta_template_povos")
+        pesquisa.get("resposta_direta")
+        or pesquisa.get("resposta_template_povos")
+        or pesquisa.get("resposta_local_suficiente")
     )
-    if not tem_resultados_web and not resposta_local_verificada:
+    if not tentou_busca_web and not tem_resultados_web and not resposta_local_verificada:
         consulta_fontes = montar_consulta_fontes(pergunta)
         consultas_adicionais = 1
         try:
@@ -252,12 +261,15 @@ def processar_pergunta(pergunta, identificador, forcar_web=False):
                 else pesquisa.get("categoria", "web")
             )
         pesquisa["consultas"] = int(pesquisa.get("consultas", 0)) + consultas_adicionais
+    fim_pesquisa = time.perf_counter()
     print("\n[FONTES] Consulta concluida.", flush=True)
     print("Fontes:", pesquisa["categoria"], flush=True)
     print("Consultas realizadas:", pesquisa["consultas"], flush=True)
+    print(f"[TEMPO] Pesquisa: {fim_pesquisa - inicio:.2f}s", flush=True)
 
     print("\n[RESPOSTA] Preparando resposta...", flush=True)
     resposta_bruta = responder_com_ia(pergunta, pesquisa, historico)
+    fim_resposta = time.perf_counter()
     resposta = anexar_fontes_no_final(
         resposta_bruta,
         pesquisa.get("evidencias", []),
@@ -287,12 +299,23 @@ def processar_pergunta(pergunta, identificador, forcar_web=False):
         conversa["ultima_pergunta"] = pergunta
 
     print("\n[RESPOSTA] Texto preparado:", resposta, flush=True)
+    print(
+        f"[TEMPO] Geracao: {fim_resposta - fim_pesquisa:.2f}s; "
+        f"total: {fim_resposta - inicio:.2f}s",
+        flush=True,
+    )
     return resposta
 
 
 def montar_consulta_fontes(pergunta):
     """Dá preferência à instituição mais ligada ao assunto perguntado."""
     pergunta_normalizada = normalizar(pergunta)
+    lei = re.search(r"\blei\s*(\d{1,2})\s*\.?\s*(\d{3})(?:\s*/\s*(\d{4}))?\b", pergunta_normalizada)
+    if lei:
+        numero = "".join(lei.group(1, 2))
+        ano = lei.group(3) or ""
+        identificador = f"Lei {numero}/{ano}" if ano else f"Lei {numero}"
+        return f"{pergunta} {identificador} texto integral site:planalto.gov.br"
     if re.search(r"\b(lingua|linguas|idioma|idiomas)\b", pergunta_normalizada) and re.search(
         r"\b(indigena|indigenas|originario|originarios)\b", pergunta_normalizada
     ):
@@ -314,7 +337,7 @@ def montar_consulta_fontes(pergunta):
         return f"{pergunta} capoeira IPHAN site:iphan.gov.br OR site:gov.br"
     if re.search(r"\b(esbam|uniesbam)\b", pergunta_normalizada):
         return f"{pergunta} site:esbam.edu.br"
-    return f"{pergunta} site:gov.br OR site:edu.br OR site:unesco.org"
+    return f"{pergunta} fonte oficial site:gov.br"
 
 
 def anexar_fontes_no_final(resposta, evidencias, pergunta=None, usar_fontes_web=True):
@@ -556,6 +579,13 @@ def responder_mensagem(texto, identificador):
             "do berimbau na capoeira?” ou “Quem foi Tereza de Benguela?”. "
             "Digite /menu para ver mais exemplos."
         )
+    tipo_social = tipo_mensagem_social(pergunta)
+    if tipo_social == "agradecimento":
+        return "Por nada! Se quiser, posso continuar explicando ou indicar fontes sobre o assunto."
+    if tipo_social == "confirmacao":
+        if normalizar(pergunta) == "entendi":
+            return "Que bom 🙂 Se algum ponto ficou confuso, posso explicar de outro jeito."
+        return "Beleza 🙂 Pode mandar a próxima dúvida quando quiser."
     conversa_curta = normalizar(pergunta).strip(" .!?\t\n")
     if re.fullmatch(
         r"(?:bugou|travou|ta ai|esta ai|ainda ta ai|esta funcionando|"
@@ -694,10 +724,24 @@ def pesquisar_fontes_ultima_resposta(identificador):
     with bloqueio:
         conversa = obter_conversa(identificador)
         pergunta = conversa.get("ultima_pergunta")
+        historico = list(conversa.get("historico") or [])
+        evidencias_anteriores = list(conversa.get("resultados") or [])
     if not pergunta:
-        return "Ainda não tenho uma pergunta anterior para buscar fontes. Qual assunto você quer pesquisar?"
+        return "Ainda nao tenho uma pergunta anterior para buscar fontes. Qual assunto voce quer pesquisar?"
+
+    fontes_anteriores = gerar_fontes(evidencias_anteriores)
+    ja_tem_fontes_web = any(
+        evidencia.get("ferramenta") == "web_busca"
+        and (evidencia.get("resultado") or {}).get("resultados")
+        for evidencia in evidencias_anteriores
+    )
+    if ja_tem_fontes_web:
+        return fontes_anteriores
+
+    historico_anterior = historico[:-2] if len(historico) >= 2 else []
+    pergunta_contextual = "; ".join(_consultas_contexto(pergunta, historico_anterior))
     consulta = montar_consulta_fontes(
-        f"{pergunta} artigos acadêmicos fontes confiáveis para leitura complementar"
+        f"{pergunta_contextual} artigos academicos para leitura complementar"
     )
     try:
         resultados = pesquisar_web(consulta, quantidade=5)
@@ -712,7 +756,6 @@ def pesquisar_fontes_ultima_resposta(identificador):
     with bloqueio:
         obter_conversa(identificador)["resultados"] = evidencias
     return gerar_fontes(evidencias)
-
 
 def processar_item_fila(item):
     client, evento, texto, identificador = item

@@ -58,7 +58,6 @@ TERMOS_DO_TEMA = (
     "zumbi",
     "dandara",
     "tereza de benguela",
-    "tereza",
     "carolina maria de jesus",
     "carolina de jesus",
     "maria firmina",
@@ -68,6 +67,25 @@ TERMOS_DO_TEMA = (
     "beatriz nascimento",
     "lelia gonzalez",
     "abdias do nascimento",
+    "luiz gama",
+    "andre reboucas",
+    "laudelina de campos melo",
+    "sueli carneiro",
+    "conceicao evaristo",
+    "milton santos",
+    "nego bispo",
+    "ailton krenak",
+    "davi kopenawa",
+    "raoni",
+    "raoni metuktire",
+    "joenia",
+    "joenia wapichana",
+    "sonia guajajara",
+    "celia xakriaba",
+    "marcal de souza",
+    "daniel munduruku",
+    "eliane potiguara",
+    "mario juruna",
     "mae menininha",
     "mae stella",
     "dona ivone lara",
@@ -112,7 +130,8 @@ TERMOS_DO_TEMA = (
     "indigenas",
     "povos originarios",
     "povo originario",
-    "amazon",
+    "amazonia indigena",
+    "indigenas no amazonas",
     "povos da floresta",
     "aldeia indigena",
     "indio",
@@ -219,7 +238,42 @@ PADROES_CONTEUDO_IMPROPRIO = tuple(
 )
 
 
+_ERROS_TEMATICOS = (
+    (r"\boq\b", "o que"),
+    (r"\bpq\b", "por que"),
+    (r"\bqm\b", "quem"),
+    (r"\bqnd\b", "quando"),
+    (r"\bqdo\b", "quando"),
+    (r"\bq\b", "que"),
+    (r"\bcapoera(s)?\b", r"capoeira\1"),
+    (r"\bcapoeirra(s)?\b", r"capoeira\1"),
+    (r"\bindigina(s)?\b", r"indigena\1"),
+    (r"\bindijena(s)?\b", r"indigena\1"),
+    (r"\bindiginas?\b", "indigenas"),
+    (r"\bkilombo(s)?\b", r"quilombo\1"),
+    (r"\bkilombola(s)?\b", r"quilombola\1"),
+    (r"\bquilombolla(s)?\b", r"quilombola\1"),
+    (r"\bafro[\s-]*brasilero(s)?\b", r"afro-brasileiro\1"),
+    (r"\bafro[\s-]*brasilera(s)?\b", r"afro-brasileira\1"),
+    (r"\blideransa(s)?\b", r"lideranca\1"),
+    (r"\bimportansia\b|\bimprotancia\b", "importancia"),
+    (r"\bescravisaum\b", "escravizacao"),
+    (r"\bcandonble\b", "candomble"),
+    (r"\bteresa\s+(?:de\s+)?(?:benguela|banguela)\b", "Tereza de Benguela"),
+    (r"\btereza\s+(?:de\s+)?banguela\b", "Tereza de Benguela"),
+)
+
+
+def corrigir_erros_tematicos(texto):
+    """Corrige apenas erros comuns e inequívocos em termos do projeto."""
+    texto = str(texto or "")
+    for padrao, substituicao in _ERROS_TEMATICOS:
+        texto = re.sub(padrao, substituicao, texto, flags=re.IGNORECASE)
+    return texto
+
+
 def normalizar(texto):
+    texto = corrigir_erros_tematicos(texto)
     texto = unicodedata.normalize("NFKD", str(texto or "").casefold())
     return "".join(c for c in texto if not unicodedata.combining(c))
 
@@ -244,6 +298,20 @@ def eh_cumprimento(texto):
             normalizado,
         )
     )
+
+
+def tipo_mensagem_social(texto):
+    """Reconhece agradecimentos e confirmações curtas para evitar aviso fora do tema."""
+    normalizado = re.sub(r"[^a-z0-9]+", " ", normalizar(texto)).strip()
+    if re.fullmatch(
+        r"(?:obrigad[oa]s?|obg|valeu|vlw|muito obrigad[oa]|"
+        r"obrigad[oa] pela explicacao|valeu pela explicacao)",
+        normalizado,
+    ):
+        return "agradecimento"
+    if re.fullmatch(r"(?:ok|okay|blz|beleza|entendi|entendido|certo|tranquilo)", normalizado):
+        return "confirmacao"
+    return None
 
 
 def eh_reacao_curta(texto):
@@ -298,6 +366,9 @@ def eh_retomada_curta(texto):
             r"essa historia|esses? direitos|essa origem)\b|"
             r"e quanto a (?:isso|esse assunto|essa cultura|esse tema|data|epoca|"
             r"origem|historia|linguas?|direitos|territorio|funcao|importancia)\b|"
+            r"quem mais\b|quem (?:participou|liderou|fundou|organizou|escreveu|criou|lutou)\b|"
+            r"e quem(?: mais| participou| liderou| fundou| organizou| escreveu| criou| lutou)?\b|"
+            r"e em que ano\b|e quanto tempo\b|e onde ficava\b|"
             r"por que\b|porque\b|e por que\b|e porque\b|e pq\b|como assim\b|"
             r"qual deles\b|quais deles\b|ele\b|ela\b|eles\b|elas\b|"
             r"isso\b|essa\b|esse\b|me explica melhor\b|continua\b|continue\b)",
@@ -366,11 +437,69 @@ def pertence_ao_assunto(texto, historico=None):
     # nao devem virar buscas sobre o assunto da conversa.
     if not eh_retomada_curta(texto):
         return False
+    if not _pode_herdar_contexto(texto):
+        return False
 
     for mensagem in reversed(historico or []):
-        if mensagem.get("role") == "user":
-            return any(
-                normalizar(termo) in normalizar(mensagem.get("content", ""))
-                for termo in TERMOS_DO_TEMA
-            )
+        if mensagem.get("role") != "user":
+            continue
+        conteudo_anterior = str(mensagem.get("content", ""))
+        if eh_retomada_curta(conteudo_anterior):
+            continue
+        if any(
+            normalizar(termo) in normalizar(conteudo_anterior)
+            for termo in TERMOS_DO_TEMA
+        ):
+            return True
+        if eh_pedido_texto_sobre_povos(conteudo_anterior) or eh_pergunta_ampla_sobre_povos(conteudo_anterior):
+            return True
+        # A ultima mensagem que ja foi respondida pode ser a mudanca de tema
+        # mais recente; nao herde assuntos anteriores a ela.
+        return False
+    return False
+
+
+def _pode_herdar_contexto(texto):
+    """Evita tratar um substantivo novo (ex.: celular) como retomada por si so."""
+    normalizado = re.sub(r"[^a-z0-9]+", " ", normalizar(texto)).strip()
+    if re.search(
+        r"\b(ele|ela|eles|elas|dele|dela|deles|delas|isso|isto|aquilo|"
+        r"esse|essa|esses|essas|disto|daquilo|lhe|lhes)\b",
+        normalizado,
+    ):
+        return True
+    if re.match(
+        r"^(?:nao entendi|nao compreendi|pode explicar melhor|explica melhor|"
+        r"explique melhor|me explica melhor|explica de novo|pode repetir|"
+        r"repete|mais detalhes|me da um exemplo|me de um exemplo|"
+        r"pode dar um exemplo|um exemplo|por exemplo|continua|continue|como assim)\b",
+        normalizado,
+    ):
+        return True
+    if re.match(r"^e (?:o que|quem|quando|onde|como|por que|porque|qual|quais)\b", normalizado):
+        return True
+    if re.match(
+        r"^(?:quem mais|quem (?:participou|liderou|fundou|organizou|escreveu|criou|lutou)|"
+        r"em que ano|e em que ano|quanto tempo|onde ficava)\b",
+        normalizado,
+    ):
+        return True
+    if re.match(r"^(?:e\s+)?(?:o que|quem|quando|onde|como|por que|porque|qual|quais)\b", normalizado):
+        if len(normalizado.split()) <= 3:
+            return True
+        return bool(re.search(
+            r"\b(linguas?|idiomas?|direitos?|territorios?|terras?|cultura|"
+            r"historia|origem|data|epoca|funcao|papel|importancia|motivo|"
+            r"exemplos?|fontes?|leis?|lideranca|comunidade|povos?|etnias?|"
+            r"respostas?|resultados?|causas?|consequencias|efeitos?|nomes?)\b",
+            normalizado,
+        ))
+    if re.match(r"^e (?:o|a|os|as)\b", normalizado):
+        return bool(re.search(
+            r"\b(linguas?|idiomas?|direitos?|territorios?|terras?|cultura|"
+            r"historia|origem|data|epoca|funcao|papel|importancia|motivo|"
+            r"exemplos?|fontes?|leis?|lideranca|comunidade|povos?|etnias?|"
+            r"respostas?|resultados?|causas?|consequencias|efeitos?|nomes?)\b",
+            normalizado,
+        ))
     return False
