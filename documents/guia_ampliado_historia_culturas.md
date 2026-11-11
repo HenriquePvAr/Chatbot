@@ -35,7 +35,7 @@ Linguas africanas participaram da formacao do portugues brasileiro, inclusive no
 - **Beatriz Nascimento**: historiadora, professora e ativista; pesquisou quilombos, territorialidade e identidade negra.
 - **Abdias do Nascimento**: artista, escritor, professor e ativista; fundou o Teatro Experimental do Negro e atuou na politica e na defesa dos direitos negros.
 
-Esta selecao nao e um ranking. Para responder "por que foi importante?", relacione cada pessoa a sua area, obra ou acao e ao contexto de sua epoca. Algumas biografias, especialmente de mulheres negras do periodo colonial, possuem registros incompletos e interpretacoes em disputa.
+Esta selecao nao e um ranking. As pessoas citadas atuaram em periodos e areas diferentes. Algumas biografias, especialmente de mulheres negras do periodo colonial, possuem registros incompletos e interpretacoes em disputa.
 
 <!-- secao: Manifestacoes afro-brasileiras, religioes e patrimonio -->
 ## Manifestacoes afro-brasileiras, religioes e patrimonio

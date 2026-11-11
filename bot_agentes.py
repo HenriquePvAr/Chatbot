@@ -8,6 +8,13 @@ import time
 from datetime import datetime
 from collections import OrderedDict
 
+# Evita que mensagens com emoji derrubem callbacks em terminais Windows cp1252.
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(errors="replace")
+    except (OSError, ValueError):
+        pass
+
 from dotenv import load_dotenv
 
 # ==========================================
@@ -25,8 +32,10 @@ from neonize.events import (
 from neonize import extract_text
 
 from agentes_autonomos import (
+    _separar_perguntas,
     pesquisar_com_ia,
-    responder_com_ia
+    responder_com_ia,
+    registrar_trace,
 )
 from busca_web import pesquisar_web
 from rag_local import listar_documentos
@@ -34,6 +43,7 @@ from escopo_assunto import (
     contem_tentativa_de_injecao,
     eh_conteudo_improprio,
     eh_cumprimento,
+    eh_confusao_povos_afro_originarios,
     eh_reacao_curta,
     pertence_ao_assunto,
     normalizar,
@@ -212,12 +222,56 @@ def processar_pergunta(pergunta, identificador, forcar_web=False):
         historico,
         forcar_web=forcar_web,
     )
+    # Respostas factuais sem evidencias web recebem uma busca complementar,
+    # exceto quando ja foram resolvidas por uma resposta local verificada.
+    tem_resultados_web = any(
+        (evidencia.get("resultado") or {}).get("resultados")
+        for evidencia in pesquisa.get("evidencias", [])
+        if evidencia.get("ferramenta") == "web_busca"
+    )
+    resposta_local_verificada = bool(
+        pesquisa.get("resposta_direta") or pesquisa.get("resposta_template_povos")
+    )
+    if not tem_resultados_web and not resposta_local_verificada:
+        consulta_fontes = montar_consulta_fontes(pergunta)
+        consultas_adicionais = 1
+        try:
+            resultados_fontes = pesquisar_web(consulta_fontes, quantidade=5)
+        except Exception as erro:
+            print("Falha ao buscar fontes complementares:", repr(erro), flush=True)
+            resultados_fontes = []
+        pesquisa.setdefault("evidencias", []).append({
+            "ferramenta": "web_busca",
+            "consulta": consulta_fontes,
+            "resultado": {"resultados": resultados_fontes},
+        })
+        if resultados_fontes:
+            pesquisa["categoria"] = (
+                "mista"
+                if pesquisa.get("categoria") == "rag"
+                else pesquisa.get("categoria", "web")
+            )
+        pesquisa["consultas"] = int(pesquisa.get("consultas", 0)) + consultas_adicionais
     print("\n[FONTES] Consulta concluida.", flush=True)
     print("Fontes:", pesquisa["categoria"], flush=True)
     print("Consultas realizadas:", pesquisa["consultas"], flush=True)
 
     print("\n[RESPOSTA] Preparando resposta...", flush=True)
-    resposta = responder_com_ia(pergunta, pesquisa, historico)
+    resposta_bruta = responder_com_ia(pergunta, pesquisa, historico)
+    resposta = anexar_fontes_no_final(
+        resposta_bruta,
+        pesquisa.get("evidencias", []),
+        pergunta=pergunta,
+        usar_fontes_web=not pesquisa.get("resposta_local_contextual"),
+    )
+    if resposta != resposta_bruta:
+        registrar_trace(
+            pergunta,
+            pesquisa,
+            resposta,
+            resposta_bruta=resposta_bruta,
+            tipo="resposta_final_com_fontes",
+        )
 
     with bloqueio:
         conversa = obter_conversa(identificador)
@@ -233,6 +287,94 @@ def processar_pergunta(pergunta, identificador, forcar_web=False):
         conversa["ultima_pergunta"] = pergunta
 
     print("\n[RESPOSTA] Texto preparado:", resposta, flush=True)
+    return resposta
+
+
+def montar_consulta_fontes(pergunta):
+    """Dá preferência à instituição mais ligada ao assunto perguntado."""
+    pergunta_normalizada = normalizar(pergunta)
+    if re.search(r"\b(lingua|linguas|idioma|idiomas)\b", pergunta_normalizada) and re.search(
+        r"\b(indigena|indigenas|originario|originarios)\b", pergunta_normalizada
+    ):
+        return f"{pergunta} Censo 2022 IBGE linguas indigenas site:ibge.gov.br"
+    if (
+        re.search(r"\bcapoeira\b", pergunta_normalizada)
+        and re.search(r"\b(angola|regional|diferenca|estilos?)\b", pergunta_normalizada)
+    ):
+        return (
+            f"{pergunta} capoeira Angola Regional diferenças IPHAN "
+            "site:iphan.gov.br OR site:gov.br"
+        )
+    if re.search(r"\b(berimbau|berimbal)\b", pergunta_normalizada):
+        return (
+            f"{pergunta} berimbau capoeira IPHAN "
+            "site:iphan.gov.br OR site:unesco.org OR site:edu.br"
+        )
+    if re.search(r"\bcapoeira\b", pergunta_normalizada):
+        return f"{pergunta} capoeira IPHAN site:iphan.gov.br OR site:gov.br"
+    if re.search(r"\b(esbam|uniesbam)\b", pergunta_normalizada):
+        return f"{pergunta} site:esbam.edu.br"
+    return f"{pergunta} site:gov.br OR site:edu.br OR site:unesco.org"
+
+
+def anexar_fontes_no_final(resposta, evidencias, pergunta=None, usar_fontes_web=True):
+    """Anexa fontes web reais e preserva respostas sustentadas apenas por RAG."""
+    if not isinstance(resposta, str) or not resposta.strip():
+        return resposta
+    # Remove rodapes produzidos livremente pelo modelo e gera a lista a partir
+    # dos resultados reais da busca, evitando URLs inventadas.
+    resposta = re.sub(
+        r"\n\s*(?:Fontes|Refer\w*):[\s\S]*$",
+        "",
+        resposta,
+        flags=re.IGNORECASE,
+    ).rstrip()
+    if not usar_fontes_web:
+        return resposta
+
+    grupos = {}
+    vistos_por_grupo = {}
+    partes = _separar_perguntas(pergunta) if pergunta else []
+    for evidencia in evidencias or []:
+        if evidencia.get("ferramenta") != "web_busca":
+            continue
+        resultado = evidencia.get("resultado") or {}
+        consulta = normalizar(evidencia.get("consulta", ""))
+        grupo = None
+        if len(partes) > 1:
+            for parte in partes:
+                normalizada = normalizar(parte)
+                termos = [
+                    termo for termo in re.findall(r"[a-z0-9]+", normalizada)
+                    if len(termo) > 3 and termo not in {"sobre", "para", "como", "qual", "quais", "porque"}
+                ]
+                if normalizada and normalizada in consulta or (
+                    termos and sum(termo in consulta for termo in termos) >= min(2, len(termos))
+                ):
+                    grupo = parte
+                    break
+        chave_grupo = grupo or ""
+        grupos.setdefault(chave_grupo, []).extend(resultado.get("resultados") or [])
+    fontes_formatadas = []
+    for grupo, itens in grupos.items():
+        itens.sort(key=lambda item: not item.get("dominio_prioritario", False))
+        fontes_grupo = []
+        vistos = vistos_por_grupo.setdefault(grupo, set())
+        for item in itens:
+            url = str(item.get("url") or "").strip()
+            titulo = str(item.get("titulo") or "Fonte consultada").strip()
+            if not url or url in vistos:
+                continue
+            vistos.add(url)
+            fontes_grupo.append(f"{len(fontes_grupo) + 1}. {titulo}: {url}")
+            if len(fontes_grupo) >= 3:
+                break
+        if fontes_grupo:
+            if len(partes) > 1 and grupo:
+                fontes_formatadas.append(f"{grupo}:")
+            fontes_formatadas.extend(fontes_grupo)
+    if fontes_formatadas:
+        return resposta.rstrip() + "\n\nFontes:\n" + "\n".join(fontes_formatadas)
     return resposta
 
 
@@ -366,9 +508,14 @@ def responder_mensagem(texto, identificador):
             "violência. Posso explicar um tema histórico de forma adequada e sem "
             "detalhes gráficos."
         )
+    texto_normalizado = normalizar(texto)
     pergunta_fontes = bool(re.search(
-        r"\b(fontes?|referencias?|links?|de onde (?:veio|tirou)|qual a fonte|tem fonte|tem fontes)\b",
-        normalizar(texto),
+        r"\b(fontes?|referencias?|links?|artigos?|leituras?|materiais?|"
+        r"onde (?:posso |consigo |da para )?(?:ler|encontrar|buscar|pesquisar)|"
+        r"(?:ler|saber|pesquisar) mais|"
+        r"(?:me indica|indique|recomenda|recomende) (?:uma? )?(?:leitura|artigo|fonte|material)|"
+        r"de onde (?:veio|tirou)|qual a fonte|tem fonte|tem fontes)\b",
+        texto_normalizado,
     ))
 
     if comando in ("/menu", "/ajuda", "/fontes", "/sobre", "/plano") or pergunta_fontes:
@@ -391,6 +538,10 @@ def responder_mensagem(texto, identificador):
 
     resposta_esbam = responder_faq_esbam(texto)
     if resposta_esbam:
+        if not re.search(r"\n\s*Fontes:", resposta_esbam, re.IGNORECASE):
+            resposta_esbam = resposta_esbam.rstrip() + (
+                "\n\nFontes:\n1. Site oficial da ESBAM: https://esbam.edu.br/"
+            )
         return resposta_esbam
 
     forcar_web = comando == "/web" or comando.startswith("/web ")
@@ -427,8 +578,8 @@ def responder_mensagem(texto, identificador):
 
     pergunta_normalizada = normalizar(pergunta)
     mistura_povos = (
-        ("povos originarios" in pergunta_normalizada or "povos indigen" in pergunta_normalizada)
-        and re.search(r"afro[- ]brasileir", pergunta_normalizada)
+        len(_separar_perguntas(pergunta)) == 1
+        and eh_confusao_povos_afro_originarios(pergunta)
     )
     if mistura_povos:
         resposta = (
@@ -439,8 +590,10 @@ def responder_mensagem(texto, identificador):
             "tradicionais distintos dos povos indigenas. Ha pessoas com identidades "
             "afro-indigenas, mas os termos nao formam uma unica categoria. Voce queria "
             "saber sobre povos indigenas ou comunidades afro-brasileiras?\n\n"
-            "Fontes: IBGE https://www.ibge.gov.br/brasil-indigena/ "
-            "| MDA https://www.gov.br/mda/pt-br/acesso-a-informacao/acoes-e-programas/"
+            "Fontes:\n"
+            "1. IBGE, O Brasil Indigena: https://www.ibge.gov.br/brasil-indigena/\n"
+            "2. MDA, Povos e comunidades tradicionais: "
+            "https://www.gov.br/mda/pt-br/acesso-a-informacao/acoes-e-programas/"
             "programas-projetos-acoes-obras-e-atividades/selos-quilombolas/"
             "selo-povos-e-comunidades-tradicionais-do-brasil"
         )
@@ -543,7 +696,9 @@ def pesquisar_fontes_ultima_resposta(identificador):
         pergunta = conversa.get("ultima_pergunta")
     if not pergunta:
         return "Ainda não tenho uma pergunta anterior para buscar fontes. Qual assunto você quer pesquisar?"
-    consulta = f"{pergunta} fontes confiáveis"
+    consulta = montar_consulta_fontes(
+        f"{pergunta} artigos acadêmicos fontes confiáveis para leitura complementar"
+    )
     try:
         resultados = pesquisar_web(consulta, quantidade=5)
     except Exception as erro:
@@ -561,6 +716,25 @@ def pesquisar_fontes_ultima_resposta(identificador):
 
 def processar_item_fila(item):
     client, evento, texto, identificador = item
+    # A mensagem pode envelhecer enquanto aguarda na fila. Revalide antes de
+    # processar para evitar responder atrasado a mensagens antigas.
+    agora = time.time()
+    timestamp = normalizar_timestamp_whatsapp(evento.Info.Timestamp)
+    corte_conexao = max(INICIO_PROCESSO_TIMESTAMP, inicio_conexao_timestamp)
+    if (
+        timestamp <= 0
+        # O WhatsApp fornece Timestamp em segundos inteiros. Aceite o mesmo
+        # segundo do corte para nao rejeitar mensagem nova por arredondamento.
+        or timestamp < int(corte_conexao)
+        or timestamp > agora + 30
+        or agora - timestamp > IDADE_MAXIMA_MENSAGEM_SEGUNDOS
+    ):
+        print(
+            f"Mensagem descartada antes da resposta (idade={agora - timestamp:.0f}s; "
+            "fora da janela da conexao ou antiga).",
+            flush=True,
+        )
+        return
     try:
         resposta = responder_mensagem(texto, identificador)
     except Exception as erro:
@@ -697,6 +871,27 @@ def enviar_midia(client, evento, midia, avisar_erro=True):
 def assunto_para_midia(texto):
     normalizado = normalizar(texto)
     temas_visuais = (
+        ("berimbau", "berimbau musical instrument capoeira"),
+        ("atabaque", "atabaque cultura afro brasileira Brasil"),
+        ("maculele", "maculele capoeira Brasil"),
+        ("afoxe", "afoxe Bahia Brasil"),
+        ("tambor de crioula", "tambor de crioula Maranhao"),
+        ("samba reggae", "samba reggae Bahia Olodum"),
+        ("coco de roda", "coco de roda Nordeste Brasil"),
+        ("bumba meu boi", "bumba meu boi Maranhao"),
+        ("boi bumba", "bumba meu boi Maranhao"),
+        ("mestre bimba", "Mestre Bimba capoeira"),
+        ("mestre pastinha", "Mestre Pastinha capoeira"),
+        ("mae menininha", "Mae Menininha do Gantois"),
+        ("ailton krenak", "Ailton Krenak"),
+        ("raoni", "Raoni Metuktire povo Kayapo"),
+        ("sonia guajajara", "Sonia Guajajara"),
+        ("sepe tiaraju", "Sepe Tiaraju"),
+        ("cestaria indigena", "cestaria indigena Brasil"),
+        ("arte indigena", "arte indigena brasileira grafismo"),
+        ("grafismo indigena", "grafismo indigena brasileiro"),
+        ("pintura corporal indigena", "pintura corporal indigena Brasil"),
+        ("ceramica indigena", "ceramica indigena brasileira"),
         ("samba de roda", "samba de roda"),
         ("tereza de benguela", "Tereza de Benguela quilombo"),
         ("ganga zumba", "Ganga Zumba Palmares"),
@@ -713,8 +908,7 @@ def assunto_para_midia(texto):
         ("esperanca garcia", "Esperanca Garcia"),
         ("abdias do nascimento", "Abdias do Nascimento"),
         ("jongo", "jongo afro brasileiro"),
-        ("sateré-mawé", "Sateré Mawé povo Amazonas"),
-        ("sateré mawé", "Sateré Mawé povo Amazonas"),
+        ("satere mawe", "Satere Mawe povo Amazonas"),
         ("tikuna", "povo Tikuna Amazonas Brasil"),
         ("kokama", "povo Kokama Amazonas Brasil"),
         ("yanomami", "povo Yanomami Brasil"),
@@ -722,23 +916,16 @@ def assunto_para_midia(texto):
         ("tukano", "povo Tukano Brasil"),
         ("guarani", "povo Guarani Brasil"),
         ("kaingang", "povo Kaingang Brasil"),
-        ("pataxó", "povo Pataxó Brasil"),
-        ("pataxo", "povo Pataxó Brasil"),
-        ("wajãpi", "Arte Kusiwa povo Wajãpi"),
-        ("wajapi", "Arte Kusiwa povo Wajãpi"),
-        ("kusiwa", "Arte Kusiwa povo Wajãpi"),
-        ("ritxoko", "Ritxoko cerâmica Karajá"),
+        ("pataxo", "povo Pataxo Brasil"),
+        ("wajapi", "Arte Kusiwa povo Wajapi"),
+        ("ritxoko", "Ritxoko ceramica Karaja"),
         ("yaokwa", "Yaokwa povo Enawene Nawe"),
-        ("cerâmica marajoara", "cerâmica marajoara Museu Brasil"),
-        ("ceramica marajoara", "cerâmica marajoara Museu Brasil"),
+        ("ceramica marajoara", "ceramica marajoara Museu Brasil"),
         ("congado", "Congado Minas Gerais Brasil"),
         ("congada", "Congada Brasil"),
-        ("acarajé", "baiana de acarajé Bahia"),
-        ("acaraje", "baiana de acarajé Bahia"),
-        ("baiana de acarajé", "baiana de acarajé Bahia"),
-        ("baiana de acaraje", "baiana de acarajé Bahia"),
-        ("maracatu", "Maracatu Pernambuco Brasil"),
+        ("acaraje", "baiana de acaraje Bahia"),
         ("mulheres negras", "mulheres negras Brasil cultura"),
+        ("maracatu", "Maracatu Pernambuco Brasil"),
     )
     for termo, busca in temas_visuais:
         if normalizar(termo) in normalizado:
@@ -750,7 +937,8 @@ def eh_pedido_explicativo(texto):
     normalizado = normalizar(texto)
     return bool(re.search(
         r"\b(me explica|me fale|me fala|explique|explica|o que e|oq e|"
-        r"quem foi|quem e|quem sao|qual foi|qual a historia|qual a importancia|"
+        r"quem foi|quem foram|quem e|quem sao|quais sao|quais foram|qual foi|"
+        r"qual (?:a )?(?:historia|importancia|funcao|objetivo)|"
         r"por que .* (?:importante|lembrad[oa]s?)|fale sobre|fala sobre|"
         r"me fale sobre|conte sobre|como e|como surgiu|qual a funcao)\b",
         normalizado,
@@ -773,27 +961,73 @@ def deve_enviar_figurinha(identificador, texto, resposta, intervalo=None):
     return False
 
 
+def registrar_diagnostico_timestamp(timestamp, agora, corte, motivo, servidor=None, de_mim=None):
+    """Registra apenas metadados de horario para diagnosticar descartes."""
+    try:
+        caminho = os.path.join(os.path.dirname(__file__), "logs", "diagnostico_horarios.jsonl")
+        registro = {
+            "agora_epoch": round(agora, 3),
+            "mensagem_epoch": timestamp,
+            "idade_segundos": round(agora - timestamp, 3),
+            "corte_epoch": round(corte, 3),
+            "motivo": motivo,
+            "servidor": servidor,
+            "de_mim": de_mim,
+        }
+        with open(caminho, "a", encoding="utf-8") as arquivo:
+            arquivo.write(json.dumps(registro, ensure_ascii=True) + "\n")
+    except OSError:
+        pass
+
+
+def normalizar_timestamp_whatsapp(valor):
+    """Converte timestamp para segundos Unix, aceitando entradas em ms."""
+    timestamp = int(valor or 0)
+    if timestamp > 10_000_000_000:
+        timestamp //= 1000
+    return timestamp
+
+
 @cliente.event(MessageEv)
 def mensagem(client, evento):
     try:
         origem = evento.Info.MessageSource
+        agora = time.time()
+        timestamp = normalizar_timestamp_whatsapp(evento.Info.Timestamp)
+        corte_conexao = max(INICIO_PROCESSO_TIMESTAMP, inicio_conexao_timestamp)
+        registrar_diagnostico_timestamp(
+            timestamp, agora, corte_conexao, "evento_recebido",
+            servidor=str(origem.Chat.Server), de_mim=bool(origem.IsFromMe),
+        )
         if origem.IsFromMe:
             return
         if origem.Chat.Server not in SERVIDORES_CHAT_INDIVIDUAL:
+            registrar_diagnostico_timestamp(
+                timestamp, agora, corte_conexao, "servidor_nao_aceito",
+                servidor=str(origem.Chat.Server), de_mim=False,
+            )
             return
 
-        agora = time.time()
-        timestamp = int(evento.Info.Timestamp)
         idade = agora - timestamp
-        corte_conexao = max(INICIO_PROCESSO_TIMESTAMP, inicio_conexao_timestamp)
-        if timestamp < corte_conexao - 1:
+        registrar_diagnostico_timestamp(timestamp, agora, corte_conexao, "recebida")
+        # Timestamp do evento tem precisao de segundos; o corte tem decimais.
+        if timestamp <= 0 or timestamp < int(corte_conexao):
+            registrar_diagnostico_timestamp(timestamp, agora, corte_conexao, "anterior_conexao")
             print(
                 f"Mensagem anterior a esta conexao ignorada "
                 f"(horario={timestamp}, corte={corte_conexao:.0f}, id={evento.Info.ID}).",
                 flush=True,
             )
             return
-        if timestamp <= 0 or idade > IDADE_MAXIMA_MENSAGEM_SEGUNDOS:
+        if timestamp > agora + 30:
+            registrar_diagnostico_timestamp(timestamp, agora, corte_conexao, "futuro")
+            print(
+                f"Mensagem com horario futuro ignorada (horario={timestamp}, agora={agora:.0f}).",
+                flush=True,
+            )
+            return
+        if idade > IDADE_MAXIMA_MENSAGEM_SEGUNDOS:
+            registrar_diagnostico_timestamp(timestamp, agora, corte_conexao, "antiga")
             print(
                 f"Mensagem antiga ignorada (idade={idade:.0f}s, "
                 f"limite={IDADE_MAXIMA_MENSAGEM_SEGUNDOS}s, id={evento.Info.ID}).",

@@ -11,6 +11,11 @@ FACEBOOK = "https://www.facebook.com/faculdadeesbamoficial/"
 INSTAGRAM = "https://www.instagram.com/uniesbamoficial/"
 
 
+def _com_fontes(resposta, fontes):
+    linhas = [f"{i}. {titulo}: {url}" for i, (titulo, url) in enumerate(fontes, 1)]
+    return resposta.rstrip() + "\n\nFontes:\n" + "\n".join(linhas)
+
+
 def responder_faq_esbam(texto):
     pergunta = normalizar(texto)
     menciona_esbam = any(t in pergunta for t in (
@@ -27,7 +32,7 @@ def responder_faq_esbam(texto):
         resposta_redes = (
             "As redes sociais oficiais que consegui confirmar são: "
             f"Instagram: {INSTAGRAM}\nFacebook: {FACEBOOK}\n"
-            f"O site também exibe ícones de YouTube e X/Twitter; confira os links atuais no rodapé: {SITE}"
+            "O site oficial também exibe os links atuais de YouTube e X/Twitter."
         )
 
     if quer_contato:
@@ -40,14 +45,17 @@ def responder_faq_esbam(texto):
             "• Shopping Via Norte: Av. Arquiteto José Henrique Bento Rodrigues, 3541, "
             "Santa Etelvina, piso G2. Telefone: (92) 3042-0007.\n"
             "E-mail da ouvidoria: ouvidoria@esbam.edu.br\n"
-            f"Confira possíveis atualizações na página oficial de contatos: {CONTATO}"
+            ""
         )
         if quer_redes:
-            return resposta_contato + "\n\n" + resposta_redes
-        return resposta_contato
+            return _com_fontes(
+                resposta_contato + "\n\n" + resposta_redes,
+                [("ESBAM — Contatos", CONTATO), ("Site oficial", SITE)],
+            )
+        return _com_fontes(resposta_contato, [("ESBAM — Contatos", CONTATO)])
 
     if quer_redes:
-        return resposta_redes
+        return _com_fontes(resposta_redes, [("Site oficial", SITE)])
 
     if re.search(r"\b(o que e|que e|significa|sobre|instituicao|faculdade|universidade|centro universitario)\b", pergunta):
         return (

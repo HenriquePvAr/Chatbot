@@ -156,6 +156,17 @@ TERMOS_DO_TEMA = (
     "terra indigena",
     "terras indigenas",
     "direitos indigenas",
+    "revolta dos males",
+    "revolta dos malês",
+    "males",
+    "marco temporal",
+    "racismo ambiental",
+    "justica ambiental",
+    "retomada territorial",
+    "territorios quilombolas",
+    "conflitos fundiarios",
+    "capoeira angola",
+    "capoeira regional",
     "constituicao de 1988",
     "19 de abril",
     "20 de novembro",
@@ -249,6 +260,21 @@ def eh_reacao_curta(texto):
 def eh_retomada_curta(texto):
     normalizado = re.sub(r"[^a-z0-9]+", " ", normalizar(texto)).strip()
     palavras = normalizado.split()
+    if len(palavras) <= 8:
+        if re.match(
+            r"^(?:nao entendi|nao compreendi|pode explicar melhor|explica melhor|"
+            r"explique melhor|me explica melhor|explica de novo|pode repetir|"
+            r"repete|mais detalhes|me da um exemplo|me de um exemplo|"
+            r"pode dar um exemplo|um exemplo|por exemplo)\b",
+            normalizado,
+        ):
+            return True
+        pergunta_com_referente = bool(
+            re.match(r"^(?:e )?(?:o que|oq|quem|quando|onde|como|por que|porque|qual|quais)\b", normalizado)
+            and re.search(r"\b(ele|ela|eles|elas|isso|esse|essa|esses|essas|dele|dela|deles|delas)\b", normalizado)
+        )
+        if pergunta_com_referente:
+            return True
     if len(palavras) > 8:
         pedido_texto = (
             len(palavras) <= 35
@@ -267,7 +293,11 @@ def eh_retomada_curta(texto):
         re.match(
             r"^(?:e (?:o|a|os|as|ele|ela|eles|elas|isso|esse|essa|esses|essas|"
             r"depois|como|qual|quais|quando|onde)\b|"
-            r"mas e\b|entao\b|nesse caso\b|e sobre\b|e quanto a\b|"
+            r"mas e\b|entao\b|nesse caso\b|"
+            r"e sobre (?:isso|esse assunto|essa cultura|esse tema|(?:a|as) linguas?|"
+            r"essa historia|esses? direitos|essa origem)\b|"
+            r"e quanto a (?:isso|esse assunto|essa cultura|esse tema|data|epoca|"
+            r"origem|historia|linguas?|direitos|territorio|funcao|importancia)\b|"
             r"por que\b|porque\b|e por que\b|e porque\b|e pq\b|como assim\b|"
             r"qual deles\b|quais deles\b|ele\b|ela\b|eles\b|elas\b|"
             r"isso\b|essa\b|esse\b|me explica melhor\b|continua\b|continue\b)",
@@ -311,6 +341,15 @@ def eh_pergunta_ampla_sobre_povos(texto):
     )
     return tem_referente and pergunta and (
         menciona_historia_ou_contribuicao or len(normalizado.split()) <= 2
+    )
+
+
+def eh_confusao_povos_afro_originarios(texto):
+    """Reconhece o uso de 'povos originarios afro-brasileiros' como categoria unica."""
+    normalizado = re.sub(r"[^a-z0-9]+", " ", normalizar(texto)).strip()
+    return bool(
+        re.search(r"\bpovos? originarios? afro ?brasileir\w*\b", normalizado)
+        or re.search(r"\bpovos? afro ?brasileir\w* originarios?\b", normalizado)
     )
 
 

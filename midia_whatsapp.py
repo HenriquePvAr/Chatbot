@@ -59,7 +59,9 @@ def buscar_opcoes_imagem(assunto, quantidade=5):
         povos_com_imagens_especificas = (
             "tikuna", "kokama", "sateré mawé", "yanomami", "munduruku",
             "tukano", "guarani", "kaingang", "pataxo", "wajapi", "kusiwa",
-            "ritxoko", "yaokwa", "ceramica marajoara",
+            "ritxoko", "yaokwa", "ceramica marajoara", "cestaria indigena",
+            "arte indigena", "grafismo indigena", "pintura corporal indigena",
+            "ceramica indigena",
         )
         if not any(_texto_normalizado(povo) in assunto_normalizado for povo in povos_com_imagens_especificas):
             raise ImagemNaoEncontrada(
@@ -121,7 +123,6 @@ def buscar_opcoes_imagem(assunto, quantidade=5):
         descricao = _texto_metadata(metadados.get("ImageDescription", {}).get("value", ""))
         busca_texto = _texto_normalizado(titulo_limpo + " " + descricao)
         if eh_conteudo_improprio(titulo_limpo + " " + descricao):
-            continue
             continue
         if re.search(r"\b(submarinos?|submarines?|navio|ship|battleship)\b", _texto_normalizado(titulo_limpo)):
             continue

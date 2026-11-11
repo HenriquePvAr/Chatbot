@@ -71,9 +71,11 @@ Comandos disponíveis:
 - `/sobre`: informações sobre o assistente.
 - `/plano`: detalhes tecnicos da última pesquisa, para depuracao.
 
-Respostas baseadas somente nos materiais locais nao recebem uma lista artificial de fontes. Quando houver pesquisa web, os links usados aparecem no fim da resposta. Se a pessoa pedir fontes de uma resposta local, o bot pesquisa referências públicas relacionadas ao assunto.
+Respostas factuais terminam com links das fontes web consultadas. Quando a resposta comeca nos materiais locais e ainda nao houve busca web, o bot procura referencias publicas antes de responder; se nao encontrar uma fonte confiavel, informa isso sem inventar links. As referencias ficam no fim da mensagem.
 
 ## Conhecimento e materiais
+
+Os guias `direitos_e_lutas_povos_indigenas.md` e `direitos_lutas_populacao_negra_quilombola.md` ampliam a base com direitos, território, saúde, educação, legislação, desigualdades e desafios atuais. São sínteses educativas; temas jurídicos e situações em andamento devem ser conferidos em fontes oficiais atualizadas e contextualizados para cada povo ou comunidade.
 
 Os arquivos Markdown e PDFs pesquisaveis ficam em `documents/`. Revise a origem, a permissão de uso e a ausencia de dados pessoais antes de adicionar material. Para reindexar manualmente:
 
