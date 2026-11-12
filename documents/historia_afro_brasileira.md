@@ -11,7 +11,7 @@ A resistencia assumiu muitas formas: preservacao de conhecimentos e redes de apo
 
 ## Palmares e liderancas negras
 
-As primeiras referencias historicas aos mocambos de Palmares datam do inicio do seculo XVII, na Serra da Barriga, atual Alagoas. Em 1678, Ganga-Zumba negociou um acordo com o governo de Pernambuco. Zumbi e Palmares tornaram-se simbolos de resistencia; Zumbi foi derrotado em 1695. Palmares reuniu pessoas de diferentes origens e viveu trocas com povos indigenas e habitantes da regiao.
+As primeiras referencias historicas aos mocambos de Palmares datam do inicio do seculo XVII, na regiao da atual Alagoas. Palmares era uma rede de mocambos, com comunidades e liderancas diversas. Em 1678, Ganga-Zumba negociou um acordo de paz com autoridades coloniais; Zumbi e parte dos palmarinos permaneceram nas matas e recusaram os termos do acordo. Zumbi liderou a resistencia em um mocambo fortificado no Outeiro do Barriga. Tropas coloniais tomaram esse mocambo em fevereiro de 1694; Zumbi escapou e foi morto em 20 de novembro de 1695. Outros mocambos continuaram na regiao depois de sua morte. Palmares e Zumbi tornaram-se referencias da resistencia negra a escravizacao. A historiadora Silvia Lara observa que os relatos militares e cronicas coloniais possuem limites e interesses proprios, por isso numeros e detalhes biograficos devem ser tratados com cautela.
 
 Mulheres negras tambem atuaram em movimentos de liberdade, na organizacao comunitaria e na preservacao da memoria. Tereza de Benguela liderou o Quilombo do Quariterê no seculo XVIII; sua trajetoria e lembrada no Dia Nacional de Tereza de Benguela e da Mulher Negra, em 25 de julho. Sobre Dandara dos Palmares ha diferentes versoes e poucos registros; respostas devem evitar apresentar detalhes incertos como consenso.
 
@@ -43,6 +43,8 @@ Esses exemplos nao representam todas as culturas negras nem sao costumes univers
 ## Fontes para consulta
 
 - Ministerio dos Direitos Humanos e da Cidadania, **Quilombo dos Palmares**: https://www.gov.br/mdh/pt-br/navegue-por-temas/memoria-e-verdade-da-escravidao/acao/lugares-de-memoria/quilombo-dos-palmares
+- Universidade Federal Fluminense, Impressões Rebeldes, **Palmares**: https://www.historia.uff.br/impressoesrebeldes/revolta/palmares/
+- Universidade Federal Fluminense, Impressões Rebeldes, **Zumbi**: https://www.historia.uff.br/impressoesrebeldes/pessoa/zumbi/
 - Fundacao Cultural Palmares, **Informacoes Quilombolas**: https://www.gov.br/palmares/pt-br/departamentos/protecao-preservacao-e-articulacao/informacoes-quilombolas/
 - IBGE, **O Brasil Quilombola**: https://www.ibge.gov.br/brasil-quilombola/
 - Presidencia da Republica, **Lei 3.353/1888 (Lei Aurea)**: https://legislacao.presidencia.gov.br/atos/?ano=1888&ato=25f0TPn5keVRVT6f8&tipo=LIM%E2%84%96%3D3353

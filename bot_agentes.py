@@ -33,9 +33,11 @@ from neonize import extract_text
 
 from agentes_autonomos import (
     _consultas_contexto,
+    _secao_de_referencias,
     _separar_perguntas,
     chamar_ia,
     pesquisar_com_ia,
+    resposta_direta_zumbi,
     responder_com_ia,
     registrar_trace,
 )
@@ -52,6 +54,7 @@ from escopo_assunto import (
     eh_cumprimento,
     eh_confusao_povos_afro_originarios,
     eh_reacao_curta,
+    eh_retomada_curta,
     pertence_ao_assunto,
     normalizar,
     tipo_mensagem_social,
@@ -118,6 +121,129 @@ bloqueio = threading.RLock()
 # Historico e resultados por conversa
 conversas = {}
 
+# A seleção MIRA deve sobreviver ao reinício do processo (por exemplo, pelo
+# recarregador de código); o arquivo fica em logs/, já excluído do Git.
+ARQUIVO_ESTADOS_MIRA = os.path.join(os.path.dirname(__file__), "logs", "mira_modos.json")
+
+
+aliases_mira = {}
+
+
+def _carregar_estados_mira():
+    global aliases_mira
+    try:
+        with open(ARQUIVO_ESTADOS_MIRA, "r", encoding="utf-8") as arquivo:
+            dados = json.load(arquivo)
+        if not isinstance(dados, dict):
+            return {}
+        aliases = dados.get("aliases")
+        if isinstance(aliases, dict):
+            aliases_mira = {
+                str(alias): str(canonico)
+                for alias, canonico in aliases.items()
+                if isinstance(alias, str) and isinstance(canonico, str)
+            }
+        modos = dados.get("modes")
+        if isinstance(modos, dict):
+            dados = modos
+        return {
+            str(chave): personagem
+            for chave, personagem in dados.items()
+            if isinstance(personagem, str)
+            and personagem in {"esperanca_garcia", "clara_camarao"}
+        }
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+estados_mira = _carregar_estados_mira()
+aliases_conversa_mira = {}
+
+
+def _persistir_estados_mira():
+    temporario = ARQUIVO_ESTADOS_MIRA + ".tmp"
+    try:
+        os.makedirs(os.path.dirname(ARQUIVO_ESTADOS_MIRA), exist_ok=True)
+        with open(temporario, "w", encoding="utf-8") as arquivo:
+            json.dump(
+                {"modes": estados_mira, "aliases": aliases_mira},
+                arquivo,
+                ensure_ascii=False,
+                indent=2,
+            )
+        os.replace(temporario, ARQUIVO_ESTADOS_MIRA)
+    except OSError as erro:
+        print("Nao foi possivel salvar a selecao MIRA localmente:", repr(erro), flush=True)
+
+
+def _definir_personagem_mira(identificador, personagem):
+    with bloqueio:
+        conversa = obter_conversa(identificador)
+        conversa["mira_personagem"] = personagem
+        aliases = set(aliases_conversa_mira.get(identificador, {identificador}))
+        aliases.update(
+            alias for alias, canonico in aliases_mira.items()
+            if canonico == identificador
+        )
+        for alias in aliases:
+            if personagem:
+                estados_mira[alias] = personagem
+            else:
+                estados_mira.pop(alias, None)
+        _persistir_estados_mira()
+
+
+def _jid_conversa(jid):
+    usuario = str(getattr(jid, "User", "") or "").strip()
+    servidor = str(getattr(jid, "Server", "") or "").strip()
+    if usuario and servidor in SERVIDORES_CHAT_INDIVIDUAL:
+        return f"{usuario}@{servidor}"
+    return ""
+
+
+def _identificador_conversa_whatsapp(origem):
+    chat = origem.Chat
+    candidatos = list(dict.fromkeys(
+        chave for chave in (
+            _jid_conversa(chat),
+            _jid_conversa(getattr(origem, "Sender", None)),
+            _jid_conversa(getattr(origem, "SenderAlt", None)),
+        ) if chave
+    ))
+    if not candidatos:
+        return f"{chat.User}@{chat.Server}"
+
+    with bloqueio:
+        canonicos_conhecidos = [aliases_mira.get(chave, chave) for chave in candidatos]
+        ativo = next((chave for chave in canonicos_conhecidos if chave in estados_mira), None)
+        if ativo is None:
+            ativo = next((
+                canonico for chave, canonico in zip(candidatos, canonicos_conhecidos)
+                if chave in conversas and conversas[chave].get("mira_personagem")
+            ), None)
+        if ativo is None:
+            ativo = next((
+                chave for chave in candidatos
+                if chave in conversas and conversas[chave].get("mira_personagem")
+            ), None)
+        # Prefira a identidade de telefone quando o WhatsApp também fornece
+        # a identidade LID; se só houver LID, mantenha o identificador do chat.
+        canonico = ativo or next((
+            chave for chave in candidatos
+            if chave.rsplit("@", 1)[-1] in {"s.whatsapp.net", "c.us"}
+        ), candidatos[0])
+        aliases_conversa_mira.setdefault(canonico, set()).update(candidatos)
+        for alias in candidatos:
+            aliases_mira[alias] = canonico
+        personagem = estados_mira.get(canonico) or next(
+            (estados_mira[alias] for alias in canonicos_conhecidos if alias in estados_mira),
+            None,
+        )
+        if personagem:
+            estados_mira[canonico] = personagem
+            _persistir_estados_mira()
+        return canonico
+
 fila_mensagens = FilaMensagens(
     trabalhadores=max(1, int(os.getenv("WHATSAPP_QUEUE_WORKERS", "2"))),
     rajada_por_usuario=max(1, int(os.getenv("WHATSAPP_USER_BURST", "3"))),
@@ -129,12 +255,13 @@ avisos_fila_cheia = {}
 avisos_fora_tema = {}
 mensagens_em_rajada = {}
 JANELA_AGRUPAMENTO_MENSAGENS = max(
-    0.3, float(os.getenv("WHATSAPP_MESSAGE_BURST_WINDOW_SECONDS", "1.8"))
+    0.3, float(os.getenv("WHATSAPP_MESSAGE_BURST_WINDOW_SECONDS", "3.5"))
 )
 INTERVALO_AVISO_FORA_TEMA = max(
     30, int(os.getenv("WHATSAPP_OFF_TOPIC_NOTICE_SECONDS", "180"))
 )
 INTERVALO_FIGURINHA = max(2, int(os.getenv("WHATSAPP_STICKER_INTERVAL", "5")))
+INTERVALO_IMAGEM = max(2, int(os.getenv("WHATSAPP_IMAGE_INTERVAL", "5")))
 
 # O Neonize pode reentregar mensagens pendentes ao conectar ou reconectar.
 # Processamos apenas mensagens recentes e guardamos IDs recentes para evitar
@@ -159,7 +286,7 @@ def obter_conversa(identificador):
             "plano": None,
             "resultados": None,
             "ultima_pergunta": None,
-            "mira_personagem": None,
+            "mira_personagem": estados_mira.get(identificador),
             "mira_historicos": {},
         }
 
@@ -180,12 +307,15 @@ def gerar_menu():
         "• Como os povos indígenas preservam suas línguas?\n\n"
         "Voce tambem pode perguntar: O que e a ESBAM? Qual o telefone ou o Instagram?\n\n"
         "/menu: mostrar este menu\n"
-        "/web pergunta: pesquisar na internet\n"
+        "/web sua pergunta: pesquisar na internet (ex.: /web preservação das línguas indígenas)\n"
         "/fontes: buscar referências da última resposta\n\n"
         "MIRA: Vozes que atravessam gerações é outro projeto com duas personagens educativas:\n"
-        "• /mira esperanca: Esperança Garcia\n"
-        "• /mira clara: Clara Camarão\n"
+        "• /mira esperanca\n"
+        "  Selecionar Esperança Garcia\n"
+        "• /mira clara\n"
+        "  Selecionar Clara Camarão\n"
         "• /mira sair: voltar ao assistente geral\n"
+        "Envie somente /mira esperanca ou /mira clara, sem acrescentar o nome.\n"
         "Digite /mira para ver as orientações. A prévia precisa estar habilitada nesta instalação.\n\n"
         "Pode escrever normalmente; não precisa usar comandos."
     )
@@ -203,8 +333,11 @@ def gerar_menu_mira():
         "MIRA é o nome do projeto; suas duas personagens são Esperança Garcia e Clara Camarão.\n"
         "As personagens são representações educativas virtuais, não as mulheres "
         "históricas nem testemunhas de suas memórias.\n\n"
-        "/mira esperanca: conversar sobre Esperança Garcia\n"
-        "/mira clara: conversar sobre Clara Camarão\n"
+        "Envie somente um destes comandos, sem nome ou texto depois dele:\n"
+        "/mira esperanca\n"
+        "  Conversar sobre Esperança Garcia\n"
+        "/mira clara\n"
+        "  Conversar sobre Clara Camarão\n"
         "/mira sair: voltar ao assistente geral\n\n"
         "As perguntas podem ser livres. As respostas usam a base histórica da personagem "
         "selecionada e reconhecem quando falta evidência. A prévia precisa estar habilitada "
@@ -217,18 +350,23 @@ def _comando_mira(texto, identificador):
     if not re.match(r"(?i)^/mira(?:\s|$)", comando):
         return None
     argumento = re.sub(r"(?i)^/mira\s*", "", comando, count=1).strip()
+    # Compatibilidade com a forma antiga do menu, que podia ser copiada como
+    # comando completo: "/mira esperanca: Esperança Garcia".
+    argumento = re.split(r"[\s:]+", argumento, maxsplit=1)[0].strip()
     if not argumento:
         return gerar_menu_mira()
     if normalizar(argumento) in {"sair", "off", "voltar", "desativar"}:
-        with bloqueio:
-            obter_conversa(identificador)["mira_personagem"] = None
+        _definir_personagem_mira(identificador, None)
         return "Pronto. Voltamos ao assistente geral do projeto."
     personagem = slug_personagem(argumento)
     if not personagem:
+        # Tolerar descrições copiadas sem separador e o alias com acento.
+        primeiro_termo = normalizar(argumento).split(maxsplit=1)[0] if argumento else ""
+        personagem = slug_personagem(primeiro_termo)
+    if not personagem:
         return "Escolha /mira esperanca, /mira clara ou /mira sair."
     if not preview_habilitado(personagem):
-        with bloqueio:
-            obter_conversa(identificador)["mira_personagem"] = None
+        _definir_personagem_mira(identificador, None)
         if personagem == "clara_camarao":
             return (
                 "A base textual de Clara Camarão foi integrada, mas a própria entrega "
@@ -239,8 +377,7 @@ def _comando_mira(texto, identificador):
             "A prévia MIRA está desativada nesta instalação. Ela só pode ser ativada "
             "depois da avaliação das respostas da base."
         )
-    with bloqueio:
-        obter_conversa(identificador)["mira_personagem"] = personagem
+    _definir_personagem_mira(identificador, personagem)
     nome = "Esperança Garcia" if personagem == "esperanca_garcia" else "Clara Camarão"
     return (
         f"Prévia MIRA ativada: {nome}. Sou uma representação virtual educativa, "
@@ -670,11 +807,33 @@ def responder_mensagem(texto, identificador):
             )[:3500]
 
     resposta_esbam = responder_faq_esbam(texto)
+    if not resposta_esbam and eh_retomada_curta(texto):
+        with bloqueio:
+            historico_esbam = list(obter_conversa(identificador)["historico"])
+        pergunta_anterior_esbam = next(
+            (
+                str(mensagem.get("content") or "")
+                for mensagem in reversed(historico_esbam)
+                if mensagem.get("role") == "user"
+            ),
+            "",
+        )
+        if pergunta_anterior_esbam:
+            resposta_esbam = responder_faq_esbam(pergunta_anterior_esbam + " " + texto)
     if resposta_esbam:
         if not re.search(r"\n\s*Fontes:", resposta_esbam, re.IGNORECASE):
             resposta_esbam = resposta_esbam.rstrip() + (
                 "\n\nFontes:\n1. Site oficial da ESBAM: https://esbam.edu.br/"
             )
+        with bloqueio:
+            conversa_esbam = obter_conversa(identificador)
+            conversa_esbam["historico"] = (
+                list(conversa_esbam["historico"])
+                + [
+                    {"role": "user", "content": texto},
+                    {"role": "assistant", "content": resposta_esbam},
+                ]
+            )[-12:]
         return resposta_esbam
 
     forcar_web = comando == "/web" or comando.startswith("/web ")
@@ -691,8 +850,8 @@ def responder_mensagem(texto, identificador):
             return "A prévia MIRA foi desativada. Você voltou ao assistente geral do projeto."
         if forcar_web:
             return "No modo MIRA uso as fontes cadastradas na base da personagem. Digite /mira sair para usar a pesquisa geral."
+        nome = "Esperança Garcia" if personagem_mira == "esperanca_garcia" else "Clara Camarão"
         if eh_cumprimento(pergunta):
-            nome = "Esperança Garcia" if personagem_mira == "esperanca_garcia" else "Clara Camarão"
             return (
                 f"Olá! Sou uma representação virtual educativa de {nome}, personagem do projeto MIRA: "
                 "Vozes que atravessam gerações. Também há a prévia de "
@@ -703,13 +862,126 @@ def responder_mensagem(texto, identificador):
         tipo_social_mira = tipo_mensagem_social(pergunta)
         if tipo_social_mira == "agradecimento":
             return "Por nada! Se quiser, pode perguntar mais sobre os registros e as fontes da base."
-        if tipo_social_mira == "confirmacao" or eh_reacao_curta(pergunta):
+        if tipo_social_mira == "confirmacao":
+            return "Certo. Pode continuar perguntando sobre a trajetoria de " + nome + "."
+        if eh_reacao_curta(pergunta):
             return None
+        status_curto = normalizar(pergunta).strip(" .!?\t\n")
+        if re.fullmatch(r"(?:deu ruim|deu erro|bugou|travou|falhou|lascou|deu problema)", status_curto):
+            return "Parece que uma resposta falhou. Estou aqui; pode reenviar a pergunta que eu tento de novo."
         return processar_pergunta(
             pergunta,
             identificador,
             personagem_mira=personagem_mira,
         )
+
+    # Um nome isolado em uma conversa costuma ser um pedido implícito para
+    # apresentar a pessoa. Corrige apenas variantes conhecidas de Marielle e
+    # responde com uma síntese local, sem depender do classificador genérico.
+    consulta_marielle = normalizar(pergunta).strip(" .!?\t\n")
+    if re.fullmatch(
+        r"(?:(?:quem foi|quem e|fale sobre|me fale sobre|me fala sobre|conte sobre) )?"
+        r"marielle franco(?: marielle francisco da silva)?",
+        consulta_marielle,
+    ):
+        resposta = (
+            "Marielle Franco (Marielle Francisco da Silva, 1979–2018) foi uma "
+            "socióloga, ativista de direitos humanos e vereadora do Rio de Janeiro, "
+            "eleita em 2016. Seu trabalho político deu destaque a direitos das "
+            "mulheres negras, de moradores de comunidades e da população LGBT. "
+            "Ela foi assassinada em 14 de março de 2018 junto com o motorista "
+            "Anderson Gomes. Marielle é lembrada por sua atuação política e pela "
+            "luta contra desigualdades e violência política.\n\n"
+            "Fontes:\n"
+            "1. Câmara dos Deputados, resumo biográfico de Marielle Franco: "
+            "https://www2.camara.leg.br/atividade-legislativa/comissoes/"
+            "comissoes-permanentes/cmulher/outros-documentos/diploma-mulher-cidada-"
+            "carlota-pereira-de-queiros/edicao-2018-diploma-mulher-cidada-carlota-"
+            "pereira-de-queiros/resumo-marielle-franco\n"
+            "2. Instituto Marielle Franco, Quem é Marielle Franco?: "
+            "https://www.institutomariellefranco.org/quem-e-marielle"
+        )
+        with bloqueio:
+            conversa = obter_conversa(identificador)
+            conversa["historico"] = (
+                list(conversa["historico"])
+                + [
+                    {"role": "user", "content": pergunta},
+                    {"role": "assistant", "content": resposta},
+                ]
+            )[-12:]
+            conversa["ultima_pergunta"] = pergunta
+        return anexar_imagem_se_fizer_sentido(pergunta, resposta)
+
+    # A pergunta "qual o maior museu indigena" nao define se "maior" e por
+    # area, visitantes ou tamanho do acervo. Responder com o museu federal de
+    # referencia e explicitar esse limite evita transformar uma metrica em
+    # ranking absoluto. A Funai atualizou o nome oficial em 2025.
+    consulta_museu_indigena = normalizar(pergunta).strip(" .!?\t\n")
+    if re.search(r"\bmuseu\w*\b", consulta_museu_indigena) and re.search(
+        r"\b(indigena|indigenas|povos originarios|indio|indios)\b",
+        consulta_museu_indigena,
+    ) and re.search(r"\b(maior|grande|acervo|pecas|colecao)\b", consulta_museu_indigena):
+        fonte_titulo = "Funai, Museu Nacional dos Povos Indígenas"
+        fonte_url = (
+            "https://www.gov.br/funai/pt-br/assuntos/noticias/2025/"
+            "governo-federal-oficializa-mudanca-de-nome-do-museu-nacional-dos-povos-indigenas"
+        )
+        resposta = (
+            "Se você quer dizer o principal museu federal dedicado aos povos indígenas, "
+            "é o Museu Nacional dos Povos Indígenas, da Funai, no Rio de Janeiro. "
+            "A instituição informa que seu acervo etnográfico reúne mais de 20 mil objetos "
+            "de cerca de 150 povos. Mas “o maior” pode significar área, número de peças "
+            "ou visitação; sem definir o critério, não dá para afirmar um ranking absoluto.\n\n"
+            f"Fonte: {fonte_titulo}: {fonte_url}"
+        )
+        evidencia = {
+            "ferramenta": "web_busca",
+            "consulta": pergunta,
+            "resultado": {"resultados": [{
+                "titulo": fonte_titulo,
+                "url": fonte_url,
+                "trecho": "Nome oficial e acervo etnográfico com mais de 20 mil objetos de cerca de 150 povos.",
+            }]},
+        }
+        with bloqueio:
+            conversa = obter_conversa(identificador)
+            conversa["historico"] = (
+                list(conversa["historico"])
+                + [
+                    {"role": "user", "content": pergunta},
+                    {"role": "assistant", "content": resposta},
+                ]
+            )[-12:]
+            conversa["plano"] = {"categoria": "web", "consultas": 1, "evidencias": [evidencia]}
+            conversa["resultados"] = [evidencia]
+            conversa["ultima_pergunta"] = pergunta
+        return anexar_imagem_se_fizer_sentido(pergunta, resposta)
+
+    resposta_zumbi = resposta_direta_zumbi(pergunta)
+    if resposta_zumbi:
+        resposta = (
+            resposta_zumbi
+            + "\n\nFontes:\n"
+            + "1. UFF, Impress?es Rebeldes, Palmares: "
+            + "https://www.historia.uff.br/impressoesrebeldes/revolta/palmares/\n"
+            + "2. UFF, Impress?es Rebeldes, Zumbi: "
+            + "https://www.historia.uff.br/impressoesrebeldes/pessoa/zumbi/\n"
+            + "3. Minist?rio dos Direitos Humanos e da Cidadania, Quilombo dos Palmares: "
+            + "https://www.gov.br/mdh/pt-br/navegue-por-temas/memoria-e-verdade-da-escravidao/"
+            + "acao/lugares-de-memoria/quilombo-dos-palmares"
+        )
+        with bloqueio:
+            conversa = obter_conversa(identificador)
+            conversa["historico"] = (
+                list(conversa["historico"])
+                + [
+                    {"role": "user", "content": pergunta},
+                    {"role": "assistant", "content": resposta},
+                ]
+            )[-12:]
+            conversa["ultima_pergunta"] = pergunta
+        return anexar_imagem_se_fizer_sentido(pergunta, resposta)
 
     if eh_cumprimento(pergunta):
         return (
@@ -728,9 +1000,17 @@ def responder_mensagem(texto, identificador):
             return "Que bom 🙂 Se algum ponto ficou confuso, posso explicar de outro jeito."
         return "Beleza 🙂 Pode mandar a próxima dúvida quando quiser."
     conversa_curta = normalizar(pergunta).strip(" .!?\t\n")
+    if re.fullmatch(r"(?:deu ruim|deu erro|bugou|travou|falhou|lascou|deu problema)", conversa_curta):
+        return "Parece que uma resposta falhou. Estou aqui; pode reenviar a pergunta que eu tento de novo."
+    if re.fullmatch(r"(?:testa perguntas?|testar perguntas?|vamos testar|quero testar)", conversa_curta):
+        return (
+            "Claro! Pode testar com: Quem foi Marielle Franco? O que Zumbi fez em Palmares? "
+            "Como os povos indigenas preservam suas linguas? Tambem pode perguntar com suas "
+            "proprias palavras; se uma resposta ficar confusa, peca para eu explicar melhor."
+        )
     if re.fullmatch(
         r"(?:bugou|travou|ta ai|esta ai|ainda ta ai|esta funcionando|"
-        r"ta funcionando|funciona|teste|testando|oxi|oxe|ixi)",
+        r"ta funcionando|funciona|teste|testando|oxi|oxe|ixi|opa)",
         conversa_curta,
     ):
         return (
@@ -778,7 +1058,7 @@ def responder_mensagem(texto, identificador):
                 ]
             )[-12:]
             conversa["ultima_pergunta"] = pergunta
-        return resposta
+        return anexar_imagem_se_fizer_sentido(pergunta, resposta)
 
     solicitacao_midia = extrair_solicitacao_midia(texto)
     if solicitacao_midia:
@@ -823,9 +1103,35 @@ def responder_mensagem(texto, identificador):
         )
 
     resposta = processar_pergunta(pergunta, identificador, forcar_web=forcar_web)
+    return anexar_imagem_se_fizer_sentido(pergunta, resposta)
+
+
+def anexar_imagem_se_fizer_sentido(pergunta, resposta):
+    """Anexa imagem ilustrativa a uma resposta de texto quando a pergunta pede
+    explicacao e cita um assunto visual, mesmo quando a resposta veio de um
+    atalho (ex.: Zumbi, Marielle, museu indigena) em vez do fluxo de IA."""
+    pedido_explicativo = eh_pedido_explicativo(pergunta)
     assunto_visual = assunto_para_midia(pergunta)
-    if assunto_visual and eh_pedido_explicativo(pergunta):
+    assuntos_resposta = []
+    if not assunto_visual and pedido_explicativo and isinstance(resposta, str):
+        assuntos_resposta = assuntos_visuais_no_texto(resposta, maximo=2)
+        if assuntos_resposta:
+            assunto_visual = assuntos_resposta[0]
+    if assunto_visual and pedido_explicativo:
         try:
+            if len(assuntos_resposta) >= 2 and eh_pedido_de_lista(pergunta):
+                itens = []
+                for termo_busca in assuntos_resposta[:2]:
+                    try:
+                        itens.append(buscar_imagem(termo_busca))
+                    except Exception:
+                        continue
+                if len(itens) >= 2:
+                    return {
+                        "tipo_midia": "imagens_com_texto",
+                        "texto": resposta,
+                        "itens": itens,
+                    }
             dados, titulo, atribuicao = buscar_imagem(assunto_visual)
             return {
                 "tipo_midia": "imagem_com_texto",
@@ -946,13 +1252,14 @@ def processar_item_fila(item):
     if resposta is None:
         print("Resposta suprimida para evitar repeticao de aviso ou reacao curta.", flush=True)
         return
-    if isinstance(resposta, dict) and resposta.get("tipo_midia") == "imagem_com_texto":
+    if isinstance(resposta, dict) and resposta.get("tipo_midia") in ("imagem_com_texto", "imagens_com_texto"):
         enviar_resposta(client, evento, resposta["texto"])
         enviar_midia(client, evento, resposta)
     elif isinstance(resposta, dict) and resposta.get("tipo_midia") in ("imagem", "imagens", "figurinha"):
         enviar_midia(client, evento, resposta)
     else:
         enviou_texto = enviar_resposta(client, evento, resposta)
+        enviou_figurinha = False
         if enviou_texto and deve_enviar_figurinha(identificador, texto, resposta):
             assunto = assunto_para_midia(texto) or texto
             try:
@@ -963,6 +1270,7 @@ def processar_item_fila(item):
                     "titulo": titulo,
                     "atribuicao": atribuicao,
                 }, avisar_erro=False)
+                enviou_figurinha = True
             except Exception as erro:
                 print("Figurinha automatica indisponivel:", repr(erro), flush=True)
                 registrar_envio_midia(
@@ -970,6 +1278,24 @@ def processar_item_fila(item):
                     "falhou",
                     repr(erro),
                 )
+        if enviou_texto and not enviou_figurinha:
+            enviar_imagem, assunto_imagem = deve_enviar_imagem_periodica(identificador, texto, resposta)
+            if enviar_imagem:
+                try:
+                    dados, titulo, atribuicao = buscar_imagem(assunto_imagem)
+                    enviar_midia(client, evento, {
+                        "tipo_midia": "imagem",
+                        "dados": dados,
+                        "titulo": titulo,
+                        "atribuicao": atribuicao,
+                    }, avisar_erro=False)
+                except Exception as erro:
+                    print("Imagem periodica indisponivel:", repr(erro), flush=True)
+                    registrar_envio_midia(
+                        {"tipo_midia": "imagem", "titulo": assunto_imagem},
+                        "falhou",
+                        repr(erro),
+                    )
 
 
 def registrar_interacao_whatsapp(entrada, saida):
@@ -1018,7 +1344,8 @@ def extrair_solicitacao_midia(texto):
     pedido = re.match(
         r"^(?:(?:oi|ola)[,! ]*)?(?:(?:por favor)\s+)?(?:(?:me\s+)?(?:manda(?:r)?|envia(?:r)?|mostra(?:r)?|exibe(?:r)?)|"
         r"quero(?:\s+ver)?|queria(?:\s+ver)?|pode(?:ria)?(?:\s+me)?\s+(?:mandar|enviar|mostrar|exibir)|"
-        r"tem\s+como\s+(?:me\s+)?(?:mandar|enviar|mostrar|exibir)|consegue\s+(?:me\s+)?(?:mandar|enviar|mostrar|exibir))"
+        r"tem\s+como\s+(?:me\s+)?(?:mandar|enviar|mostrar|exibir)|consegue\s+(?:me\s+)?(?:mandar|enviar|mostrar|exibir)|"
+        r"(?:voce\s+)?(?:tem|possui)(?:\s+(?:uma|alguma))?)"
         r"\b.*?\b(fotos?|fotografias?|image(?:m|ns)|figurinhas?|stickers?)\b(.*)$",
         limpo,
         flags=re.IGNORECASE,
@@ -1047,7 +1374,7 @@ def enviar_midia(client, evento, midia, avisar_erro=True):
                 midia["dados"],
                 caption=midia["atribuicao"],
             )
-        elif midia["tipo_midia"] == "imagens":
+        elif midia["tipo_midia"] in ("imagens", "imagens_com_texto"):
             for dados, titulo, atribuicao in midia["itens"]:
                 client.send_image(chat, dados, caption=atribuicao)
                 print(f"Imagem enviada: {titulo}", flush=True)
@@ -1070,9 +1397,7 @@ def enviar_midia(client, evento, midia, avisar_erro=True):
         return False
 
 
-def assunto_para_midia(texto):
-    normalizado = normalizar(texto)
-    temas_visuais = (
+TEMAS_VISUAIS = (
         ("berimbau", "berimbau musical instrument capoeira"),
         ("atabaque", "atabaque cultura afro brasileira Brasil"),
         ("maculele", "maculele capoeira Brasil"),
@@ -1129,10 +1454,35 @@ def assunto_para_midia(texto):
         ("mulheres negras", "mulheres negras Brasil cultura"),
         ("maracatu", "Maracatu Pernambuco Brasil"),
     )
-    for termo, busca in temas_visuais:
+
+
+def assunto_para_midia(texto):
+    normalizado = normalizar(texto)
+    for termo, busca in TEMAS_VISUAIS:
         if normalizar(termo) in normalizado:
             return busca
     return None
+
+
+def assuntos_visuais_no_texto(texto, maximo=2):
+    """Retorna ate `maximo` buscas visuais distintas citadas no texto."""
+    normalizado = normalizar(texto)
+    encontrados = []
+    for termo, busca in TEMAS_VISUAIS:
+        if normalizar(termo) in normalizado and busca not in encontrados:
+            encontrados.append(busca)
+            if len(encontrados) >= maximo:
+                break
+    return encontrados
+
+
+def eh_pedido_de_lista(texto):
+    normalizado = normalizar(texto)
+    return bool(re.search(
+        r"\b(me diga algum[ao]s|cite|liste|quais pessoas|quem ajudou|quem lutou|"
+        r"quem contribuiu)\b",
+        normalizado,
+    ))
 
 
 def eh_pedido_explicativo(texto):
@@ -1142,7 +1492,9 @@ def eh_pedido_explicativo(texto):
         r"quem foi|quem foram|quem e|quem sao|quais sao|quais foram|qual foi|"
         r"qual (?:a )?(?:historia|importancia|funcao|objetivo)|"
         r"por que .* (?:importante|lembrad[oa]s?)|fale sobre|fala sobre|"
-        r"me fale sobre|conte sobre|como e|como surgiu|qual a funcao)\b",
+        r"me fale sobre|conte sobre|como e|como surgiu|qual a funcao|"
+        r"me diga algum[ao]s|cite|liste|quais pessoas|quem ajudou|quem lutou|"
+        r"quem contribuiu)\b",
         normalizado,
     ))
 
@@ -1161,6 +1513,53 @@ def deve_enviar_figurinha(identificador, texto, resposta, intervalo=None):
             return True
         conversa["respostas_desde_figurinha"] = total
     return False
+
+
+def assunto_principal_dinamico(identificador):
+    """Descobre o assunto da troca atual pela secao/arquivo do melhor trecho
+    do RAG usado na ultima resposta, sem depender de lista fixa de termos."""
+    with bloqueio:
+        evidencias = list(obter_conversa(identificador).get("resultados") or [])
+    trechos = [
+        trecho
+        for evidencia in evidencias
+        if evidencia.get("ferramenta") == "rag_busca"
+        for trecho in (evidencia.get("resultado") or {}).get("trechos") or []
+        if not _secao_de_referencias(trecho.get("secao"))
+    ]
+    melhor = max(trechos, key=lambda trecho: float(trecho.get("relevancia", 0)), default=None)
+    if not melhor:
+        return None
+    secao = str(melhor.get("secao") or "").strip(" #-:.")
+    if secao:
+        return secao
+    arquivo = str(melhor.get("arquivo") or "").strip()
+    if arquivo:
+        return os.path.splitext(arquivo)[0].replace("_", " ")
+    return None
+
+
+def deve_enviar_imagem_periodica(identificador, texto, resposta, intervalo=None):
+    """A cada N respostas que fazem sentido, sugere o assunto para uma
+    imagem ilustrativa, independente da solicitacao explicita de midia."""
+    intervalo = INTERVALO_IMAGEM if intervalo is None else max(2, int(intervalo))
+    if not pertence_ao_assunto(texto) or eh_cumprimento(texto):
+        return False, None
+    if not isinstance(resposta, str) or resposta.startswith(("Sou um assistente apenas", "Nao encontrei evidencia", "Nao consegui responder")):
+        return False, None
+    with bloqueio:
+        conversa = obter_conversa(identificador)
+        total = conversa.get("respostas_desde_imagem", 0) + 1
+        if total >= intervalo:
+            conversa["respostas_desde_imagem"] = 0
+            atingiu_intervalo = True
+        else:
+            conversa["respostas_desde_imagem"] = total
+            atingiu_intervalo = False
+    if not atingiu_intervalo:
+        return False, None
+    assunto = assunto_principal_dinamico(identificador)
+    return (bool(assunto), assunto)
 
 
 def registrar_diagnostico_timestamp(timestamp, agora, corte, motivo, servidor=None, de_mim=None):
@@ -1249,7 +1648,7 @@ def mensagem(client, evento):
         if not texto:
             return
 
-        identificador = f"{origem.Chat.User}@{origem.Chat.Server}"
+        identificador = _identificador_conversa_whatsapp(origem)
         agendar_item_apos_rajada(client, evento, texto, identificador)
 
     except Exception as erro:
@@ -1283,6 +1682,7 @@ def despachar_rajada(identificador):
         return
     itens = estado["itens"]
     cumprimentos = []
+    status_conversa = []
     partes = []
     vistas = set()
     ultimo_item_util = None
@@ -1293,6 +1693,14 @@ def despachar_rajada(identificador):
             continue
         if eh_cumprimento(texto):
             cumprimentos.append(texto)
+            continue
+        normalizado_curto = normalizar(texto).strip(" .!?\t\n")
+        if re.fullmatch(
+            r"(?:deu ruim|deu erro|bugou|travou|falhou|lascou|deu problema|"
+            r"ixi|eita|oxi|oxe)",
+            normalizado_curto,
+        ):
+            status_conversa.append((texto, item))
             continue
         # Um ponto de interrogacao enviado sozinho complementa a pergunta
         # anterior; nao deve virar uma segunda pergunta nem ser descartado.
@@ -1309,6 +1717,9 @@ def despachar_rajada(identificador):
 
     if partes:
         texto_consolidado = "\n".join(partes)[:3000]
+    elif status_conversa:
+        texto_consolidado = status_conversa[-1][0]
+        ultimo_item_util = status_conversa[-1][1]
     elif cumprimentos:
         texto_consolidado = cumprimentos[-1]
     else:

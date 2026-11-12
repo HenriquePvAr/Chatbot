@@ -42,6 +42,19 @@ class TestMiraPersonagens(unittest.TestCase):
         self.assertTrue(resultado["fontes"])
         self.assertTrue(all(item["status_verificacao"] == "verificada" for item in resultado["fontes"]))
 
+    def test_quem_foi_esperanca_responde_com_trajetoria_sem_expor_a_base(self):
+        chamar = unittest.mock.Mock(side_effect=AssertionError("resposta introdutoria deve ser documentada"))
+        resultado = responder_personagem("esperanca", "Quem foi Esperan" + chr(0xE7) + "a?", chamar_modelo=chamar)
+        resposta = resultado["resposta"].casefold()
+        self.assertIn("mulher negra escravizada", resposta)
+        self.assertIn("1770", resposta)
+        self.assertIn("fazenda algodões", resposta)
+        self.assertIn("primeira advogada piauiense", resposta)
+        self.assertNotIn("base de dados", resposta)
+        self.assertNotIn("estou usando", resposta)
+        self.assertEqual({fonte["id"] for fonte in resultado["fontes"]}, {"F001", "F002", "F003"})
+        chamar.assert_not_called()
+
     def test_mensagem_com_varias_perguntas_nao_vira_uma_resposta_fixa(self):
         resultado = buscar_evidencias("esperanca", "Quando a carta foi escrita? O que ela pediu?")
         self.assertIsNone(resultado["resposta_exata"])

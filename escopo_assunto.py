@@ -72,6 +72,8 @@ TERMOS_DO_TEMA = (
     "laudelina de campos melo",
     "sueli carneiro",
     "conceicao evaristo",
+    "marielle franco",
+    "marielle francisco da silva",
     "milton santos",
     "nego bispo",
     "ailton krenak",
@@ -240,6 +242,7 @@ PADROES_CONTEUDO_IMPROPRIO = tuple(
 
 _ERROS_TEMATICOS = (
     (r"\boq\b", "o que"),
+    (r"\bqem\b", "quem"),
     (r"\bpq\b", "por que"),
     (r"\bqm\b", "quem"),
     (r"\bqnd\b", "quando"),
@@ -255,6 +258,11 @@ _ERROS_TEMATICOS = (
     (r"\bquilombolla(s)?\b", r"quilombola\1"),
     (r"\bafro[\s-]*brasilero(s)?\b", r"afro-brasileiro\1"),
     (r"\bafro[\s-]*brasilera(s)?\b", r"afro-brasileira\1"),
+    # Confusões recorrentes de nome próprio. A correção exata permite tratar
+    # a pessoa como assunto do projeto sem ativar uma correção fuzzy ampla.
+    (r"\bmariele\s+frango\b", "Marielle Franco"),
+    (r"\bmariele\s+franco\b", "Marielle Franco"),
+    (r"\bmarielle\s+frango\b", "Marielle Franco"),
     (r"\blideransa(s)?\b", r"lideranca\1"),
     (r"\bimportansia\b|\bimprotancia\b", "importancia"),
     (r"\bescravisaum\b", "escravizacao"),
@@ -293,7 +301,7 @@ def eh_cumprimento(texto):
     normalizado = re.sub(r"[^a-z0-9]+", " ", normalizar(texto)).strip()
     return bool(
         re.fullmatch(
-            r"(?:oi+e?|ola+|bom dia|boa tarde|boa noite|e ai|eae|tudo bem|tudo bom|como vai|hello|hi|hey)"
+            r"(?:oi+e?|ola+|opa+|bom dia|boa tarde|boa noite|e ai|eae|tudo bem|tudo bom|como vai|hello|hi|hey)"
             r"(?: (?:tudo bem|tudo bom|como vai))?",
             normalizado,
         )
@@ -309,7 +317,10 @@ def tipo_mensagem_social(texto):
         normalizado,
     ):
         return "agradecimento"
-    if re.fullmatch(r"(?:ok|okay|blz|beleza|entendi|entendido|certo|tranquilo)", normalizado):
+    if re.fullmatch(
+        r"(?:ok|okay|blz|beleza|entendi|entendido|certo|tranquilo|sim|s|isso|aham|uhum)",
+        normalizado,
+    ):
         return "confirmacao"
     return None
 
@@ -343,6 +354,22 @@ def eh_retomada_curta(texto):
         )
         if pergunta_com_referente:
             return True
+        # Continuacoes bem curtas sem pronome nem assunto novo, tipo "quando
+        # surgiu?", "onde se originou?", "aonde se originou?", "quando foi
+        # fundada?" - so conta quando nao ha mais nenhuma palavra alem do
+        # verbo, para nao confundir com uma pergunta nova ja com assunto
+        # explicito (ex.: "onde moram os guarani?").
+        if re.fullmatch(
+            r"(?:aonde|onde|quando|de onde)\s+(?:se\s+)?(?:originou|origina|"
+            r"nasceu|fica|ficava|mora|morava|viveu|surgiu|surgiram|aconteceu|"
+            r"comecou|criad[ao]|fundad[ao]|foi\s+(?:fundad[ao]|criad[ao]))",
+            normalizado,
+        ):
+            return True
+        # Palavra de pergunta sozinha, sem verbo nem assunto novo (ex.: "quando?",
+        # "onde?", "quem?") - so e retomada quando nao sobra mais nada na frase.
+        if re.fullmatch(r"(?:quando|onde|aonde|quem|como|por que|porque|qual|quais|o que|oq)", normalizado):
+            return True
     if len(palavras) > 8:
         pedido_texto = (
             len(palavras) <= 35
@@ -351,7 +378,7 @@ def eh_retomada_curta(texto):
         )
         continuacao = bool(
             re.match(
-                r"^(?:e|mas e) (?:por que|porque|como|qual|quais|quando|onde|"
+                r"^(?:e|mas)(?: e)? (?:por que|porque|como|qual|quais|quando|onde|"
                 r"eles|elas|ele|ela|isso|esse|essa)\b",
                 normalizado,
             )
@@ -361,6 +388,8 @@ def eh_retomada_curta(texto):
         re.match(
             r"^(?:e (?:o|a|os|as|ele|ela|eles|elas|isso|esse|essa|esses|essas|"
             r"depois|como|qual|quais|quando|onde)\b|"
+            r"mas(?: e)? (?:o que|oq|quem|quando|onde|como|por que|porque|qual|quais|"
+            r"ele|ela|eles|elas|isso|esse|essa|esses|essas)\b|"
             r"mas e\b|entao\b|nesse caso\b|"
             r"e sobre (?:isso|esse assunto|essa cultura|esse tema|(?:a|as) linguas?|"
             r"essa historia|esses? direitos|essa origem)\b|"
@@ -476,7 +505,7 @@ def _pode_herdar_contexto(texto):
         normalizado,
     ):
         return True
-    if re.match(r"^e (?:o que|quem|quando|onde|como|por que|porque|qual|quais)\b", normalizado):
+    if re.match(r"^e (?:o que|quem|quando|onde|aonde|como|por que|porque|qual|quais)\b", normalizado):
         return True
     if re.match(
         r"^(?:quem mais|quem (?:participou|liderou|fundou|organizou|escreveu|criou|lutou)|"
@@ -484,7 +513,7 @@ def _pode_herdar_contexto(texto):
         normalizado,
     ):
         return True
-    if re.match(r"^(?:e\s+)?(?:o que|quem|quando|onde|como|por que|porque|qual|quais)\b", normalizado):
+    if re.match(r"^(?:e\s+)?(?:o que|quem|quando|onde|aonde|como|por que|porque|qual|quais)\b", normalizado):
         if len(normalizado.split()) <= 3:
             return True
         return bool(re.search(

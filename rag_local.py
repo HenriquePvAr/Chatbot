@@ -1,4 +1,5 @@
 
+import hashlib
 import os
 import json
 import math
@@ -40,6 +41,20 @@ PALAVRAS_VAZIAS_BUSCA = {
 }
 
 
+def _radical_busca(token):
+    """Reduz plural/genero simples para melhorar o casamento lexical."""
+    if len(token) <= 4:
+        return token
+    for sufixo in ("oes", "aes", "ais"):
+        if token.endswith(sufixo) and len(token) > len(sufixo) + 3:
+            return token[: -len(sufixo)]
+    if token.endswith("s") and len(token) > 4:
+        token = token[:-1]
+    if token.endswith("a") and len(token) > 4:
+        token = token[:-1]
+    return token
+
+
 def _tokens_busca(texto):
     sem_acentos = "".join(
         caractere
@@ -47,7 +62,8 @@ def _tokens_busca(texto):
         if not unicodedata.combining(caractere)
     )
     return {
-        token for token in re.findall(r"[a-z0-9]+", sem_acentos)
+        _radical_busca(token)
+        for token in re.findall(r"[a-z0-9]+", sem_acentos)
         if token not in PALAVRAS_VAZIAS_BUSCA
     }
 
@@ -118,16 +134,44 @@ def dividir_texto(texto, tamanho=900, sobreposicao=120):
     return trechos
 
 
+def dividir_texto_por_secao(texto, tamanho=900, sobreposicao=120):
+    """Preserva secoes Markdown (## / ###) inteiras quando cabem no limite."""
+    blocos = re.split(r"(?m)^(#{2,3} .+)$", str(texto or ""))
+
+    if len(blocos) <= 1:
+        return dividir_texto(texto, tamanho=tamanho, sobreposicao=sobreposicao)
+
+    trechos = []
+    preambulo = blocos[0].strip()
+    if preambulo:
+        trechos.extend(dividir_texto(preambulo, tamanho=tamanho, sobreposicao=sobreposicao))
+
+    for indice in range(1, len(blocos), 2):
+        titulo = blocos[indice].strip()
+        corpo = blocos[indice + 1] if indice + 1 < len(blocos) else ""
+        secao_completa = (titulo + "\n" + corpo).strip()
+        if len(re.sub(r"\s+", " ", secao_completa)) <= tamanho:
+            trechos.append(re.sub(r"\s+", " ", secao_completa).strip())
+        else:
+            trechos.extend(
+                dividir_texto(secao_completa, tamanho=tamanho, sobreposicao=sobreposicao)
+            )
+
+    return [trecho for trecho in trechos if trecho]
+
+
 # ==========================================
 # INDEXAR DOCUMENTOS PDF
 # ==========================================
+
+def _hash_conteudo(conteudo_binario):
+    return hashlib.sha256(conteudo_binario).hexdigest()
+
 
 def indexar_documentos():
 
     PASTA_DOCUMENTOS.mkdir(exist_ok=True)
     PASTA_INDICE.mkdir(exist_ok=True)
-
-    registros = []
 
     arquivos = sorted(
         [*PASTA_DOCUMENTOS.glob("*.pdf"), *PASTA_DOCUMENTOS.glob("*.md")]
@@ -138,7 +182,42 @@ def indexar_documentos():
             "Nenhum PDF ou arquivo Markdown encontrado em documents/."
         )
 
+    indice_anterior = {}
+    if ARQUIVO_INDICE.exists():
+        try:
+            bruto = json.loads(ARQUIVO_INDICE.read_text(encoding="utf-8"))
+            if bruto.get("modelo") == EMBEDDING_MODEL:
+                indice_anterior = bruto.get("hashes_arquivos", {})
+        except (json.JSONDecodeError, OSError):
+            indice_anterior = {}
+        registros_anteriores_por_arquivo = {}
+        if indice_anterior:
+            for registro in bruto.get("registros", []):
+                registros_anteriores_por_arquivo.setdefault(
+                    registro["arquivo"], []
+                ).append(registro)
+    else:
+        registros_anteriores_por_arquivo = {}
+
+    registros = []
+    hashes_arquivos = {}
+    pendentes_embedding = []
+    reaproveitados = 0
+
     for arquivo in arquivos:
+
+        conteudo_binario = arquivo.read_bytes()
+        hash_atual = _hash_conteudo(conteudo_binario)
+        hashes_arquivos[arquivo.name] = hash_atual
+
+        if (
+            indice_anterior.get(arquivo.name) == hash_atual
+            and arquivo.name in registros_anteriores_por_arquivo
+        ):
+            print(f"Sem alteracao, reaproveitando: {arquivo.name}", flush=True)
+            registros.extend(registros_anteriores_por_arquivo[arquivo.name])
+            reaproveitados += len(registros_anteriores_por_arquivo[arquivo.name])
+            continue
 
         print(f"Lendo: {arquivo.name}", flush=True)
 
@@ -149,7 +228,7 @@ def indexar_documentos():
                 for numero, pagina in enumerate(leitor.pages, start=1)
             ]
         else:
-            texto_markdown = arquivo.read_text(encoding="utf-8")
+            texto_markdown = conteudo_binario.decode("utf-8")
             marcadores = list(
                 re.finditer(
                     r"(?m)^<!-- (pagina|secao): (.*?) -->\s*$",
@@ -175,16 +254,19 @@ def indexar_documentos():
 
         for numero_pagina, secao, texto in paginas:
 
-            trechos = dividir_texto(texto)
+            divisor = dividir_texto_por_secao if arquivo.suffix.lower() == ".md" else dividir_texto
+            trechos = divisor(texto)
 
             for trecho in trechos:
 
-                registros.append({
+                registro = {
                     "arquivo": arquivo.name,
                     "pagina": numero_pagina,
                     "secao": secao,
                     "texto": trecho
-                })
+                }
+                registros.append(registro)
+                pendentes_embedding.append(registro)
 
     if not registros:
         raise RuntimeError(
@@ -192,31 +274,36 @@ def indexar_documentos():
             "PDFs digitalizados precisam de OCR antes da indexacao."
         )
 
-    print(
-        f"Gerando embeddings de {len(registros)} trechos..."
-    )
+    if reaproveitados:
+        print(f"Reaproveitados {reaproveitados} trechos sem reembedding.", flush=True)
 
-    # Processar em pequenos lotes
-    for inicio in range(0, len(registros), 12):
-
-        lote = registros[inicio:inicio + 12]
-
-        vetores = gerar_embeddings(
-            [item["texto"] for item in lote]
-        )
-
-        for item, vetor in zip(lote, vetores):
-            item["embedding"] = vetor
-
+    if pendentes_embedding:
         print(
-            f"Processados: {min(inicio + 12, len(registros))}"
-            f"/{len(registros)}",
-            flush=True
+            f"Gerando embeddings de {len(pendentes_embedding)} trechos novos/alterados..."
         )
+
+        # Processar em pequenos lotes
+        for inicio in range(0, len(pendentes_embedding), 12):
+
+            lote = pendentes_embedding[inicio:inicio + 12]
+
+            vetores = gerar_embeddings(
+                [item["texto"] for item in lote]
+            )
+
+            for item, vetor in zip(lote, vetores):
+                item["embedding"] = vetor
+
+            print(
+                f"Processados: {min(inicio + 12, len(pendentes_embedding))}"
+                f"/{len(pendentes_embedding)}",
+                flush=True
+            )
 
     indice = {
         "modelo": EMBEDDING_MODEL,
-        "registros": registros
+        "registros": registros,
+        "hashes_arquivos": hashes_arquivos,
     }
 
     ARQUIVO_INDICE.write_text(
@@ -309,8 +396,31 @@ def buscar_documentos_multiplos(perguntas, quantidade=3):
                 "relevancia": pontuacao + 0.35 * cobertura_lexical,
             })
         resultados.sort(key=lambda item: item["relevancia"], reverse=True)
+        resultados = _remover_trechos_duplicados(resultados)
         resultados_por_pergunta.append(resultados[:quantidade])
     return resultados_por_pergunta
+
+
+def _chave_dedupe_trecho(texto):
+    sem_acentos = "".join(
+        caractere
+        for caractere in unicodedata.normalize("NFKD", str(texto or "").casefold())
+        if not unicodedata.combining(caractere)
+    )
+    return re.sub(r"\s+", " ", sem_acentos).strip()
+
+
+def _remover_trechos_duplicados(resultados):
+    """Mantem apenas a melhor ocorrencia de trechos identicos/quase identicos."""
+    vistos = set()
+    unicos = []
+    for item in resultados:
+        chave = _chave_dedupe_trecho(item["texto"])
+        if chave in vistos:
+            continue
+        vistos.add(chave)
+        unicos.append(item)
+    return unicos
 
 
 

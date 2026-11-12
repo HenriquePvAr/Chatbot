@@ -133,12 +133,14 @@ def _pesquisar_web_sem_cache(consulta, quantidade):
         resultados = []
 
     # O backend automatico pode nao encontrar resultados em redes que bloqueiam
-    # alguns provedores. O fallback Startpage/Google evita retornar vazio cedo.
+    # alguns provedores. O fallback Startpage evita retornar vazio cedo.
+    # "google" nao e mais um backend valido na biblioteca ddgs instalada; usa-lo
+    # so desperdica tempo (cai de volta para "auto" silenciosamente).
     if not resultados:
         try:
             resultados = DDGS(timeout=3).text(
                 consulta[:300],
-                backend="google",
+                backend="startpage",
                 **parametros,
             )
         except Exception:
@@ -186,7 +188,7 @@ def _pesquisar_web_sem_cache(consulta, quantidade):
             )
             candidatos = DDGS(timeout=3).text(
                 consulta_prioritaria,
-                backend="google",
+                backend="startpage",
                 **parametros,
             )
         except Exception:

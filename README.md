@@ -43,13 +43,14 @@ WHATSAPP_USER_BURST=3
 WHATSAPP_USER_PAUSE_SECONDS=5
 WHATSAPP_MAX_PENDING_PER_USER=30
 WHATSAPP_MAX_PENDING_TOTAL=2000
-WHATSAPP_MESSAGE_BURST_WINDOW_SECONDS=1.8
+WHATSAPP_MESSAGE_BURST_WINDOW_SECONDS=3.5
 WHATSAPP_OFF_TOPIC_NOTICE_SECONDS=180
 WHATSAPP_MAX_MESSAGE_AGE_SECONDS=120
 WHATSAPP_STICKER_INTERVAL=5
+WHATSAPP_IMAGE_INTERVAL=5
 ```
 
-A fila agrupa mensagens proximas, preserva a ordem de cada conversa e limita respostas repetidas. Mensagens antigas e duplicadas podem ser ignoradas. O intervalo de avisos fora do tema reduz repeticoes.
+A fila espera ate 3,5 segundos de silencio para juntar mensagens consecutivas da mesma conversa em uma unica consulta. Risadas e reacoes curtas sao descartadas quando vieram junto de uma pergunta; avisos como "bugou" ou "lascou" tambem nao interrompem a pergunta agrupada. Se forem enviados sozinhos, recebem uma resposta breve e acolhedora. Mensagens antigas e duplicadas podem ser ignoradas. O intervalo de avisos fora do tema reduz repeticoes.
 
 ## Como conversar
 
@@ -95,9 +96,11 @@ Os guias locais sao sinteticos e nao representam todas as comunidades. Para dado
 - `/mira clara`: selecionar Clara Camarão.
 - `/mira sair`: voltar ao assistente geral.
 
-A seleção vale somente para aquela conversa. As perguntas podem ser livres, não precisam repetir as perguntas de exemplo. No modo MIRA, o bot responde com a base e as fontes registradas para a personagem selecionada; não faz busca web fora dessa base e reconhece quando não encontra evidência suficiente. Fora do modo MIRA, continua valendo o fluxo geral do assistente.
+Envie o comando sozinho, sem acrescentar o nome da personagem. Para pesquisa na internet, use `/web <pergunta>` com a barra inicial, por exemplo: `/web preservacao das linguas indigenas`.
 
-As duas personagens são representações educativas virtuais, não simulações de memórias pessoais. As prévias ficam ativadas por padrão; defina `MIRA_PREVIEW_ENABLED=0` para desativar ambas ou `MIRA_CLARA_PREVIEW_ENABLED=0` para desativar somente Clara. A entrega de Clara ainda a marca como não aprovada para conversa pública, e seus 14 cenários precisam de avaliação. A ativação padrão habilita o uso local do modo MIRA, mas não constitui liberação pública. O estado da personagem é mantido em memória e reinicia com o processo.
+A personagem selecionada fica salva localmente por conversa. As perguntas podem ser livres, não precisam repetir as perguntas de exemplo. No modo MIRA, o bot responde com a base e as fontes registradas para a personagem selecionada; não faz busca web fora dessa base e reconhece quando não encontra evidência suficiente. Fora do modo MIRA, continua valendo o fluxo geral do assistente.
+
+As duas personagens são representações educativas virtuais, não simulações de memórias pessoais. As prévias ficam ativadas por padrão; defina `MIRA_PREVIEW_ENABLED=0` para desativar ambas ou `MIRA_CLARA_PREVIEW_ENABLED=0` para desativar somente Clara. A entrega de Clara ainda a marca como não aprovada para conversa pública, e seus 14 cenários precisam de avaliação. A ativação padrão habilita o uso local do modo MIRA, mas não constitui liberação pública. A selecao MIRA fica em `logs/mira_modos.json` (ignorado pelo Git), permanece ativa apos reiniciar e pode ser desativada com `/mira sair`.
 
 Os testes locais conferem integridade das bases, recuperação de evidências, referências permitidas, limites de lacunas e encaminhamento de conversas. Eles não substituem revisão das respostas do modelo; a integração deve continuar em prévia até essa revisão.
 
@@ -109,7 +112,7 @@ Para repetir a validação:
 
 ## Imagens e figurinhas
 
-Pedidos como "Pode me mandar uma imagem da capoeira?" ou "Me manda uma figurinha de capoeira" testam o envio de mídia. Imagens podem acompanhar respostas sobre alguns temas visuais, e figurinhas podem ser enviadas automaticamente conforme `WHATSAPP_STICKER_INTERVAL`. O envio depende da rede, da disponibilidade do arquivo e do WhatsApp. O terminal e `logs/interacoes_whatsapp.jsonl` registram o resultado.
+Pedidos como "Pode me mandar uma imagem da capoeira?" ou "Me manda uma figurinha de capoeira" testam o envio de mídia. Imagens podem acompanhar respostas sobre alguns temas visuais, e figurinhas podem ser enviadas automaticamente conforme `WHATSAPP_STICKER_INTERVAL`. Além do pedido explícito, a cada `WHATSAPP_IMAGE_INTERVAL` respostas dentro do tema o bot pode enviar sozinho uma imagem do assunto que estava sendo conversado, descoberto pela base local usada naquela resposta (sem depender de uma lista fixa de termos); isso só acontece quando a resposta é informativa e não for junto com uma figurinha na mesma mensagem. O envio depende da rede, da disponibilidade do arquivo e do WhatsApp. O terminal e `logs/interacoes_whatsapp.jsonl` registram o resultado.
 
 ## Privacidade, dados locais e Git
 

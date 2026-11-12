@@ -5,6 +5,7 @@ Material de referência para respostas introdutórias. A lista é ilustrativa, n
 <!-- secao: Personalidades afro-brasileiras adicionais -->
 ## Personalidades afro-brasileiras adicionais
 
+- **Zumbi dos Palmares (c. 1655–1695)**: liderança quilombola que comandou parte dos mocambos de Palmares após a ruptura de uma negociação de paz conduzida por Ganga Zumba com autoridades coloniais em 1678. As comunidades de Palmares formavam uma rede de mocambos, com modos de organização e defesa próprios. O mocambo fortificado no Outeiro do Barriga foi tomado em 1694; Zumbi escapou e foi morto em 20 de novembro de 1695. Outros mocambos continuaram na região depois de sua morte. Palmares e Zumbi tornaram-se referências da resistência negra à escravização. Consulte a historiografia antes de repetir detalhes biográficos tradicionais, pois as fontes sobre sua vida são limitadas.
 - **Luiz Gama (1830–1882)**: advogado, jornalista e abolicionista. Atuou juridicamente para conquistar a liberdade de pessoas escravizadas e denunciou a escravidão.
 - **André Rebouças (1838–1898)**: engenheiro, professor e abolicionista. Defendeu a abolição e reformas sociais; participou de debates públicos sobre o futuro do país.
 - **Laudelina de Campos Melo (1904–1991)**: trabalhadora doméstica e ativista. Organizou trabalhadoras domésticas e ajudou a criar associações de defesa de seus direitos.
@@ -14,6 +15,7 @@ Material de referência para respostas introdutórias. A lista é ilustrativa, n
 - **Nego Bispo (Antônio Bispo dos Santos, 1959–2023)**: escritor, pensador quilombola e liderança comunitária. Produziu reflexões sobre quilombos, território, colonialismo e conhecimentos tradicionais.
 - **Luiza Bairros (1953–2016)**: socióloga e ativista do movimento negro. Atuou na formulação de políticas de promoção da igualdade racial e no debate sobre racismo e gênero.
 - **Mestre Bimba (Manuel dos Reis Machado, 1899–1974)** e **Mestre Pastinha (Vicente Ferreira Pastinha, 1889–1981)**: mestres de capoeira com trajetórias importantes na história e transmissão dessa prática. As linhagens e estilos de capoeira são diversos.
+- **Marielle Franco (Marielle Francisco da Silva, 1979–2018)**: socióloga, ativista de direitos humanos e vereadora do Rio de Janeiro, eleita em 2016. Atuou em pautas ligadas a mulheres negras, moradores de comunidades, direitos humanos e população LGBT. Foi assassinada em 14 de março de 2018 junto com o motorista Anderson Gomes. Esta síntese não substitui uma biografia completa; para detalhes de sua trajetória e memória, consulte as fontes abaixo.
 
 Ao apresentar uma personalidade, explique brevemente sua atuação e o contexto. Não use uma lista como se existisse uma única liderança ou uma única forma de representar a população negra.
 
@@ -36,7 +38,13 @@ Os povos indígenas são distintos e contemporâneos. Ao falar de uma pessoa, no
 <!-- secao: Fontes institucionais sobre personalidades -->
 ## Fontes institucionais para consulta
 
+- Universidade Federal Fluminense, Impressões Rebeldes, **Palmares**: https://www.historia.uff.br/impressoesrebeldes/revolta/palmares/
+- Universidade Federal Fluminense, Impressões Rebeldes, **Zumbi**: https://www.historia.uff.br/impressoesrebeldes/pessoa/zumbi/
+- Ministério dos Direitos Humanos e da Cidadania, **Quilombo dos Palmares**: https://www.gov.br/mdh/pt-br/navegue-por-temas/memoria-e-verdade-da-escravidao/acao/lugares-de-memoria/quilombo-dos-palmares
 - Fundação Cultural Palmares, **Personalidades Notáveis Negras** (lista institucional; atualizada em 2025): https://www.gov.br/palmares/pt-br/departamentos/fomento-a-cultura/personalidades-notaveis-negras-1
+- Câmara dos Deputados, **Resumo biográfico de Marielle Franco**: https://www2.camara.leg.br/atividade-legislativa/comissoes/comissoes-permanentes/cmulher/outros-documentos/diploma-mulher-cidada-carlota-pereira-de-queiros/edicao-2018-diploma-mulher-cidada-carlota-pereira-de-queiros/resumo-marielle-franco
+- Câmara dos Deputados, **Congresso se ilumina de lilás em homenagem ao Dia Nacional Marielle Franco** (biografia e datas): https://www.camara.leg.br/assessoria-de-imprensa/1257532-congresso-se-ilumina-de-lilas-em-homenagem-ao-dia-nacional-marielle-franco/
+- Instituto Marielle Franco, **Quem é Marielle Franco?**: https://www.institutomariellefranco.org/quem-e-marielle
 - Fundação Nacional dos Povos Indígenas, **Joenia Wapichana**: https://www.gov.br/funai/pt-br/assuntos/noticias/2023/em-55-anos-joenia-wapichana-sera-a-primeira-mulher-indigena-a-assumir-a-presidencia-da-funai
 - Ministério dos Povos Indígenas, **Raoni Metuktire**: https://www.gov.br/povosindigenas/pt-br/assuntos/noticias/2025/04/lula-condecora-cacique-raoni-com-a-mais-alta-honraria-do-estado-brasileiro
 - Ministério dos Povos Indígenas, **Marçal de Souza Tupã-Y**: https://www.gov.br/povosindigenas/pt-br/assuntos/noticias/2026/03/estado-pede-desculpas-a-marcal-de-souza-lider-indigena-assassinado-na-ditadura
