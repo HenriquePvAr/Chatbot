@@ -1,0 +1,748 @@
+[
+  {
+    "id": "CCF001",
+    "tema": "nome",
+    "afirmacao": "O OCR de Calado contém a forma de tratamento e nome Dona Clara.",
+    "classificacao_evidencia": "relato_atribuido",
+    "fontes": [
+      "CCS002"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS002",
+        "autoria": "Manuel Calado",
+        "ano_publicacao": 1648,
+        "data_documento": null,
+        "localizador": "p. impressa 37, parágrafo da partida de Camarão.",
+        "o_que_a_fonte_efetivamente_sustenta": "Uso nominal localizado.",
+        "nao_sustenta": "Nome completo, nome indígena original ou certidão de batismo.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      }
+    ],
+    "limitacoes_e_divergencias": "Passagem cotejada visualmente na página impressa 37 da edição de 1648. Comparação com outras edições permanece pendente.",
+    "lacunas": [
+      "CCL002",
+      "CCL012"
+    ],
+    "status_verificacao": "relato_atribuido_com_trecho_cotejado_visualmente",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF002",
+    "tema": "relacao_familiar",
+    "afirmacao": "Calado apresenta Dona Clara como mulher de Camarão.",
+    "classificacao_evidencia": "relato_atribuido",
+    "fontes": [
+      "CCS002",
+      "CCS001"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS002",
+        "autoria": "Manuel Calado",
+        "ano_publicacao": 1648,
+        "data_documento": null,
+        "localizador": "p. impressa 37, mesmo parágrafo.",
+        "o_que_a_fonte_efetivamente_sustenta": "Relação conjugal narrada.",
+        "nao_sustenta": "Data, local ou registro matrimonial.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      },
+      {
+        "fonte_id": "CCS001",
+        "autoria": "Igor Pereira Fagundes",
+        "ano_publicacao": 2015,
+        "data_documento": null,
+        "localizador": "p. 203, parágrafo sobre a família.",
+        "o_que_a_fonte_efetivamente_sustenta": "Atribuição conjugal na historiografia.",
+        "nao_sustenta": "Confirmação independente do ato matrimonial.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      }
+    ],
+    "limitacoes_e_divergencias": "A relação está relatada; não foi encontrado registro de casamento nesta etapa.",
+    "lacunas": [
+      "CCL004",
+      "CCL012"
+    ],
+    "status_verificacao": "relato_atribuido_com_trecho_cotejado_visualmente",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF003",
+    "tema": "conflitos",
+    "afirmacao": "Calado narra Clara acompanhando Camarão a cavalo, com lança.",
+    "classificacao_evidencia": "relato_atribuido",
+    "fontes": [
+      "CCS002"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS002",
+        "autoria": "Manuel Calado",
+        "ano_publicacao": 1648,
+        "data_documento": null,
+        "localizador": "p. impressa 37; contexto da narrativa em pp. 36–38.",
+        "o_que_a_fonte_efetivamente_sustenta": "Acompanhamento armado narrado.",
+        "nao_sustenta": "Ação individual de combater, matar, vencer ou comandar tropas.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      }
+    ],
+    "limitacoes_e_divergencias": "Não inferir atos militares da presença e do objeto mencionado; contexto situa Porto Calvo, mas data do episódio deve ser cotejada.",
+    "lacunas": [
+      "CCL005",
+      "CCL012"
+    ],
+    "status_verificacao": "relato_atribuido_com_trecho_cotejado_visualmente",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF004",
+    "tema": "identificacao_indigena",
+    "afirmacao": "Fagundes identifica Clara como indígena potiguar; publicações atuais também a apresentam como potiguara.",
+    "classificacao_evidencia": "relato_atribuido",
+    "fontes": [
+      "CCS001",
+      "CCS010"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS001",
+        "autoria": "Igor Pereira Fagundes",
+        "ano_publicacao": 2015,
+        "data_documento": null,
+        "localizador": "p. 204, início da seção familiar.",
+        "o_que_a_fonte_efetivamente_sustenta": "Identificação historiográfica.",
+        "nao_sustenta": "Autodeclaração de época, comunidade exata ou língua pessoal.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      },
+      {
+        "fonte_id": "CCS010",
+        "autoria": "Memorial da Assembleia Legislativa do Rio Grande do Norte; autoria individual não indicada",
+        "ano_publicacao": null,
+        "data_documento": null,
+        "localizador": "Seção Clara, primeiro parágrafo.",
+        "o_que_a_fonte_efetivamente_sustenta": "Atribuição de identidade numa narrativa memorial.",
+        "nao_sustenta": "Confirmação documental de época.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      }
+    ],
+    "limitacoes_e_divergencias": "Não deduzir identidade exclusivamente do casamento, sobrenome ou naturalidade; preservar a atribuição e buscar documentação e produção indígena.",
+    "lacunas": [
+      "CCL003"
+    ],
+    "status_verificacao": "candidata_em_revisao",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF005",
+    "tema": "variantes_nominais",
+    "afirmacao": "O verbete Impressões Rebeldes utiliza a grafia Clara Felipe Camarão.",
+    "classificacao_evidencia": "relato_atribuido",
+    "fontes": [
+      "CCS007"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS007",
+        "autoria": "Bianca Novais Cambruzzi",
+        "ano_publicacao": 2023,
+        "data_documento": null,
+        "localizador": "Primeiro parágrafo da biografia.",
+        "o_que_a_fonte_efetivamente_sustenta": "Uso editorial da grafia Felipe.",
+        "nao_sustenta": "Nome de batismo comprovado.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      }
+    ],
+    "limitacoes_e_divergencias": "Registrar como variante de publicação, sem unificar automaticamente com outras formas.",
+    "lacunas": [
+      "CCL002"
+    ],
+    "status_verificacao": "candidata_em_revisao",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF006",
+    "tema": "variantes_nominais",
+    "afirmacao": "A notícia da Câmara de Natal de 2017 utiliza Clara Felipa Camarão.",
+    "classificacao_evidencia": "relato_atribuido",
+    "fontes": [
+      "CCS009"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS009",
+        "autoria": "Cláudio Oliveira",
+        "ano_publicacao": 2017,
+        "data_documento": null,
+        "localizador": "Parágrafo biográfico após a abertura.",
+        "o_que_a_fonte_efetivamente_sustenta": "Uso editorial de Felipa.",
+        "nao_sustenta": "Autenticidade do suposto nome batismal.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      }
+    ],
+    "limitacoes_e_divergencias": "A notícia tem finalidade comemorativa e não apresenta registro nominal de época.",
+    "lacunas": [
+      "CCL002"
+    ],
+    "status_verificacao": "candidata_em_revisao",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF007",
+    "tema": "variantes_nominais",
+    "afirmacao": "A justificativa parlamentar de 2012 e registros da homenagem de 2023 utilizam Clara Filipa Camarão.",
+    "classificacao_evidencia": "relato_atribuido",
+    "fontes": [
+      "CCS013",
+      "CCS011"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS013",
+        "autoria": "Márcia Maia; publicação da Assembleia Legislativa do Rio Grande do Norte",
+        "ano_publicacao": 2012,
+        "data_documento": null,
+        "localizador": "p. impressa 10 (índice PDF 9), início da justificativa.",
+        "o_que_a_fonte_efetivamente_sustenta": "Uso de Filipa num texto parlamentar.",
+        "nao_sustenta": "Identificação batismal de época.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      },
+      {
+        "fonte_id": "CCS011",
+        "autoria": "Agência Senado",
+        "ano_publicacao": 2023,
+        "data_documento": null,
+        "localizador": "Legenda da representante Rita Potyguara.",
+        "o_que_a_fonte_efetivamente_sustenta": "Uso de Filipa na legenda.",
+        "nao_sustenta": "Prova de um nome adotado no século XVII.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      }
+    ],
+    "limitacoes_e_divergencias": "A concordância contemporânea não comprova o registro de origem do nome.",
+    "lacunas": [
+      "CCL002"
+    ],
+    "status_verificacao": "candidata_em_revisao",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF008",
+    "tema": "origem_geografica",
+    "afirmacao": "A naturalidade exata de Clara não está estabelecida documentalmente nesta base.",
+    "classificacao_evidencia": "informacao_sem_comprovacao_nesta_base",
+    "fontes": [
+      "CCS001",
+      "CCS007",
+      "CCS010"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS001",
+        "autoria": "Igor Pereira Fagundes",
+        "ano_publicacao": 2015,
+        "data_documento": null,
+        "localizador": "p. 204, referência aos verbetes citados na nota 15.",
+        "o_que_a_fonte_efetivamente_sustenta": "Origem regional reportada por bibliografia.",
+        "nao_sustenta": "Local de nascimento demonstrado por documento.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      },
+      {
+        "fonte_id": "CCS007",
+        "autoria": "Bianca Novais Cambruzzi",
+        "ano_publicacao": 2023,
+        "data_documento": null,
+        "localizador": "Biografia e campo Nascimento.",
+        "o_que_a_fonte_efetivamente_sustenta": "Divergência entre texto e ficha.",
+        "nao_sustenta": "Uma naturalidade única confirmada.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      },
+      {
+        "fonte_id": "CCS010",
+        "autoria": "Memorial da Assembleia Legislativa do Rio Grande do Norte; autoria individual não indicada",
+        "ano_publicacao": null,
+        "data_documento": null,
+        "localizador": "Primeiro parágrafo da seção Clara.",
+        "o_que_a_fonte_efetivamente_sustenta": "Origem apresentada como provável e atribuída a obra de 1999.",
+        "nao_sustenta": "Confirmação de Aldeia Velha/Igapó como local de nascimento.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      }
+    ],
+    "limitacoes_e_divergencias": "Não escolher local por votação entre sites; distinguir território indígena, capitania e município atual.",
+    "lacunas": [
+      "CCL001"
+    ],
+    "status_verificacao": "candidata_em_revisao",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF009",
+    "tema": "cronologia",
+    "afirmacao": "Não há data de nascimento comprovada nesta base; as formulações contemporâneas consultadas divergem.",
+    "classificacao_evidencia": "informacao_sem_comprovacao_nesta_base",
+    "fontes": [
+      "CCS013",
+      "CCS007"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS013",
+        "autoria": "Márcia Maia; publicação da Assembleia Legislativa do Rio Grande do Norte",
+        "ano_publicacao": 2012,
+        "data_documento": null,
+        "localizador": "p. impressa 10 (índice PDF 9), primeiro e último parágrafos.",
+        "o_que_a_fonte_efetivamente_sustenta": "A própria justificativa associa nascimento em meados do XVII e atuação em 1637.",
+        "nao_sustenta": "Coerência cronológica ou data de nascimento.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      },
+      {
+        "fonte_id": "CCS007",
+        "autoria": "Bianca Novais Cambruzzi",
+        "ano_publicacao": 2023,
+        "data_documento": null,
+        "localizador": "Primeiro parágrafo.",
+        "o_que_a_fonte_efetivamente_sustenta": "Outra formulação de período de nascimento.",
+        "nao_sustenta": "Registro de nascimento ou idade exata.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      }
+    ],
+    "limitacoes_e_divergencias": "A tensão interna do boletim não será corrigida por estimativa; um episódio atribuído não permite calcular a idade.",
+    "lacunas": [
+      "CCL001",
+      "CCL005"
+    ],
+    "status_verificacao": "candidata_em_revisao",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF010",
+    "tema": "critica_historiografica",
+    "afirmacao": "Fagundes, atribuindo a cautela a Gonsalves de Mello, adverte contra concluir combate individual a partir de acompanhamento armado.",
+    "classificacao_evidencia": "interpretacao_historiografica",
+    "fontes": [
+      "CCS001"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS001",
+        "autoria": "Igor Pereira Fagundes",
+        "ano_publicacao": 2015,
+        "data_documento": null,
+        "localizador": "p. 204, após a citação de Santiago.",
+        "o_que_a_fonte_efetivamente_sustenta": "Posição crítica do pesquisador.",
+        "nao_sustenta": "Conclusão de que Clara combateu ou nunca combateu.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      }
+    ],
+    "limitacoes_e_divergencias": "A advertência é apresentada por Fagundes com atribuição a Gonsalves de Mello. A obra de Mello não foi consultada diretamente nesta auditoria.",
+    "lacunas": [
+      "CCL005",
+      "CCL012"
+    ],
+    "status_verificacao": "interpretacao_consultada",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF011",
+    "tema": "relato_tardio",
+    "afirmacao": "Loreto Couto é citado por Fagundes em uma narrativa laudatória de feitos militares de Clara.",
+    "classificacao_evidencia": "relato_atribuido",
+    "fontes": [
+      "CCS001",
+      "CCS005"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS001",
+        "autoria": "Igor Pereira Fagundes",
+        "ano_publicacao": 2015,
+        "data_documento": null,
+        "localizador": "pp. 204–205, bloco citado e notas 18–20.",
+        "o_que_a_fonte_efetivamente_sustenta": "Existência da passagem mediada e seu teor encomiástico.",
+        "nao_sustenta": "Leitura direta da edição citada ou confirmação dos feitos.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      },
+      {
+        "fonte_id": "CCS005",
+        "autoria": "Domingos do Loreto Couto",
+        "ano_publicacao": 1981,
+        "data_documento": null,
+        "localizador": "p. 524, conforme remissão de CCS001.",
+        "o_que_a_fonte_efetivamente_sustenta": "Pista de localização na reedição.",
+        "nao_sustenta": "Passagem cotejada nesta edição.",
+        "modo_de_verificacao": "referencia_indireta_apud_CCS001"
+      }
+    ],
+    "limitacoes_e_divergencias": "A redação setecentista e a reedição moderna exigem crítica de distância temporal e circulação.",
+    "lacunas": [
+      "CCL005",
+      "CCL012"
+    ],
+    "status_verificacao": "citacao_indireta_cotejo_pendente",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF012",
+    "tema": "construcao_heroica",
+    "afirmacao": "Fagundes interpreta a valorização posterior de Clara por Loreto como ampliação da memória heroica.",
+    "classificacao_evidencia": "interpretacao_historiografica",
+    "fontes": [
+      "CCS001"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS001",
+        "autoria": "Igor Pereira Fagundes",
+        "ano_publicacao": 2015,
+        "data_documento": null,
+        "localizador": "p. 204, parágrafo imediatamente anterior à citação de Couto; citação continua na p. 205, nota 20.",
+        "o_que_a_fonte_efetivamente_sustenta": "Leitura historiográfica da representação.",
+        "nao_sustenta": "Prova de falsidade de toda participação ou catálogo de combates.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      }
+    ],
+    "limitacoes_e_divergencias": "Examinar também o século XIX em CCS014; o capítulo ainda não foi lido.",
+    "lacunas": [
+      "CCL012"
+    ],
+    "status_verificacao": "interpretacao_consultada",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF013",
+    "tema": "porto_calvo",
+    "afirmacao": "Comando de um grupo feminino e ação individual de combate em Porto Calvo permanecem sem comprovação suficiente nesta base.",
+    "classificacao_evidencia": "informacao_sem_comprovacao_nesta_base",
+    "fontes": [
+      "CCS010",
+      "CCS013",
+      "CCS002"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS010",
+        "autoria": "Memorial da Assembleia Legislativa do Rio Grande do Norte; autoria individual não indicada",
+        "ano_publicacao": null,
+        "data_documento": null,
+        "localizador": "Seção Clara, parágrafo sobre Porto Calvo.",
+        "o_que_a_fonte_efetivamente_sustenta": "Atribuição memorial a um episódio de 1637.",
+        "nao_sustenta": "Documentação militar individual.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      },
+      {
+        "fonte_id": "CCS013",
+        "autoria": "Márcia Maia; publicação da Assembleia Legislativa do Rio Grande do Norte",
+        "ano_publicacao": 2012,
+        "data_documento": null,
+        "localizador": "p. impressa 10, parágrafo final.",
+        "o_que_a_fonte_efetivamente_sustenta": "Reprodução de uma narrativa de liderança.",
+        "nao_sustenta": "Ordem, patente ou relato individual de ação conferidos.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      },
+      {
+        "fonte_id": "CCS002",
+        "autoria": "Manuel Calado",
+        "ano_publicacao": 1648,
+        "data_documento": null,
+        "localizador": "p. impressa 37.",
+        "o_que_a_fonte_efetivamente_sustenta": "Menção limitada ao acompanhamento narrado.",
+        "nao_sustenta": "Conversão automática de presença em comando.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      }
+    ],
+    "limitacoes_e_divergencias": "Não negar a possibilidade histórica; não apresentá-la como feito estabelecido.",
+    "lacunas": [
+      "CCL005",
+      "CCL008"
+    ],
+    "status_verificacao": "candidata_em_revisao",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF014",
+    "tema": "tejucupapo",
+    "afirmacao": "A participação individual de Clara em Tejucupapo aparece na memória consultada, mas não foi corroborada por passagem de época conferida nesta base.",
+    "classificacao_evidencia": "informacao_sem_comprovacao_nesta_base",
+    "fontes": [
+      "CCS007",
+      "CCS012"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS007",
+        "autoria": "Bianca Novais Cambruzzi",
+        "ano_publicacao": 2023,
+        "data_documento": null,
+        "localizador": "Parágrafos sobre Tejucupapo e tradição.",
+        "o_que_a_fonte_efetivamente_sustenta": "Atribuição divulgada e memória coletiva.",
+        "nao_sustenta": "Identidade entre Clara e todas as mulheres do episódio.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      },
+      {
+        "fonte_id": "CCS012",
+        "autoria": "Senado Federal; falas de Eliziane Gama e Rita Potyguara no trecho examinado",
+        "ano_publicacao": 2023,
+        "data_documento": "2023-03-08",
+        "localizador": "Bloco de apresentação em torno de 10:08.",
+        "o_que_a_fonte_efetivamente_sustenta": "Reprodução da atribuição durante homenagem.",
+        "nao_sustenta": "Testemunho do conflito colonial.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      }
+    ],
+    "limitacoes_e_divergencias": "Não transferir evidências sobre participação de mulheres em geral para Clara especificamente.",
+    "lacunas": [
+      "CCL006"
+    ],
+    "status_verificacao": "candidata_em_revisao",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF015",
+    "tema": "guararapes",
+    "afirmacao": "A presença e a ação militar individual de Clara em Guararapes não foram estabelecidas nesta etapa.",
+    "classificacao_evidencia": "informacao_sem_comprovacao_nesta_base",
+    "fontes": [
+      "CCS007",
+      "CCS010",
+      "CCS012"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS007",
+        "autoria": "Bianca Novais Cambruzzi",
+        "ano_publicacao": 2023,
+        "data_documento": null,
+        "localizador": "Parágrafo sobre a primeira batalha.",
+        "o_que_a_fonte_efetivamente_sustenta": "Hipótese apresentada no verbete.",
+        "nao_sustenta": "Comprovação da presença.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      },
+      {
+        "fonte_id": "CCS010",
+        "autoria": "Memorial da Assembleia Legislativa do Rio Grande do Norte; autoria individual não indicada",
+        "ano_publicacao": null,
+        "data_documento": null,
+        "localizador": "Parágrafo dos episódios de resistência.",
+        "o_que_a_fonte_efetivamente_sustenta": "Atribuição memorial.",
+        "nao_sustenta": "Relato individual de época.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      },
+      {
+        "fonte_id": "CCS012",
+        "autoria": "Senado Federal; falas de Eliziane Gama e Rita Potyguara no trecho examinado",
+        "ano_publicacao": 2023,
+        "data_documento": "2023-03-08",
+        "localizador": "Apresentação em torno de 10:08.",
+        "o_que_a_fonte_efetivamente_sustenta": "Atribuição cerimonial contemporânea.",
+        "nao_sustenta": "Prova militar.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      }
+    ],
+    "limitacoes_e_divergencias": "Distinguir batalhas e datas; trajetória de Filipe não comprova a de Clara.",
+    "lacunas": [
+      "CCL007"
+    ],
+    "status_verificacao": "candidata_em_revisao",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF016",
+    "tema": "reconhecimento_posterior",
+    "afirmacao": "A Lei nº 13.422, de 27/03/2017, determina a inscrição do nome Clara Camarão no Livro dos Heróis da Pátria.",
+    "classificacao_evidencia": "fato_documentado",
+    "fontes": [
+      "CCS008"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS008",
+        "autoria": "Brasil / Presidência da República; texto disponibilizado pela Câmara dos Deputados",
+        "ano_publicacao": 2017,
+        "data_documento": "2017-03-27",
+        "localizador": "Art. 1º e referência de publicação no DOU em 28/03/2017.",
+        "o_que_a_fonte_efetivamente_sustenta": "Ato legal de reconhecimento.",
+        "nao_sustenta": "Comprovação dos episódios biográficos ou inspeção física do livro.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      }
+    ],
+    "limitacoes_e_divergencias": "Ato posterior; texto consultado no portal oficial, não no exemplar original do DOU.",
+    "lacunas": [],
+    "status_verificacao": "documentado_no_escopo_do_ato_legal",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF017",
+    "tema": "homenagem_posterior",
+    "afirmacao": "A sessão do Senado de 08/03/2023 registra a entrega do Diploma Bertha Lutz em homenagem póstuma a Clara, por representante.",
+    "classificacao_evidencia": "fato_documentado",
+    "fontes": [
+      "CCS012",
+      "CCS011"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS012",
+        "autoria": "Senado Federal; falas de Eliziane Gama e Rita Potyguara no trecho examinado",
+        "ano_publicacao": 2023,
+        "data_documento": "2023-03-08",
+        "localizador": "Bloco anterior a 10:08 e registro de entrega em seguida.",
+        "o_que_a_fonte_efetivamente_sustenta": "A cerimônia e a representação por Rita Potyguara.",
+        "nao_sustenta": "Feitos militares antigos ou genealogia da representante.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      },
+      {
+        "fonte_id": "CCS011",
+        "autoria": "Agência Senado",
+        "ano_publicacao": 2023,
+        "data_documento": null,
+        "localizador": "Abertura da notícia, parágrafo sobre agraciadas in memoriam.",
+        "o_que_a_fonte_efetivamente_sustenta": "Notícia institucional do mesmo evento.",
+        "nao_sustenta": "Confirmação independente do passado colonial.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      }
+    ],
+    "limitacoes_e_divergencias": "Fontes do mesmo evento não são testemunhos independentes do século XVII.",
+    "lacunas": [],
+    "status_verificacao": "documentado_no_escopo_da_homenagem",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF018",
+    "tema": "homenagem_local",
+    "afirmacao": "A notícia de 29/05/2017 da Câmara de Natal relata aprovação em comissão de uma proposta de homenagem a Clara.",
+    "classificacao_evidencia": "relato_atribuido",
+    "fontes": [
+      "CCS009"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS009",
+        "autoria": "Cláudio Oliveira",
+        "ano_publicacao": 2017,
+        "data_documento": null,
+        "localizador": "Primeiro parágrafo.",
+        "o_que_a_fonte_efetivamente_sustenta": "Notícia de tramitação em comissão.",
+        "nao_sustenta": "Aprovação final, promulgação ou execução da homenagem.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      }
+    ],
+    "limitacoes_e_divergencias": "Não substituir o futuro do título da notícia por ato final já realizado.",
+    "lacunas": [
+      "CCL013"
+    ],
+    "status_verificacao": "noticia_consultada_desfecho_pendente",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF019",
+    "tema": "tratamento_e_honrarias",
+    "afirmacao": "A menção de Calado usa Dona; concessões específicas de honrarias a Clara não foram comprovadas nesta base.",
+    "classificacao_evidencia": "relato_atribuido",
+    "fontes": [
+      "CCS002",
+      "CCS013"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS002",
+        "autoria": "Manuel Calado",
+        "ano_publicacao": 1648,
+        "data_documento": null,
+        "localizador": "p. impressa 37.",
+        "o_que_a_fonte_efetivamente_sustenta": "Uso do tratamento.",
+        "nao_sustenta": "Ato de concessão pelo monarca ou hábito de ordem militar.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      },
+      {
+        "fonte_id": "CCS013",
+        "autoria": "Márcia Maia; publicação da Assembleia Legislativa do Rio Grande do Norte",
+        "ano_publicacao": 2012,
+        "data_documento": null,
+        "localizador": "p. impressa 10, segundo parágrafo.",
+        "o_que_a_fonte_efetivamente_sustenta": "Alegação parlamentar posterior de honrarias.",
+        "nao_sustenta": "Carta de mercê ou registro de ordem.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      }
+    ],
+    "limitacoes_e_divergencias": "O parágrafo de Calado atribui mercês ao marido; não estendê-las a Clara por associação.",
+    "lacunas": [
+      "CCL009",
+      "CCL012"
+    ],
+    "status_verificacao": "relato_atribuido_com_trecho_cotejado_visualmente",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF020",
+    "tema": "memoria_indigena_contemporanea",
+    "afirmacao": "Na sessão de 2023, Rita Potyguara apresenta Clara como sua parenta potiguara.",
+    "classificacao_evidencia": "relato_atribuido",
+    "fontes": [
+      "CCS012"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS012",
+        "autoria": "Senado Federal; falas de Eliziane Gama e Rita Potyguara no trecho examinado",
+        "ano_publicacao": 2023,
+        "data_documento": "2023-03-08",
+        "localizador": "Fala de Rita Potyguara logo após a entrega em torno de 10:08.",
+        "o_que_a_fonte_efetivamente_sustenta": "Identificação e vínculo de memória enunciados pela representante.",
+        "nao_sustenta": "Parentesco genealógico demonstrado ou opinião de todo o povo Potiguara.",
+        "modo_de_verificacao": "texto_publicado_consultado"
+      }
+    ],
+    "limitacoes_e_divergencias": "Preservar autoria e contexto; o documento é primário para a fala contemporânea, não autodeclaração de Clara.",
+    "lacunas": [
+      "CCL003"
+    ],
+    "status_verificacao": "fala_contemporanea_consultada",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  },
+  {
+    "id": "CCF021",
+    "tema": "proposta_comemorativa",
+    "afirmacao": "O Boletim Oficial nº 2839 publica o Projeto de Resolução nº 0003/2012, que propõe a Comenda Clara Camarão.",
+    "classificacao_evidencia": "fato_documentado",
+    "fontes": [
+      "CCS013"
+    ],
+    "sustentacao": [
+      {
+        "fonte_id": "CCS013",
+        "autoria": "Márcia Maia; publicação da Assembleia Legislativa do Rio Grande do Norte",
+        "ano_publicacao": 2012,
+        "data_documento": null,
+        "localizador": "p. impressa 9 (índice PDF 8), título e corpo do projeto.",
+        "o_que_a_fonte_efetivamente_sustenta": "Publicação da proposição de homenagem.",
+        "nao_sustenta": "Promulgação final ou veracidade automática da justificativa.",
+        "modo_de_verificacao": "trecho_cotejado_visualmente_etapa2"
+      }
+    ],
+    "limitacoes_e_divergencias": "Cabeçalho de 14/03/2012 e assinatura interna de 08/03/2011 permanecem distintos; não retificar por suposição.",
+    "lacunas": [
+      "CCL013"
+    ],
+    "status_verificacao": "documentado_como_proposicao_publicada",
+    "uso_em_primeira_pessoa": false,
+    "nota_de_uso": "Registro de pesquisa; não aprovado para narração autobiográfica ou geração automática de respostas."
+  }
+]

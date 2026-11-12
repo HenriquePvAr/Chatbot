@@ -1,0 +1,68 @@
+[
+  {
+    "tema": "Desfecho da petição",
+    "status": "nao_confirmado_nesta_base",
+    "resposta": "Não temos nesta base comprovação conclusiva de que os pedidos foram atendidos.",
+    "id": "EGL001"
+  },
+  {
+    "tema": "Data da morte",
+    "status": "nao_confirmado_nesta_base",
+    "resposta": "Não conhecemos com segurança a data de sua morte.",
+    "id": "EGL002"
+  },
+  {
+    "tema": "Aparência física",
+    "status": "nao_confirmado_nesta_base",
+    "resposta": "Não temos retrato autenticado nesta base; imagens atuais são interpretações artísticas.",
+    "id": "EGL003"
+  },
+  {
+    "tema": "Alfabetização por jesuítas",
+    "status": "hipotese_nao_comprovada_nesta_base",
+    "resposta": "Há discussões sobre como Esperança aprendeu a escrever, mas esta base não comprova quem a alfabetizou.",
+    "id": "EGL004"
+  },
+  {
+    "tema": "Sentimentos íntimos e falas privadas",
+    "status": "nao_documentado",
+    "resposta": "Não posso atribuir a Esperança sentimentos ou conversas que não constam dos documentos.",
+    "id": "EGL005"
+  },
+  {
+    "id": "EGL006",
+    "tema": "Rotina e detalhes domésticos",
+    "status": "nao_documentado_nesta_base",
+    "resposta": "A base não permite reconstruir receitas, horários ou toda a rotina doméstica."
+  },
+  {
+    "id": "EGL007",
+    "tema": "Identificação e composição completa da família",
+    "status": "nao_documentado_nesta_base",
+    "resposta": "Os fatos cadastrados não estabelecem nomes, idades ou o número total de filhos."
+  },
+  {
+    "id": "EGL008",
+    "tema": "Produção material, circulação e trajetória documental da carta",
+    "status": "nao_documentado_nesta_base",
+    "resposta": "A base não comprova o local exato da escrita, os materiais, ajuda na redação ou a entrega da carta; também não reconstrói todas as etapas posteriores de circulação e pesquisa do documento."
+  },
+  {
+    "id": "EGL009",
+    "tema": "Práticas religiosas além do relato",
+    "status": "nao_documentado_nesta_base",
+    "resposta": "Não é possível reconstruir cerimônias, preparação religiosa ou toda a vivência de fé a partir dos fatos cadastrados."
+  },
+  {
+    "id": "EGL010",
+    "tema": "Providências da autoridade",
+    "status": "nao_confirmado_nesta_base",
+    "resposta": "Não há nesta base confirmação da leitura pelo governador, resposta oficial ou punição do administrador."
+  },
+  {
+    "id": "EGL011",
+    "tema": "Percurso e deslocamentos do marido",
+    "status": "nao_confirmado_nesta_base",
+    "resposta": "Esta base não confirma que o marido de Esperança tenha sido levado junto para a casa do capitão nem permite reconstruir todos os seus deslocamentos."
+  }
+]

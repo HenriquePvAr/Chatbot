@@ -1,0 +1,483 @@
+[
+  {
+    "id": "CCS001",
+    "titulo": "Felipe Camarão, um cavaleiro potiguar a serviço del Rei: memória, história e identidade nas guerras pernambucanas, século XVII",
+    "autoria": "Igor Pereira Fagundes",
+    "instituicao": "Universidade Federal Fluminense / Revista 7 Mares",
+    "ano_publicacao": 2015,
+    "tipo_documento": "artigo_academico",
+    "url": "https://www.historia.uff.br/7mares/wp-content/uploads/2015/11/v03n05a131.pdf",
+    "status_verificacao": "trecho_consultado_com_cotejo_visual",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Revista 7 Mares, n. 5, outubro de 2015, pp. 200–212; examinados especialmente pp. 203–205 e notas 15–20.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Leitura historiográfica com referências às crônicas e prudência sobre inferências militares.",
+    "limitacoes": "Trecho das páginas 203–205 cotejado visualmente na etapa 2. Citações de Santiago, Couto e Mello continuam indiretas; não houve conferência das edições originais citadas. Não presumir independência entre crônicas.",
+    "grupo_dependencia": "fagundes",
+    "afirmacoes_candidatas": [
+      "CCF002",
+      "CCF004",
+      "CCF008",
+      "CCF010",
+      "CCF011",
+      "CCF012"
+    ],
+    "arquivo_local": "documentos/CCS001_fagundes_2015.pdf",
+    "ano_recebimento_artigo": 2014,
+    "sha256_arquivo_local": "e4220d5de513d7b91ea4683a2f41354767358bad379d581ebe5acf486ce59782",
+    "auditoria_etapa2": {
+      "data": "2026-11-11",
+      "consulta_efetiva": "PDF local: páginas impressas 203, 204 e 205, índices PDF 3, 4 e 5. Texto e notas visíveis conferidos; não leitura integral do artigo.",
+      "conferencia_visual": true,
+      "relatorio": "documentacao/AUDITORIA_DOCUMENTAL.md"
+    }
+  },
+  {
+    "id": "CCS002",
+    "titulo": "O valeroso Lucideno. E triumpho da liberdade: Primeira parte",
+    "autoria": "Manuel Calado",
+    "instituicao": "John Carter Brown Library / Internet Archive",
+    "ano_publicacao": 1648,
+    "tipo_documento": "cronica_seiscentista_em_digitalizacao_e_ocr",
+    "url": "https://archive.org/details/ovalerosoluciden00cala",
+    "status_verificacao": "trecho_consultado_com_cotejo_visual",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "OCR da edição de Lisboa, Paulo Craesbeeck, 1648, p. impressa 37 e contexto pp. 36–38; item da John Carter Brown Library.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Localização textual de menção a Dona Clara como mulher de Camarão, acompanhando-o a cavalo e com lança.",
+    "limitacoes": "Passagem da página impressa 37 cotejada visualmente na etapa 2. O trecho não descreve ação individual de combate, comando ou concessão de honraria a Clara. A página 36 não foi conferida visualmente. Crônica não é fala autobiográfica.",
+    "grupo_dependencia": "cronicas_seiscentistas_cotejo_pendente",
+    "afirmacoes_candidatas": [
+      "CCF001",
+      "CCF002",
+      "CCF003",
+      "CCF013",
+      "CCF019"
+    ],
+    "url_texto_consultado": "https://archive.org/stream/ovalerosoluciden00cala/ovalerosoluciden00cala_djvu.txt",
+    "identificador_acervo": "ovalerosoluciden00cala; cota b2221370",
+    "data_redacao": null,
+    "auditoria_etapa2": {
+      "data": "2026-11-11",
+      "consulta_efetiva": "Imagem da página impressa 37, coluna direita, parágrafo final da partida; página 38 como contexto. Serviço page/n58.jpg retorna p. 37; page/n59.jpg retorna p. 38. Cotejo da passagem, não da obra inteira.",
+      "conferencia_visual": true,
+      "relatorio": "documentacao/AUDITORIA_DOCUMENTAL.md"
+    }
+  },
+  {
+    "id": "CCS003",
+    "titulo": "O Valeroso Lucideno, e triumpho da liberdade: primeira parte... dedicada ao Excelentissimo Senhor D. Theodosio, Principe deste Reyno, e Monarquia de Portugal",
+    "autoria": "Manuel Calado",
+    "instituicao": "Biblioteca Digital da Câmara dos Deputados",
+    "ano_publicacao": 1668,
+    "tipo_documento": "registro_catalografico_de_edicao_de_cronica",
+    "url": "https://bd.camara.leg.br/bd/items/cdc736c1-a14d-4579-a4ae-efa63e8a44ea",
+    "status_verificacao": "catalogo_consultado",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Metadados da edição de Lisboa, Officina de Domingos Carneiro, 1668. PDF listado com 303,48 MB.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Existência e dados da edição cadastrada.",
+    "limitacoes": "PDF não consultado: serviço rejeitou o tipo de conteúdo. Não transferir a paginação de 1648, 1985 ou 1987 para esta edição.",
+    "grupo_dependencia": "calado_edicoes",
+    "afirmacoes_candidatas": [],
+    "url_arquivo_listado": "https://bd.camara.leg.br/bd/bitstreams/5ba1c531-d16e-49ae-b9d6-97e580704855/download"
+  },
+  {
+    "id": "CCS004",
+    "titulo": "História da guerra de Pernambuco e feitos memoráveis do mestre de campo João Fernandes Vieira, herói digno de eterna memória",
+    "autoria": "Diogo Lopes de Santiago",
+    "instituicao": "Fundarpe; referência obtida em CCS001",
+    "ano_publicacao": 1984,
+    "tipo_documento": "cronica_em_edicao_moderna_referenciada_indiretamente",
+    "url": null,
+    "status_verificacao": "referencia_indireta",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Referência da edição Fundarpe, Recife, 1984, em CCS001, nota 3; a nota 17 remete à p. 118.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Identificação bibliográfica e passagem atribuída por Fagundes.",
+    "limitacoes": "Edição não consultada diretamente; ano de redação não estabelecido nesta pesquisa. Não atribuir ao cronista uma transcrição conferida. A semelhança com Calado exige estudo de transmissão, sem concluir cópia ou independência.",
+    "grupo_dependencia": "cronicas_seiscentistas_cotejo_pendente",
+    "afirmacoes_candidatas": [],
+    "referenciada_em": [
+      "CCS001"
+    ],
+    "data_redacao": null
+  },
+  {
+    "id": "CCS005",
+    "titulo": "Desagravos do Brasil e glórias de Pernambuco",
+    "autoria": "Domingos do Loreto Couto",
+    "instituicao": "Fundação de Cultura da Cidade do Recife; referência obtida em CCS001",
+    "ano_publicacao": 1981,
+    "tipo_documento": "cronica_setecentista_em_reedicao_fac_similar_referencia_indireta",
+    "url": null,
+    "status_verificacao": "referencia_indireta",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Edição Recife, Fundação de Cultura da Cidade do Recife, 1981; p. 524 citada em CCS001, notas 18–20.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Localização bibliográfica da passagem laudatória citada por Fagundes.",
+    "limitacoes": "Reedição e manuscrito não cotejados. Não confundir ano de redação, primeira impressão e edição citada. As expressões heroicas não constituem corroboração independente de cada combate.",
+    "grupo_dependencia": "loreto_couto",
+    "afirmacoes_candidatas": [
+      "CCF011"
+    ],
+    "referenciada_em": [
+      "CCS001"
+    ],
+    "data_redacao_reportada": 1757,
+    "primeira_impressao_reportada": 1904,
+    "nota_datas": "1757 consta no catálogo CCS006; 1904 e a edição de 1981 constam no repertório bibliográfico da UFPE localizado durante a busca; confirmar frontispícios antes de adoção editorial."
+  },
+  {
+    "id": "CCS006",
+    "titulo": "Desagravos do Brasil e glórias de Pernambuco: Livro 2: Pernambuco vencido e vencedor",
+    "autoria": "Domingos do Loreto Couto",
+    "instituicao": "Biblioteca Nacional / Biblioteca Digital Luso-Brasileira",
+    "ano_publicacao": null,
+    "tipo_documento": "registro_catalografico_de_manuscrito",
+    "url": "https://bdlb.bn.gov.br/acervo/handle/20.500.12156.3/38079",
+    "status_verificacao": "catalogo_consultado",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Catálogo registra data 1757, tipo Manuscrito. Lista por assunto também identifica Livro 7, Pernambuco illustrado pelo sexo feminino.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Existência do registro do manuscrito e distinção entre partes da obra.",
+    "limitacoes": "1757 é data catalográfica do documento, não publicação impressa. O Livro 2 não comprova o conteúdo da p. 524 da edição de 1981. Acesso aos visualizadores da BN retornou 502; nenhum manuscrito foi lido.",
+    "grupo_dependencia": "loreto_couto",
+    "afirmacoes_candidatas": [],
+    "data_documento_catalogada": 1757,
+    "url_lista_livros": "https://bdlb.bn.gov.br/acervo/browse?etal=-1&offset=300&order=ASC&rpp=20&sort_by=-1&type=subject&value=Pernambuco",
+    "urls_acesso_falhou": [
+      "https://acervo.bndigital.bn.br/sophia/index.asp?codigo_sophia=24564",
+      "https://acervo.bndigital.bn.br/sophia/index.asp?codigo_sophia=24570"
+    ]
+  },
+  {
+    "id": "CCS007",
+    "titulo": "Clara Camarão",
+    "autoria": "Bianca Novais Cambruzzi",
+    "instituicao": "Universidade Federal Fluminense / Impressões Rebeldes",
+    "ano_publicacao": 2023,
+    "tipo_documento": "divulgacao_historica_academica",
+    "url": "https://www.historia.uff.br/impressoesrebeldes/pessoa/clara-camarao/",
+    "status_verificacao": "texto_consultado",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Impressões Rebeldes, biografia, ficha e bibliografia; data de publicação indicada: 19/04/2023.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Uso editorial do nome, recepção e hipóteses divulgadas.",
+    "limitacoes": "Mistura graus de certeza. A ficha de nascimento aponta capitania diferente da indicada no texto. Narrativas de batalhas não trazem localizador primário para cada episódio; vínculo universitário não as autentica.",
+    "grupo_dependencia": "divulgacao_uff_com_fagundes",
+    "afirmacoes_candidatas": [
+      "CCF005",
+      "CCF008",
+      "CCF009",
+      "CCF014",
+      "CCF015"
+    ],
+    "referencias_declaradas_incluem": [
+      "CCS015"
+    ]
+  },
+  {
+    "id": "CCS008",
+    "titulo": "Lei nº 13.422, de 27 de março de 2017 — Publicação Original",
+    "autoria": "Brasil / Presidência da República; texto disponibilizado pela Câmara dos Deputados",
+    "instituicao": "Câmara dos Deputados",
+    "ano_publicacao": 2017,
+    "tipo_documento": "texto_legal_reproduzido_em_portal_oficial",
+    "url": "https://www2.camara.leg.br/legin/fed/lei/2017/lei-13422-27-marco-2017-784524-publicacaooriginal-152231-pl.html",
+    "status_verificacao": "texto_consultado",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Artigos 1º e 2º; assinatura em 27/03/2017; referência a DOU, Seção 1, 28/03/2017, p. 1.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Ato legal de inscrição do nome Clara Camarão no Livro dos Heróis da Pátria.",
+    "limitacoes": "Consultado o texto no portal, não o exemplar do DOU. Não comprova atos militares ou detalhes biográficos. Justificativa de proposição não equivale a comprovação histórica.",
+    "grupo_dependencia": "ato_legal_2017",
+    "afirmacoes_candidatas": [
+      "CCF016"
+    ],
+    "data_publicacao": "2017-03-28",
+    "data_ato": "2017-03-27"
+  },
+  {
+    "id": "CCS009",
+    "titulo": "Clara Camarão será reconhecida \"Heroína Natalense\" pela Câmara",
+    "autoria": "Cláudio Oliveira",
+    "instituicao": "Câmara Municipal de Natal",
+    "ano_publicacao": 2017,
+    "tipo_documento": "noticia_institucional_de_tramitacao_e_memoria",
+    "url": "https://www.cmnat.rn.gov.br/noticias/238/clara-camaro-ser-reconhecida-herona-natalense-pela-cmara",
+    "status_verificacao": "texto_consultado",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Notícia de 29/05/2017: primeiro parágrafo, biografia e crédito do texto.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Grafia Felipa e notícia de aprovação em comissão de uma proposta de homenagem.",
+    "limitacoes": "Não comprova promulgação final. Biografia contém afirmações não acompanhadas de provas de época. Não deduzir causa da morte de Filipe ou destino de Clara deste texto.",
+    "grupo_dependencia": "CCS009",
+    "afirmacoes_candidatas": [
+      "CCF006",
+      "CCF018"
+    ],
+    "data_publicacao": "2017-05-29"
+  },
+  {
+    "id": "CCS010",
+    "titulo": "Pioneirismo da Mulher Potiguar — seção Clara Camarão, Índia e Guerreira",
+    "autoria": "Memorial da Assembleia Legislativa do Rio Grande do Norte; autoria individual não indicada",
+    "instituicao": "Assembleia Legislativa do Rio Grande do Norte",
+    "ano_publicacao": null,
+    "tipo_documento": "memorial_institucional_de_divulgacao",
+    "url": "https://memorial.al.rn.leg.br/index.php/mulheres-na-politica/pioneirismo-da-mulher",
+    "status_verificacao": "texto_consultado",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Seção de Clara; remete à obra A Mulher Potiguar — Cinco Séculos de Presença, Fundação José Augusto, 1999.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Atribuições contemporâneas de identidade, origem, episódios e destino como objetos de memória.",
+    "limitacoes": "Data da página não estabelecida; 1999 é a data da obra citada, não da página. Livro referido não consultado. Hipótese de retorno a Aldeia Velha não comprova esse percurso.",
+    "grupo_dependencia": "memorial_fja_1999",
+    "afirmacoes_candidatas": [
+      "CCF004",
+      "CCF008",
+      "CCF013",
+      "CCF015"
+    ],
+    "obra_referida_nao_consultada": "A Mulher Potiguar — Cinco Séculos de Presença. CEPEJUL / Fundação José Augusto, 1999."
+  },
+  {
+    "id": "CCS011",
+    "titulo": "Empoderamento da mulher é destaque na entrega do Diploma Bertha Lutz",
+    "autoria": "Agência Senado",
+    "instituicao": "Senado Federal",
+    "ano_publicacao": 2023,
+    "tipo_documento": "noticia_institucional_sobre_homenagem",
+    "url": "https://www12.senado.leg.br/noticias/materias/2023/03/08/premio-bertha-lutz-e-entregue-a-sete-mulheres-de-destaque",
+    "status_verificacao": "texto_consultado",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Notícia de 08/03/2023, abertura e legenda sobre representação por Rita Potyguara.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Registro da homenagem póstuma e uso da grafia Filipa na legenda.",
+    "limitacoes": "A homenagem e a legenda não autenticam nome de batismo nem feitos do século XVII.",
+    "grupo_dependencia": "homenagem_bertha_lutz_2023",
+    "afirmacoes_candidatas": [
+      "CCF007",
+      "CCF017"
+    ],
+    "data_publicacao": "2023-03-08"
+  },
+  {
+    "id": "CCS012",
+    "titulo": "Notas Taquigráficas da 6ª sessão, Sessão de Premiações e Condecorações, de 8 de março de 2023",
+    "autoria": "Senado Federal; falas de Eliziane Gama e Rita Potyguara no trecho examinado",
+    "instituicao": "Senado Federal",
+    "ano_publicacao": 2023,
+    "tipo_documento": "registro_oficial_de_sessao_contemporanea",
+    "url": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/s/25388",
+    "status_verificacao": "texto_consultado",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Cabeçalho da sessão; bloco imediatamente anterior a 10:08 e fala de Rita Potyguara em seguida.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Entrega do diploma por representante e existência de uma identificação e memória indígena explicitadas nessa ocasião.",
+    "limitacoes": "O registro é primário para a sessão de 2023, não para combates coloniais. A fala da representante merece atribuição própria; não substitui documento seiscentista nem permite generalizar uma posição para todos os Potiguara.",
+    "grupo_dependencia": "homenagem_bertha_lutz_2023",
+    "afirmacoes_candidatas": [
+      "CCF014",
+      "CCF015",
+      "CCF017",
+      "CCF020"
+    ],
+    "data_documento": "2023-03-08"
+  },
+  {
+    "id": "CCS013",
+    "titulo": "Boletim Oficial nº 2839 — Projeto de Resolução nº 0003/2012 e justificativa",
+    "autoria": "Márcia Maia; publicação da Assembleia Legislativa do Rio Grande do Norte",
+    "instituicao": "Assembleia Legislativa do Rio Grande do Norte",
+    "ano_publicacao": 2012,
+    "tipo_documento": "proposicao_legislativa_e_justificativa_em_boletim_oficial",
+    "url": "https://www.al.rn.leg.br/storage/boletins/2014/01/07/bo%202839.pdf",
+    "status_verificacao": "trecho_consultado_com_cotejo_visual",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Cabeçalho de 14/03/2012; páginas impressas 9–10 (índices PDF 8–9).",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Proposta de comenda, grafia Filipa e argumentos de uma justificativa parlamentar.",
+    "limitacoes": "Não se verificou resolução final. O texto apresenta tensão cronológica interna e alegações de honrarias e costumes sem provas primárias. O diretório da URL é de 2014, mas o documento traz 2012; a assinatura do projeto traz 2011, não harmonizada nesta base.",
+    "grupo_dependencia": "CCS013",
+    "afirmacoes_candidatas": [
+      "CCF007",
+      "CCF009",
+      "CCF013",
+      "CCF019",
+      "CCF021"
+    ],
+    "data_publicacao": "2012-03-14",
+    "data_assinatura_interna": "2011-03-08",
+    "auditoria_etapa2": {
+      "data": "2026-11-11",
+      "consulta_efetiva": "PDF completo obtido; páginas impressas 9 e 10, índices PDF 8 e 9, conferidas visualmente. Cabeçalho, título, assinatura e justificativa.",
+      "conferencia_visual": true,
+      "relatorio": "documentacao/AUDITORIA_DOCUMENTAL.md"
+    },
+    "arquivo_local": "documentos/etapa2/CCS013_boletim_2839.pdf",
+    "sha256_arquivo_local": "27ef92f682dbe562e5f26ba9e808ee6264af191406ecbd23884ff6a6353002cb"
+  },
+  {
+    "id": "CCS014",
+    "titulo": "Brasileiras célebres",
+    "autoria": "Joaquim Norberto de Souza e Silva",
+    "instituicao": "Biblioteca Digital do Senado Federal",
+    "ano_publicacao": 2004,
+    "tipo_documento": "reedicao_de_biografias_oitocentistas_catalogo",
+    "url": "https://www2.senado.leg.br/bdsf/item/id/188343",
+    "status_verificacao": "catalogo_indexado_acesso_bloqueado",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Metadados indexados da reedição Senado de obra de 1862. Capítulo Armas e virtudes indicado em bibliografia do Senado como pp. 69–71.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Pista para investigar construção oitocentista da imagem.",
+    "limitacoes": "Página e PDF bloquearam leitura direta por verificação de segurança. Não se leu o capítulo. A paginação informada é pista, não passagem cotejada. Registro de representação do século XIX não equivale a testemunho do XVII.",
+    "grupo_dependencia": "memoria_oitocentista",
+    "afirmacoes_candidatas": [],
+    "ano_primeira_publicacao_reportado": 1862,
+    "url_pdf_bloqueado": "https://www2.senado.leg.br/bdsf/bitstream/handle/id/562753/001088687_Brasileiras_celebres.pdf",
+    "url_bibliografia_localizada": "https://www2.senado.leg.br/bdsf/bitstream/handle/id/570014/Mulheres_de_A-Z.pdf",
+    "auditoria_etapa2": {
+      "data": "2026-11-11",
+      "edicao_cadastrada_2004": "Catálogo e PDFs do Senado retornaram verificação de segurança; não consultados diretamente.",
+      "edicao_alternativa": {
+        "ano": 1862,
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Brasileiras_celebres.pdf",
+        "arquivo_local": "documentos/etapa2/CCS014_edicao_alternativa_1862.pdf",
+        "paginas_impressas_conferidas": [
+          86,
+          87,
+          88,
+          89
+        ],
+        "paginas_pdf_conferidas": [
+          7,
+          98,
+          99,
+          100,
+          101
+        ],
+        "conferencia_visual": true
+      },
+      "limite": "A edição alternativa não autentica a paginação da edição 2004. Relato oitocentista, não testemunho do XVII."
+    }
+  },
+  {
+    "id": "CCS015",
+    "titulo": "A história do índio Antônio Felipe (Poti) Camarão",
+    "autoria": "Igor Pereira Fagundes",
+    "instituicao": "Universidade Federal Fluminense / ProfHistória / eduCAPES",
+    "ano_publicacao": 2016,
+    "tipo_documento": "dissertacao_de_mestrado_catalogo_e_trecho_indexado",
+    "url": "https://www.historia.uff.br/profhistoria/dissertacoes",
+    "status_verificacao": "trecho_consultado_com_cotejo_visual",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Lista ProfHistória: autor, orientação de Larissa Moreira Viana, data 08/09/2016; trecho indexado próximo à p. 17 da cópia eduCAPES.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Localização da dissertação e continuação da abordagem historiográfica.",
+    "limitacoes": "RIUFF bloqueou a consulta, mas o PDF eduCAPES completo foi obtido na etapa 2. Conferidos capa e trecho do produto educacional, pp. 13–17, páginas PDF 33–37. Mesmo autor de CCS001: sem confirmação independente. Na p. 14, atribui a Santiago o título Desagravos do Brasil e Glórias de Pernambuco, incompatível com CCS004/CCS005; não reproduzir essa atribuição. Não houve leitura integral.",
+    "grupo_dependencia": "fagundes",
+    "afirmacoes_candidatas": [],
+    "url_repositorio": "https://app.uff.br/riuff/handle/1/4517",
+    "url_pdf": "https://educapes.capes.gov.br/bitstream/capes/173403/1/A%20hist%C3%B3ria%20do%20%C3%ADndio%20Ant%C3%B4nio%20Felipe%20%28Poti%29%20Camar%C3%A3o.pdf",
+    "auditoria_etapa2": {
+      "data": "2026-11-11",
+      "consulta_efetiva": "PDF eduCAPES completo com 92 páginas. Capa e trecho do produto educacional nas páginas impressas 13–17 (páginas PDF 33–37) conferidos visualmente; não leitura integral.",
+      "conferencia_visual": true,
+      "relatorio": "documentacao/AUDITORIA_DOCUMENTAL.md"
+    },
+    "arquivo_local": "documentos/etapa2/CCS015_fagundes_2016.pdf",
+    "sha256_arquivo_local": "3d8b7fee80b17d484b7df6e6ab68f8b71c391c72ba7af50a55ebc6f7dc5a00d8"
+  },
+  {
+    "id": "CCS016",
+    "titulo": "Desconstrução da tradição historiográfica sobre as “invasões holandesas”: caminhos para pensar a ocupação neerlandesa seiscentista",
+    "autoria": "Regina de Carvalho Ribeiro da Costa",
+    "instituicao": "Revista Brasileira de História / SciELO",
+    "ano_publicacao": 2023,
+    "tipo_documento": "artigo_cientifico_de_historiografia",
+    "url": "https://www.scielo.br/j/rbh/a/Qf5y6yJZ8ys3ZD63bmMSyrN/?ilang=es&lang=pt",
+    "status_verificacao": "texto_consultado",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Revista Brasileira de História, v. 43, n. 94, pp. 377–406; resumo, introdução e conclusão.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Método para examinar memória, nacionalismo e limites de narrativas gerais.",
+    "limitacoes": "Artigo de contexto historiográfico, não prova de ação específica de Clara. DOI redirecionou a barreira, mas a página HTML foi consultada.",
+    "grupo_dependencia": "CCS016",
+    "afirmacoes_candidatas": [],
+    "doi": "10.1590/1806-93472023v43n94-18",
+    "data_publicacao": "2023-12-18"
+  },
+  {
+    "id": "CCS017",
+    "titulo": "Restauradores de Pernambuco: biografias de figuras do século XVII que defenderam e consolidaram a unidade brasileira",
+    "autoria": "José Antônio Gonsalves de Mello",
+    "instituicao": "Imprensa Universitária; referência obtida em CCS001",
+    "ano_publicacao": 1967,
+    "tipo_documento": "estudo_historiografico_referenciado_indiretamente",
+    "url": null,
+    "status_verificacao": "referencia_indireta",
+    "consulta": {
+      "data": "2026-11-10",
+      "metodo": "Pesquisa web e leitura do suporte indicado; respostas do serviço podem ser indexadas.",
+      "escopo_leitura": "Referência da edição Recife, Imprensa Universitária, 1967, em CCS001, nota 1; discussão reportada na p. 204 de CCS001.",
+      "conferencia_visual": false
+    },
+    "o_que_sustenta": "Origem bibliográfica de uma interpretação reportada por Fagundes.",
+    "limitacoes": "Volume e passagem original não consultados. Não converter a leitura de Fagundes em citação direta de Mello ou fixar paginação não conferida.",
+    "grupo_dependencia": "mello_apud_fagundes",
+    "afirmacoes_candidatas": [],
+    "referenciada_em": [
+      "CCS001"
+    ]
+  }
+]

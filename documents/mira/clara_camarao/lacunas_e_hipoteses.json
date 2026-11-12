@@ -1,0 +1,193 @@
+[
+  {
+    "id": "CCL001",
+    "tema": "Nascimento e naturalidade",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "Não há documento de nascimento ou local exato conferido. Há descrições regionais divergentes e tensão de cronologia nas publicações.",
+    "fontes_relacionadas": [
+      "CCS001",
+      "CCS007",
+      "CCS010",
+      "CCS013"
+    ],
+    "proxima_verificacao": "Localizar registros e reconstruir a origem de cada atribuição, sem estimar idade a partir de batalha.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL002",
+    "tema": "Nomes e batismo",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "Clara, Dona Clara, Felipe, Felipa e Filipa são ocorrências em suportes de épocas distintas; nome indígena e nome de batismo não foram comprovados.",
+    "fontes_relacionadas": [
+      "CCS002",
+      "CCS007",
+      "CCS009",
+      "CCS011",
+      "CCS013"
+    ],
+    "proxima_verificacao": "Cotejar grafias nas imagens e buscar registros nominais. Não criar nome indígena ou unificação automática.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL003",
+    "tema": "Identificação potiguara e comunidade",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "Identificação aparece em historiografia, memória institucional e fala indígena contemporânea; não foi localizada autodeclaração de época ou comunidade exata.",
+    "fontes_relacionadas": [
+      "CCS001",
+      "CCS010",
+      "CCS012"
+    ],
+    "proxima_verificacao": "Ampliar pesquisa de autoria indígena e documentos sem transferir identidade somente por casamento.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL004",
+    "tema": "Casamento e família",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "Relação conjugal é narrada, mas datas, local e registro de casamento não foram conferidos. Não reconstruir parentes por associação.",
+    "fontes_relacionadas": [
+      "CCS001",
+      "CCS002"
+    ],
+    "proxima_verificacao": "Localizar registro matrimonial e documentos familiares, se existentes.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL005",
+    "tema": "Acompanhamento, presença e combate",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "O acompanhamento narrado não basta para estabelecer ação militar individual; cada conflito exige evidência própria.",
+    "fontes_relacionadas": [
+      "CCS001",
+      "CCS002",
+      "CCS004",
+      "CCS005"
+    ],
+    "proxima_verificacao": "Confrontar Calado, Santiago e Couto em edições identificadas e fontes externas independentes.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL006",
+    "tema": "Tejucupapo",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "Não há nesta etapa passagem de época conferida que identifique Clara individualmente nesse episódio.",
+    "fontes_relacionadas": [
+      "CCS007",
+      "CCS012"
+    ],
+    "proxima_verificacao": "Rastrear a primeira associação nominal e separá-la da documentação sobre outras mulheres.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL007",
+    "tema": "Guararapes",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "Não se estabeleceu presença individual de Clara em cada batalha; não transferir cronologia do marido.",
+    "fontes_relacionadas": [
+      "CCS007",
+      "CCS010",
+      "CCS012"
+    ],
+    "proxima_verificacao": "Localizar evidência por batalha e distinguir datas de eventos de vida pessoal.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL008",
+    "tema": "Comando feminino e costumes",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "Não foram conferidas patentes, ordens ou provas de comando de pelotão; supostas proibições tribais e formação militar também não estão demonstradas.",
+    "fontes_relacionadas": [
+      "CCS009",
+      "CCS010",
+      "CCS013"
+    ],
+    "proxima_verificacao": "Investigar origem textual dos relatos e evitar generalizações sobre costumes indígenas.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL009",
+    "tema": "Dona e honrarias",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "Uso de tratamento não comprova concessão régia individual; não foi verificado hábito de Cristo conferido a Clara.",
+    "fontes_relacionadas": [
+      "CCS002",
+      "CCS013"
+    ],
+    "proxima_verificacao": "Buscar cartas de mercê e registros de ordens, sem estender honrarias de Filipe à esposa.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL010",
+    "tema": "Morte e destino posterior",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "Data e local de morte, viuvez narrada e suposto retorno a Aldeia Velha não foram comprovados nesta pesquisa.",
+    "fontes_relacionadas": [
+      "CCS007",
+      "CCS009",
+      "CCS010"
+    ],
+    "proxima_verificacao": "Buscar registros e origem das narrativas de retiro, sem preencher silêncio com anonimato comprovado.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL011",
+    "tema": "Falas, sentimentos e aparência",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "Não há testemunho autobiográfico, diálogo íntimo ou retrato autenticado conferido que sustente esses detalhes nesta base.",
+    "fontes_relacionadas": [],
+    "proxima_verificacao": "Não produzir cenas, pensamentos, aparência ou sentimentos como informação histórica.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL012",
+    "tema": "Edições, OCR e transmissão das crônicas",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "Faltam cotejo visual de Calado e leitura direta de Santiago e da passagem de Couto. Semelhança textual não demonstra independência nem plágio.",
+    "fontes_relacionadas": [
+      "CCS001",
+      "CCS002",
+      "CCS003",
+      "CCS004",
+      "CCS005",
+      "CCS006",
+      "CCS017"
+    ],
+    "proxima_verificacao": "Conferir páginas das edições citadas e comparar a cadeia Calado/Santiago/Couto/Mello/Fagundes.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL013",
+    "tema": "Desfecho de homenagens propostas",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "Projeto de comenda e notícia de comissão não demonstram por si só a edição de atos finais.",
+    "fontes_relacionadas": [
+      "CCS009",
+      "CCS013"
+    ],
+    "proxima_verificacao": "Localizar resolução promulgada, publicação oficial e execução, distinguindo proposta e ato.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL014",
+    "tema": "Refinaria e outras homenagens",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "A origem formal da denominação e as datas de homenagens não examinadas permanecem fora do núcleo comprovado.",
+    "fontes_relacionadas": [
+      "CCS007"
+    ],
+    "proxima_verificacao": "Pesquisar atos de denominação e registros institucionais específicos antes de incorporar fatos.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  },
+  {
+    "id": "CCL015",
+    "tema": "Recepção oitocentista",
+    "status": "nao_comprovado_nesta_base",
+    "descricao": "A obra de Joaquim Norberto foi localizada bibliograficamente, mas o capítulo de Clara não foi consultado diretamente.",
+    "fontes_relacionadas": [
+      "CCS014"
+    ],
+    "proxima_verificacao": "Obter edição acessível e examinar o capítulo com contexto de autoria, gênero e nacionalismo.",
+    "regra": "Não preencher com narrativa ficcional nem converter ausência de prova em prova de inexistência."
+  }
+]

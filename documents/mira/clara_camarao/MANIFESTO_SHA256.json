@@ -1,0 +1,103 @@
+{
+  "projeto": "MIRA",
+  "personagem": "clara_camarao",
+  "versao_base_textual": "1.0.0",
+  "algoritmo": "SHA-256",
+  "raiz_pacote": "clara_camarao",
+  "exclusoes_autorreferencia": [
+    "MANIFESTO_SHA256.json"
+  ],
+  "nota": "O SHA-256 externo do ZIP cobre tambem este manifesto. Hashes nao constituem assinatura digital.",
+  "arquivos": [
+    {
+      "caminho": "README.md",
+      "bytes": 2343,
+      "sha256": "e38a7163b4a235776271cf2073b8cf13c89931514922f3382c7e19149b6776ac"
+    },
+    {
+      "caminho": "VERSAO.json",
+      "bytes": 1086,
+      "sha256": "90f767efdf333f72409feface608faff7641b8f86d850978c992b26d11ed98ba"
+    },
+    {
+      "caminho": "contrato_resposta.json",
+      "bytes": 13626,
+      "sha256": "cd97e15d0eda86f4532e648b50e29687c31e580fb73fc43a0baaa8b55190b502"
+    },
+    {
+      "caminho": "documentacao/AUDITORIA_DOCUMENTAL.md",
+      "bytes": 30792,
+      "sha256": "ce738b9f94bb0e8e2d8b64b2861880735b1c6b1725e9371efc84827dbc9eae67"
+    },
+    {
+      "caminho": "documentacao/AUDITORIA_RESPOSTAS_ETAPA5.md",
+      "bytes": 68887,
+      "sha256": "3dc4c2d613d33dba57e0cc6cbb31e89b5f08549e13f02992927d125f9bc82128"
+    },
+    {
+      "caminho": "documentacao/GUIA_INTEGRACAO_BASE_TEXTUAL_v1.0.0.md",
+      "bytes": 12577,
+      "sha256": "b5457840ede8f5063f15b4baa79ffbcf1f829c5ec400b7e77b567fd064f78d96"
+    },
+    {
+      "caminho": "documentacao/INDICE_AUDITORIA.md",
+      "bytes": 3795,
+      "sha256": "c61716e22f5f2d5ec51992e6b098e2a662d66e27902a717d08b794c6fe6fb04d"
+    },
+    {
+      "caminho": "documentacao/RELATORIO_CORRECOES_ETAPA6.md",
+      "bytes": 19978,
+      "sha256": "3e1ab096cb03c50b0516040a15ca89bde3e3edc7993eddddfa9265266aeda1d2"
+    },
+    {
+      "caminho": "documentacao/RELATORIO_REVISAO_FINAL_ETAPA7.md",
+      "bytes": 63039,
+      "sha256": "004370ea42df159236809bb6752d0cfa6d0b58643e98cd85a644479cbc65732c"
+    },
+    {
+      "caminho": "fatos_historicos.json",
+      "bytes": 32589,
+      "sha256": "a62fd453f3a7744ab2462b69bed2e748bbf6279955c7d7edfce042a243870c89"
+    },
+    {
+      "caminho": "fontes.json",
+      "bytes": 26619,
+      "sha256": "f5de3c2841df574a64eda8de2defbeff1cf6b75c1915f602db8a55656e77ff57"
+    },
+    {
+      "caminho": "lacunas_e_hipoteses.json",
+      "bytes": 8701,
+      "sha256": "12bd5095a90f82b642905e6c2e2b11931c1be0912b06f7fefc67a7dc6adfa67a"
+    },
+    {
+      "caminho": "matriz_perguntas.json",
+      "bytes": 31875,
+      "sha256": "a407ae147a840a8139a34d075a4357e4417d60ec35310cdaff84a4a977d680bd"
+    },
+    {
+      "caminho": "perfil.json",
+      "bytes": 9272,
+      "sha256": "169edb13c14e47ff1d94c565a403527af99e39db2591ec9cd04d3f9a4b4368d3"
+    },
+    {
+      "caminho": "perguntas_respostas.json",
+      "bytes": 47836,
+      "sha256": "cf2a4f161f3686eaa49d562c48d8d977aa58c6bb6ac53c80ede96cbf08719e73"
+    },
+    {
+      "caminho": "personalidade.md",
+      "bytes": 5257,
+      "sha256": "9046c310fee4c228ba3dffaeaf55295b84ec6e03b2c2ec7fa1e3a2eef877ccdf"
+    },
+    {
+      "caminho": "testes/cenarios_comportamento_etapa7.json",
+      "bytes": 12652,
+      "sha256": "66362a42f01462fe8a51d2cf063f3db88da21aa679c7063de6bcbc586ac9111e"
+    },
+    {
+      "caminho": "verificar_integridade_pacote.py",
+      "bytes": 4502,
+      "sha256": "d3391258a7717d7141d392e051657dd409d2a576eba83c210e4588af72d1d385"
+    }
+  ]
+}

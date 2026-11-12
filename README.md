@@ -87,6 +87,26 @@ O indice e criado em `dados_rag/indice.json` e pode ser reconstruido; nao precis
 
 Os guias locais sao sinteticos e nao representam todas as comunidades. Para dados atuais, cursos, mensalidades, vestibular ou servicos da ESBAM, encaminhe a pessoa ao site oficial: https://esbam.edu.br/.
 
+### Prévia de personagens MIRA
+
+**MIRA: Vozes que atravessam gerações** é o nome do projeto; as duas personagens são **Esperança Garcia** (base v1.2.1) e **Clara Camarão** (base textual v1.0.0). No WhatsApp, envie `/mira` para ver as orientações ou use:
+
+- `/mira esperanca`: selecionar Esperança Garcia.
+- `/mira clara`: selecionar Clara Camarão.
+- `/mira sair`: voltar ao assistente geral.
+
+A seleção vale somente para aquela conversa. As perguntas podem ser livres, não precisam repetir as perguntas de exemplo. No modo MIRA, o bot responde com a base e as fontes registradas para a personagem selecionada; não faz busca web fora dessa base e reconhece quando não encontra evidência suficiente. Fora do modo MIRA, continua valendo o fluxo geral do assistente.
+
+As duas personagens são representações educativas virtuais, não simulações de memórias pessoais. As prévias ficam ativadas por padrão; defina `MIRA_PREVIEW_ENABLED=0` para desativar ambas ou `MIRA_CLARA_PREVIEW_ENABLED=0` para desativar somente Clara. A entrega de Clara ainda a marca como não aprovada para conversa pública, e seus 14 cenários precisam de avaliação. A ativação padrão habilita o uso local do modo MIRA, mas não constitui liberação pública. O estado da personagem é mantido em memória e reinicia com o processo.
+
+Os testes locais conferem integridade das bases, recuperação de evidências, referências permitidas, limites de lacunas e encaminhamento de conversas. Eles não substituem revisão das respostas do modelo; a integração deve continuar em prévia até essa revisão.
+
+Para repetir a validação:
+
+```powershell
+.\.venv\Scripts\python.exe -m unittest -v test_mira_personagens.py
+```
+
 ## Imagens e figurinhas
 
 Pedidos como "Pode me mandar uma imagem da capoeira?" ou "Me manda uma figurinha de capoeira" testam o envio de mídia. Imagens podem acompanhar respostas sobre alguns temas visuais, e figurinhas podem ser enviadas automaticamente conforme `WHATSAPP_STICKER_INTERVAL`. O envio depende da rede, da disponibilidade do arquivo e do WhatsApp. O terminal e `logs/interacoes_whatsapp.jsonl` registram o resultado.
@@ -103,9 +123,11 @@ Consulte [Política_Conteúdo_E_FONTES.md](./POLITICA_CONTEUDO_E_FONTES.md) para
 
 - `bot_agentes.py`: conexão WhatsApp, comandos, fila, histórico e envio de mídia.
 - `agentes_autonomos.py`, `busca_web.py`: busca local/web e respostas.
+- `mira_personagens.py`: seleção de perfil e respostas fundamentadas nas bases MIRA.
 - `rag_local.py`, `indexar_pdfs.py`: indexação e recuperacao de documentos.
 - `fila_whatsapp.py`, `escopo_assunto.py`: agrupamento de mensagens e filtros.
 - `midia_whatsapp.py`: busca e preparacao de imagens e figurinhas.
 - `documents/`: materiais revisados para a base do bot.
+- `documents/mira/`: bases e auditorias recebidas do projeto MIRA.
 - `dados_rag/`: indice gerado localmente.
 - `logs/`: diagnosticos locais, ignorados pelo Git.

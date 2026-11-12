@@ -1,0 +1,862 @@
+{
+  "personagem": "clara_camarao",
+  "etapa": 4,
+  "data": "2026-11-11",
+  "status": "respostas_educativas_preliminares",
+  "publico_provisorio": [
+    "ensino_fundamental_II",
+    "ensino_medio"
+  ],
+  "aprovadas": false,
+  "personagem_pronta_para_uso": false,
+  "auditoria_editorial_final_realizada": false,
+  "autorizacao": "Produção preliminar expressamente autorizada na etapa 4; não equivale a aprovação editorial ou liberação para uso.",
+  "matriz_origem": "matriz_perguntas.json",
+  "auditoria_documental": "documentacao/AUDITORIA_DOCUMENTAL.md",
+  "natureza": "representacao_historica_virtual_educativa",
+  "registros": [
+    {
+      "id": "CCQ001",
+      "tema_id": "CCT01",
+      "pergunta": "Qual nome aparece na passagem de Calado sobre Clara?",
+      "fatos": [
+        "CCF001"
+      ],
+      "fontes": [
+        "CCS002"
+      ],
+      "lacunas": [
+        "CCL002",
+        "CCL012"
+      ],
+      "conteudo": {
+        "resposta": "Na passagem de Manuel Calado examinada nesta pesquisa, aparece o nome Dona Clara. A menção está na página impressa 37 da edição de 1648 de O valeroso Lucideno.\n\nIsso permite identificar como o cronista a nomeou naquele trecho. Não comprova seu nome indígena, seu nome completo ou o nome registrado no batismo.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS002",
+            "fonte_id": "CCS002",
+            "titulo": "O valeroso Lucideno. E triumpho da liberdade: Primeira parte",
+            "url": "https://archive.org/details/ovalerosoluciden00cala",
+            "localizador": "p. impressa 37, coluna direita, menção nominal no parágrafo da partida de Camarão",
+            "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+          }
+        ],
+        "status_verificacao": "relato_historico_atribuido"
+      }
+    },
+    {
+      "id": "CCQ002",
+      "tema_id": "CCT01",
+      "pergunta": "Por que encontramos as grafias Felipe, Felipa e Filipa em textos sobre Clara?",
+      "fatos": [
+        "CCF005",
+        "CCF006",
+        "CCF007"
+      ],
+      "fontes": [
+        "CCS007",
+        "CCS009",
+        "CCS013"
+      ],
+      "lacunas": [
+        "CCL002"
+      ],
+      "conteudo": {
+        "resposta": "A pesquisa não estabeleceu por que essas grafias são diferentes. O que foi possível conferir é que elas aparecem em publicações distintas: o verbete Impressões Rebeldes usa Clara Felipe Camarão; a notícia da Câmara de Natal de 2017 usa Clara Felipa Camarão; e a justificativa parlamentar publicada em 2012 usa Clara Filipa Camarão.\n\nComparar os textos permite reconhecer essa variação, mas não descobrir sua causa. Como nenhum registro de batismo foi conferido nesta pesquisa, não é seguro afirmar qual dessas formas corresponderia ao nome registrado no batismo.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS007",
+            "fonte_id": "CCS007",
+            "titulo": "Clara Camarão",
+            "url": "https://www.historia.uff.br/impressoesrebeldes/pessoa/clara-camarao/",
+            "localizador": "Biografia, primeiro parágrafo: grafia Clara Felipe Camarão",
+            "uso": "Comparação de ocorrência editorial."
+          },
+          {
+            "id": "CCS009",
+            "fonte_id": "CCS009",
+            "titulo": "Clara Camarão será reconhecida \"Heroína Natalense\" pela Câmara",
+            "url": "https://www.cmnat.rn.gov.br/noticias/238/clara-camaro-ser-reconhecida-herona-natalense-pela-cmara",
+            "localizador": "notícia de 29/05/2017, primeiro parágrafo biográfico após a abertura: grafia Felipa",
+            "uso": "Comparação de ocorrência editorial."
+          },
+          {
+            "id": "CCS013",
+            "fonte_id": "CCS013",
+            "titulo": "Boletim Oficial nº 2839 — Projeto de Resolução nº 0003/2012 e justificativa",
+            "url": "https://www.al.rn.leg.br/storage/boletins/2014/01/07/bo%202839.pdf",
+            "localizador": "p. impressa 10, primeiro parágrafo da justificativa: grafia Filipa",
+            "uso": "Comparação de ocorrência editorial."
+          }
+        ],
+        "status_verificacao": "misto"
+      }
+    },
+    {
+      "id": "CCQ003",
+      "tema_id": "CCT01",
+      "pergunta": "Como as fontes consultadas apresentam a identificação potiguara de Clara?",
+      "fatos": [
+        "CCF004",
+        "CCF020"
+      ],
+      "fontes": [
+        "CCS001",
+        "CCS010",
+        "CCS012"
+      ],
+      "lacunas": [
+        "CCL003"
+      ],
+      "conteudo": {
+        "resposta": "Igor Pereira Fagundes apresenta Clara como indígena potiguar. O Memorial da Assembleia Legislativa do Rio Grande do Norte também a associa ao povo potiguara, com referência a um livro de 1999 que não foi consultado diretamente nesta pesquisa.\n\nHá ainda uma fala indígena contemporânea: na sessão do Senado de 2023, Rita Potyguara se refere a Clara como sua parenta potiguara. Esse registro documenta como Rita expressou esse vínculo de memória naquela ocasião.\n\nEssas atribuições precisam manter seus autores e contextos. A pesquisa não encontrou uma autodeclaração de Clara nem estabeleceu sua comunidade exata. Isso não invalida a memória expressa por Rita, mas também não demonstra, por si só, uma genealogia ou uma posição de todo o povo Potiguara.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS001",
+            "fonte_id": "CCS001",
+            "titulo": "Felipe Camarão, um cavaleiro potiguar a serviço del Rei: memória, história e identidade nas guerras pernambucanas, século XVII",
+            "url": "https://www.historia.uff.br/7mares/wp-content/uploads/2015/11/v03n05a131.pdf",
+            "localizador": "p. 204, segundo parágrafo da seção A família de Felipe Camarão",
+            "uso": "Identificação potiguar atribuída ao autor."
+          },
+          {
+            "id": "CCS010",
+            "fonte_id": "CCS010",
+            "titulo": "Pioneirismo da Mulher Potiguar — seção Clara Camarão, Índia e Guerreira",
+            "url": "https://memorial.al.rn.leg.br/index.php/mulheres-na-politica/pioneirismo-da-mulher",
+            "localizador": "seção Clara Camarão, Índia e Guerreira, primeiro parágrafo e fonte bibliográfica de 1999",
+            "uso": "Identificação memorial com dependência de obra de 1999 não consultada."
+          },
+          {
+            "id": "CCS012",
+            "fonte_id": "CCS012",
+            "titulo": "Notas Taquigráficas da 6ª sessão, Sessão de Premiações e Condecorações, de 8 de março de 2023",
+            "url": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/s/25388",
+            "localizador": "bloco 10:08, fala de Rita Potyguara após a entrega do diploma",
+            "uso": "Fala atribuída a Rita na homenagem contemporânea; não genealogia ou autodeclaração colonial."
+          }
+        ],
+        "status_verificacao": "misto"
+      }
+    },
+    {
+      "id": "CCQ004",
+      "tema_id": "CCT01",
+      "pergunta": "É possível afirmar com segurança onde Clara nasceu?",
+      "fatos": [
+        "CCF008"
+      ],
+      "fontes": [
+        "CCS001",
+        "CCS007",
+        "CCS010"
+      ],
+      "lacunas": [
+        "CCL001"
+      ],
+      "conteudo": {
+        "resposta": "Não é possível fixar com segurança o local de nascimento de Clara com os documentos examinados. As publicações consultadas apresentam atribuições e hipóteses que não foram confirmadas por um registro de nascimento.\n\nO próprio verbete Impressões Rebeldes traz uma diferença: a biografia indica o Rio Grande do Norte, enquanto o campo de nascimento aponta Pernambuco. O Memorial da Assembleia apresenta Aldeia Velha como uma origem provável. São informações que precisam ser investigadas, sem escolher um lugar apenas porque vários textos o repetem.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS001",
+            "fonte_id": "CCS001",
+            "titulo": "Felipe Camarão, um cavaleiro potiguar a serviço del Rei: memória, história e identidade nas guerras pernambucanas, século XVII",
+            "url": "https://www.historia.uff.br/7mares/wp-content/uploads/2015/11/v03n05a131.pdf",
+            "localizador": "p. 204, parágrafo sobre origem e nota 15",
+            "uso": "Análise acadêmica e citações mediadas; não leitura direta de Santiago, Couto ou Mello."
+          },
+          {
+            "id": "CCS007",
+            "fonte_id": "CCS007",
+            "titulo": "Clara Camarão",
+            "url": "https://www.historia.uff.br/impressoesrebeldes/pessoa/clara-camarao/",
+            "localizador": "Biografia, primeiro parágrafo, comparado ao campo Nascimento",
+            "uso": "Uso editorial, hipóteses e divergências do verbete; não prova colonial individual."
+          },
+          {
+            "id": "CCS010",
+            "fonte_id": "CCS010",
+            "titulo": "Pioneirismo da Mulher Potiguar — seção Clara Camarão, Índia e Guerreira",
+            "url": "https://memorial.al.rn.leg.br/index.php/mulheres-na-politica/pioneirismo-da-mulher",
+            "localizador": "seção Clara Camarão, Índia e Guerreira, primeiro parágrafo, origem apresentada como provável",
+            "uso": "Narrativa memorial atribuída a livro de 1999 não consultado; hipóteses não são provas."
+          }
+        ],
+        "status_verificacao": "limitacao_documental"
+      }
+    },
+    {
+      "id": "CCQ005",
+      "tema_id": "CCT01",
+      "pergunta": "O que impede fixar uma data de nascimento ou uma idade para Clara?",
+      "fatos": [
+        "CCF009"
+      ],
+      "fontes": [
+        "CCS007",
+        "CCS013"
+      ],
+      "lacunas": [
+        "CCL001",
+        "CCL005"
+      ],
+      "conteudo": {
+        "resposta": "Não há um registro de nascimento conferido que permita fixar uma data ou calcular a idade de Clara. As publicações consultadas também não oferecem uma sequência segura de datas: o verbete Impressões Rebeldes sugere um período de nascimento, e a justificativa parlamentar publicada em 2012 contém informações que não combinam entre si.\n\nEssa justificativa situa o nascimento na metade do século XVII, aproximadamente em torno de 1650, mas também atribui a Clara uma atuação em Porto Calvo em 1637, antes desse período. A pesquisa registra a inconsistência sem escolher uma correção por suposição. Também não calcula sua idade com base em um episódio cuja participação individual ainda não foi suficientemente comprovada.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS007",
+            "fonte_id": "CCS007",
+            "titulo": "Clara Camarão",
+            "url": "https://www.historia.uff.br/impressoesrebeldes/pessoa/clara-camarao/",
+            "localizador": "Biografia, primeiro parágrafo, período de nascimento atribuído",
+            "uso": "Uso editorial, hipóteses e divergências do verbete; não prova colonial individual."
+          },
+          {
+            "id": "CCS013",
+            "fonte_id": "CCS013",
+            "titulo": "Boletim Oficial nº 2839 — Projeto de Resolução nº 0003/2012 e justificativa",
+            "url": "https://www.al.rn.leg.br/storage/boletins/2014/01/07/bo%202839.pdf",
+            "localizador": "p. impressa 10, primeiro parágrafo e parágrafo de Porto Calvo, anterior ao pedido final de aprovação",
+            "uso": "Proposição e justificativa; não ato final nem prova automática das alegações do século XVII."
+          }
+        ],
+        "status_verificacao": "limitacao_documental"
+      }
+    },
+    {
+      "id": "CCQ006",
+      "tema_id": "CCT02",
+      "pergunta": "O que Calado relata sobre a relação entre Clara e Camarão?",
+      "fatos": [
+        "CCF002"
+      ],
+      "fontes": [
+        "CCS002",
+        "CCS001"
+      ],
+      "lacunas": [
+        "CCL004",
+        "CCL012"
+      ],
+      "conteudo": {
+        "resposta": "Calado apresenta Dona Clara como mulher de Camarão, isto é, como sua esposa. Fagundes também menciona essa relação em seu estudo.\n\nA relação conjugal está, portanto, narrada nas fontes consultadas. Isso não fornece automaticamente a data, o lugar ou os detalhes do casamento: nenhum registro matrimonial foi conferido nesta pesquisa.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS002",
+            "fonte_id": "CCS002",
+            "titulo": "O valeroso Lucideno. E triumpho da liberdade: Primeira parte",
+            "url": "https://archive.org/details/ovalerosoluciden00cala",
+            "localizador": "p. impressa 37, coluna direita, relação conjugal no parágrafo da partida",
+            "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+          },
+          {
+            "id": "CCS001",
+            "fonte_id": "CCS001",
+            "titulo": "Felipe Camarão, um cavaleiro potiguar a serviço del Rei: memória, história e identidade nas guerras pernambucanas, século XVII",
+            "url": "https://www.historia.uff.br/7mares/wp-content/uploads/2015/11/v03n05a131.pdf",
+            "localizador": "p. 203, parágrafo sobre o casamento e a família de Camarão",
+            "uso": "Análise acadêmica e citações mediadas; não leitura direta de Santiago, Couto ou Mello."
+          }
+        ],
+        "status_verificacao": "relato_historico_atribuido"
+      }
+    },
+    {
+      "id": "CCQ007",
+      "tema_id": "CCT02",
+      "pergunta": "O que a passagem do cavalo e da lança permite dizer sobre Clara?",
+      "fatos": [
+        "CCF003"
+      ],
+      "fontes": [
+        "CCS002"
+      ],
+      "lacunas": [
+        "CCL005",
+        "CCL012"
+      ],
+      "conteudo": {
+        "resposta": "Calado narra que Clara acompanhava Camarão a cavalo, com uma lança. É esse acompanhamento armado que a passagem permite apresentar como relato do cronista.\n\nO trecho não descreve uma ação individual de Clara em combate nem afirma que ela comandava um grupo de mulheres. Para sustentar essas outras afirmações, seriam necessárias evidências específicas.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS002",
+            "fonte_id": "CCS002",
+            "titulo": "O valeroso Lucideno. E triumpho da liberdade: Primeira parte",
+            "url": "https://archive.org/details/ovalerosoluciden00cala",
+            "localizador": "p. impressa 37, coluna direita, passagem do acompanhamento a cavalo com lança",
+            "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+          }
+        ],
+        "status_verificacao": "relato_historico_atribuido"
+      }
+    },
+    {
+      "id": "CCQ008",
+      "tema_id": "CCT02",
+      "pergunta": "O tratamento Dona comprova que Clara recebeu uma honraria régia?",
+      "fatos": [
+        "CCF019"
+      ],
+      "fontes": [
+        "CCS002",
+        "CCS013"
+      ],
+      "lacunas": [
+        "CCL009",
+        "CCL012"
+      ],
+      "conteudo": {
+        "resposta": "Não. Encontrar o tratamento Dona em um texto não basta para comprovar uma honraria concedida pelo rei. Na passagem de Calado, as mercês, ou distinções concedidas, são atribuídas ao marido; Clara aparece nomeada como Dona Clara.\n\nJá a justificativa parlamentar publicada em 2012 atribui honrarias a ela. Isso confirma a existência dessa alegação posterior, mas não substitui um documento de concessão. A pesquisa não conferiu uma carta de mercê ou registro de ordem que demonstrasse a concessão individual a Clara.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS002",
+            "fonte_id": "CCS002",
+            "titulo": "O valeroso Lucideno. E triumpho da liberdade: Primeira parte",
+            "url": "https://archive.org/details/ovalerosoluciden00cala",
+            "localizador": "p. impressa 37, coluna direita, mercês de Camarão e tratamento de Clara",
+            "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+          },
+          {
+            "id": "CCS013",
+            "fonte_id": "CCS013",
+            "titulo": "Boletim Oficial nº 2839 — Projeto de Resolução nº 0003/2012 e justificativa",
+            "url": "https://www.al.rn.leg.br/storage/boletins/2014/01/07/bo%202839.pdf",
+            "localizador": "p. impressa 10, segundo parágrafo da justificativa, alegação de honrarias",
+            "uso": "Proposição e justificativa; não ato final nem prova automática das alegações do século XVII."
+          }
+        ],
+        "status_verificacao": "misto"
+      }
+    },
+    {
+      "id": "CCQ009",
+      "tema_id": "CCT03",
+      "pergunta": "Acompanhar alguém a cavalo e com lança basta para comprovar combate individual?",
+      "fatos": [
+        "CCF003",
+        "CCF010"
+      ],
+      "fontes": [
+        "CCS002",
+        "CCS001"
+      ],
+      "lacunas": [
+        "CCL005",
+        "CCL012"
+      ],
+      "conteudo": {
+        "resposta": "Não basta. Um relato de acompanhamento armado e a comprovação de uma ação individual de combate são informações diferentes. Na passagem examinada, Calado menciona o cavalo e a lança, sem descrever o que Clara teria feito em uma luta.\n\nFagundes apresenta essa cautela atribuindo-a ao historiador Gonsalves de Mello, cuja obra não foi consultada diretamente nesta pesquisa. O limite vale nos dois sentidos: esse trecho não comprova que Clara combateu, mas também não permite afirmar que ela nunca combateu.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS002",
+            "fonte_id": "CCS002",
+            "titulo": "O valeroso Lucideno. E triumpho da liberdade: Primeira parte",
+            "url": "https://archive.org/details/ovalerosoluciden00cala",
+            "localizador": "p. impressa 37, coluna direita, passagem do acompanhamento armado",
+            "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+          },
+          {
+            "id": "CCS001",
+            "fonte_id": "CCS001",
+            "titulo": "Felipe Camarão, um cavaleiro potiguar a serviço del Rei: memória, história e identidade nas guerras pernambucanas, século XVII",
+            "url": "https://www.historia.uff.br/7mares/wp-content/uploads/2015/11/v03n05a131.pdf",
+            "localizador": "p. 204, parágrafo após a citação de Santiago, cautela atribuída a Gonsalves de Mello",
+            "uso": "Análise acadêmica e citações mediadas; não leitura direta de Santiago, Couto ou Mello."
+          }
+        ],
+        "status_verificacao": "misto"
+      }
+    },
+    {
+      "id": "CCQ010",
+      "tema_id": "CCT03",
+      "pergunta": "O comando de mulheres por Clara em Porto Calvo está comprovado nesta base?",
+      "fatos": [
+        "CCF013"
+      ],
+      "fontes": [
+        "CCS002",
+        "CCS010",
+        "CCS013"
+      ],
+      "lacunas": [
+        "CCL005",
+        "CCL008"
+      ],
+      "conteudo": {
+        "resposta": "O comando de mulheres por Clara em Porto Calvo não está comprovado de forma suficiente nesta base. O Memorial da Assembleia Legislativa e a justificativa parlamentar atribuem a ela uma liderança, mas esses textos posteriores não apresentam, nos trechos auditados, documentação militar individual que resolva a questão.\n\nA passagem de Calado examinada narra o acompanhamento a cavalo com lança; não descreve comando feminino. Por isso, não é seguro reconstruir um pelotão, uma patente, um treinamento ou costumes indígenas a partir desses relatos. A falta de comprovação nesta pesquisa não demonstra que tal participação seria impossível.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS002",
+            "fonte_id": "CCS002",
+            "titulo": "O valeroso Lucideno. E triumpho da liberdade: Primeira parte",
+            "url": "https://archive.org/details/ovalerosoluciden00cala",
+            "localizador": "p. impressa 37, coluna direita, acompanhamento narrado",
+            "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+          },
+          {
+            "id": "CCS010",
+            "fonte_id": "CCS010",
+            "titulo": "Pioneirismo da Mulher Potiguar — seção Clara Camarão, Índia e Guerreira",
+            "url": "https://memorial.al.rn.leg.br/index.php/mulheres-na-politica/pioneirismo-da-mulher",
+            "localizador": "seção Clara Camarão, Índia e Guerreira, parágrafo iniciado por Os relatos, episódio de Porto Calvo",
+            "uso": "Narrativa memorial atribuída a livro de 1999 não consultado; hipóteses não são provas."
+          },
+          {
+            "id": "CCS013",
+            "fonte_id": "CCS013",
+            "titulo": "Boletim Oficial nº 2839 — Projeto de Resolução nº 0003/2012 e justificativa",
+            "url": "https://www.al.rn.leg.br/storage/boletins/2014/01/07/bo%202839.pdf",
+            "localizador": "p. impressa 10, parágrafo de Porto Calvo, anterior ao pedido final de aprovação",
+            "uso": "Proposição e justificativa; não ato final nem prova automática das alegações do século XVII."
+          }
+        ],
+        "status_verificacao": "limitacao_documental"
+      }
+    },
+    {
+      "id": "CCQ011",
+      "tema_id": "CCT03",
+      "pergunta": "Que limites existem para associar Clara individualmente a Tejucupapo?",
+      "fatos": [
+        "CCF014"
+      ],
+      "fontes": [
+        "CCS007",
+        "CCS012"
+      ],
+      "lacunas": [
+        "CCL006"
+      ],
+      "conteudo": {
+        "resposta": "A principal limitação é a falta de um texto da época, conferido nesta pesquisa, que identifique Clara individualmente em Tejucupapo. O verbete Impressões Rebeldes associa seu nome à tradição sobre a batalha. A apresentação da homenagem no Senado, em 2023, antes da fala de Rita Potyguara, também atribui essa participação a Clara.\n\nEsses registros mostram que a associação aparece em narrativas posteriores; não são testemunhos do conflito colonial. Reconhecer a memória da participação de mulheres em Tejucupapo não permite concluir, sem outra evidência, que Clara esteve pessoalmente entre elas.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS007",
+            "fonte_id": "CCS007",
+            "titulo": "Clara Camarão",
+            "url": "https://www.historia.uff.br/impressoesrebeldes/pessoa/clara-camarao/",
+            "localizador": "Biografia, parágrafo sobre Tejucupapo e tradição",
+            "uso": "Uso editorial, hipóteses e divergências do verbete; não prova colonial individual."
+          },
+          {
+            "id": "CCS012",
+            "fonte_id": "CCS012",
+            "titulo": "Notas Taquigráficas da 6ª sessão, Sessão de Premiações e Condecorações, de 8 de março de 2023",
+            "url": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/s/25388",
+            "localizador": "bloco 10:08, apresentação da homenagem, antes da fala de Rita",
+            "uso": "Menção a Tejucupapo na apresentação da homenagem, antes da fala de Rita; atribuição de 2023, sem comprovação colonial individual."
+          }
+        ],
+        "status_verificacao": "limitacao_documental"
+      }
+    },
+    {
+      "id": "CCQ012",
+      "tema_id": "CCT03",
+      "pergunta": "A presença de Clara nas batalhas dos Guararapes pode ser afirmada com segurança?",
+      "fatos": [
+        "CCF015"
+      ],
+      "fontes": [
+        "CCS007",
+        "CCS010",
+        "CCS012"
+      ],
+      "lacunas": [
+        "CCL007"
+      ],
+      "conteudo": {
+        "resposta": "A presença e a ação militar individual de Clara nas batalhas dos Guararapes não foram estabelecidas com segurança nesta pesquisa. O verbete Impressões Rebeldes apresenta como hipótese sua participação na primeira batalha. O Memorial da Assembleia e a apresentação da homenagem no Senado, antes da fala de Rita Potyguara, também fazem atribuições posteriores de participação.\n\nCada batalha e cada data precisam ser examinadas com evidências próprias. A trajetória de Filipe Camarão não comprova automaticamente a de Clara, e os registros de homenagem não substituem documentos sobre sua atuação individual.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS007",
+            "fonte_id": "CCS007",
+            "titulo": "Clara Camarão",
+            "url": "https://www.historia.uff.br/impressoesrebeldes/pessoa/clara-camarao/",
+            "localizador": "Biografia, segundo parágrafo, hipótese sobre a primeira Batalha dos Guararapes",
+            "uso": "Uso editorial, hipóteses e divergências do verbete; não prova colonial individual."
+          },
+          {
+            "id": "CCS010",
+            "fonte_id": "CCS010",
+            "titulo": "Pioneirismo da Mulher Potiguar — seção Clara Camarão, Índia e Guerreira",
+            "url": "https://memorial.al.rn.leg.br/index.php/mulheres-na-politica/pioneirismo-da-mulher",
+            "localizador": "seção Clara Camarão, Índia e Guerreira, parágrafo dos episódios de resistência",
+            "uso": "Narrativa memorial atribuída a livro de 1999 não consultado; hipóteses não são provas."
+          },
+          {
+            "id": "CCS012",
+            "fonte_id": "CCS012",
+            "titulo": "Notas Taquigráficas da 6ª sessão, Sessão de Premiações e Condecorações, de 8 de março de 2023",
+            "url": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/s/25388",
+            "localizador": "bloco 10:08, apresentação de Clara na homenagem",
+            "uso": "Menção a Guararapes na apresentação da homenagem, antes da fala de Rita; atribuição de 2023, sem comprovação colonial individual."
+          }
+        ],
+        "status_verificacao": "limitacao_documental"
+      }
+    },
+    {
+      "id": "CCQ013",
+      "tema_id": "CCT04",
+      "pergunta": "Como falar da passagem de Loreto Couto que foi lida por meio de Fagundes?",
+      "fatos": [
+        "CCF011"
+      ],
+      "fontes": [
+        "CCS001"
+      ],
+      "lacunas": [
+        "CCL005",
+        "CCL012"
+      ],
+      "conteudo": {
+        "resposta": "A forma cuidadosa é indicar que se trata de Loreto Couto citado por Fagundes. A passagem elogia feitos militares atribuídos a Clara, mas foi examinada dentro do artigo de Fagundes, não diretamente na edição de Couto que ele menciona.\n\nIsso é uma citação de segunda mão: o leitor conhece um trecho de um autor por meio de outro. A palavra latina apud, usada em referências, significa citado por. Informar esse caminho deixa claro qual texto foi realmente consultado.\n\nAs páginas 204–205 do artigo foram conferidas. A página 524 da edição de Couto indicada por Fagundes continua sendo uma referência a verificar, e o elogio narrado não foi tratado como comprovação independente de cada combate.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS001",
+            "fonte_id": "CCS001",
+            "titulo": "Felipe Camarão, um cavaleiro potiguar a serviço del Rei: memória, história e identidade nas guerras pernambucanas, século XVII",
+            "url": "https://www.historia.uff.br/7mares/wp-content/uploads/2015/11/v03n05a131.pdf",
+            "localizador": "pp. impressas 204–205, bloco atribuído a Couto e notas 18–20; p. 524 de Couto é remissão indireta não cotejada",
+            "uso": "Fonte efetivamente consultada para o trecho de Couto citado por Fagundes e sua remissão bibliográfica; não leitura direta de Couto."
+          }
+        ],
+        "status_verificacao": "relato_historico_atribuido"
+      }
+    },
+    {
+      "id": "CCQ014",
+      "tema_id": "CCT04",
+      "pergunta": "Como Fagundes interpreta a valorização posterior de Clara?",
+      "fatos": [
+        "CCF012"
+      ],
+      "fontes": [
+        "CCS001"
+      ],
+      "lacunas": [
+        "CCL012"
+      ],
+      "conteudo": {
+        "resposta": "Fagundes observa que Loreto Couto dá grande destaque aos feitos militares atribuídos a Clara, enquanto as crônicas anteriores trazem menções mais breves. Para o pesquisador, esse contraste ajuda a analisar como sua figura ganhou importância em uma narrativa posterior.\n\nEssa é uma interpretação sobre a construção da memória heroica: o modo como autores de outros tempos elogiam uma pessoa e dão significado à sua trajetória. A análise não comprova cada feito militar narrado, mas também não demonstra que toda participação de Clara seja falsa.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS001",
+            "fonte_id": "CCS001",
+            "titulo": "Felipe Camarão, um cavaleiro potiguar a serviço del Rei: memória, história e identidade nas guerras pernambucanas, século XVII",
+            "url": "https://www.historia.uff.br/7mares/wp-content/uploads/2015/11/v03n05a131.pdf",
+            "localizador": "p. impressa 204, parágrafo anterior ao bloco de Couto; continuação do bloco na p. 205",
+            "uso": "Análise acadêmica e citações mediadas; não leitura direta de Santiago, Couto ou Mello."
+          }
+        ],
+        "status_verificacao": "interpretacao_academica"
+      }
+    },
+    {
+      "id": "CCQ015",
+      "tema_id": "CCT04",
+      "pergunta": "O que a edição de 1862 de Brasileiras célebres permite estudar sobre a memória de Clara?",
+      "fatos": [],
+      "fontes": [
+        "CCS014"
+      ],
+      "lacunas": [
+        "CCL003",
+        "CCL009",
+        "CCL015"
+      ],
+      "conteudo": {
+        "resposta": "A edição de 1862 de Brasileiras célebres permite estudar como Joaquim Norberto de Souza e Silva apresentou Clara no século XIX. O trecho examinado combina elogios com incertezas e hipóteses sobre sua origem.\n\nEstudar essa recepção é observar como uma pessoa foi lembrada e representada depois de sua época. O livro é uma fonte para conhecer essa narrativa oitocentista, não um testemunho direto da vida de Clara no século XVII. Suas descrições não autenticam aparência, identidade ou feitos militares.\n\nNesta pesquisa foram examinadas as páginas 86–89 da edição de 1862. A edição de 2004 cadastrada no Senado permaneceu sem consulta direta, e sua paginação não deve ser confundida com a do suporte mais antigo.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS014_1862",
+            "fonte_id": "CCS014",
+            "titulo": "Brasileiras célebres — edição Garnier de 1862 (suporte alternativo auditado)",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Brasileiras_celebres.pdf",
+            "localizador": "edição Garnier de 1862, pp. impressas 86–89, páginas PDF 98–101; não paginação da edição de 2004",
+            "uso": "Recepção oitocentista no suporte de 1862; não testemunho do XVII e não paginação da edição cadastrada de 2004."
+          }
+        ],
+        "status_verificacao": "relato_historico_atribuido"
+      }
+    },
+    {
+      "id": "CCQ016",
+      "tema_id": "CCT04",
+      "pergunta": "Por que fontes que repetem um relato não são necessariamente confirmações independentes?",
+      "fatos": [
+        "CCF010",
+        "CCF011"
+      ],
+      "fontes": [
+        "CCS001",
+        "CCS002"
+      ],
+      "lacunas": [
+        "CCL005",
+        "CCL012"
+      ],
+      "conteudo": {
+        "resposta": "Porque vários textos podem repetir uma informação recebida de um mesmo autor. Para considerar os relatos confirmações independentes, é necessário investigar se eles se apoiam em informações de origens diferentes. A repetição, sozinha, não demonstra isso.\n\nNa pesquisa, também é preciso separar duas questões: se um texto foi consultado diretamente e de onde veio a informação que ele apresenta. O trecho de Calado foi consultado diretamente; outras passagens foram conhecidas por meio das citações reunidas por Fagundes. Ler um texto diretamente não garante que seu relato seja independente de outros.\n\nO caminho pelo qual essas informações passaram de um texto a outro ainda precisa ser investigado nas crônicas examinadas. Por isso, não se pode concluir automaticamente que houve cópia, plágio ou confirmação independente. Aqui, os exemplos documentais e os limites da pesquisa ajudam a explicar um cuidado do trabalho com fontes.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS001",
+            "fonte_id": "CCS001",
+            "titulo": "Felipe Camarão, um cavaleiro potiguar a serviço del Rei: memória, história e identidade nas guerras pernambucanas, século XVII",
+            "url": "https://www.historia.uff.br/7mares/wp-content/uploads/2015/11/v03n05a131.pdf",
+            "localizador": "p. 204, citações de Santiago e análise atribuída a Mello; pp. 204–205, bloco de Couto e notas 16–20",
+            "uso": "Exemplo auditado de mediação por citações e atribuições, sem demonstrar independência entre crônicas."
+          },
+          {
+            "id": "CCS002",
+            "fonte_id": "CCS002",
+            "titulo": "O valeroso Lucideno. E triumpho da liberdade: Primeira parte",
+            "url": "https://archive.org/details/ovalerosoluciden00cala",
+            "localizador": "p. impressa 37, coluna direita, relato de acompanhamento para comparação de alcance",
+            "uso": "Relato consultado diretamente em trecho; ponto de comparação, sem afirmar relação de cópia com outras crônicas."
+          }
+        ],
+        "status_verificacao": "misto"
+      }
+    },
+    {
+      "id": "CCQ017",
+      "tema_id": "CCT05",
+      "pergunta": "O que a Lei 13.422, de 2017, determina em relação a Clara?",
+      "fatos": [
+        "CCF016"
+      ],
+      "fontes": [
+        "CCS008"
+      ],
+      "lacunas": [],
+      "conteudo": {
+        "resposta": "A Lei 13.422, de 27 de março de 2017, determina a inscrição do nome de Clara Camarão no Livro dos Heróis da Pátria. Seu artigo 1º identifica o livro e o local onde ele é depositado, no Panteão da Pátria e da Liberdade, em Brasília.\n\nEsse documento sustenta o reconhecimento legal de 2017. Ele não comprova, por si só, os episódios militares do século XVII. A pesquisa consultou o texto no portal oficial, sem examinar fisicamente o livro.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS008",
+            "fonte_id": "CCS008",
+            "titulo": "Lei nº 13.422, de 27 de março de 2017 — Publicação Original",
+            "url": "https://www2.camara.leg.br/legin/fed/lei/2017/lei-13422-27-marco-2017-784524-publicacaooriginal-152231-pl.html",
+            "localizador": "art. 1º, inscrição e depósito do livro; art. 2º e data do ato, 27/03/2017",
+            "uso": "Ato legal de 2017; não comprovação dos acontecimentos coloniais."
+          }
+        ],
+        "status_verificacao": "documentado_no_escopo_da_fonte"
+      }
+    },
+    {
+      "id": "CCQ018",
+      "tema_id": "CCT05",
+      "pergunta": "O que os registros do Senado documentam sobre a homenagem de 2023?",
+      "fatos": [
+        "CCF017"
+      ],
+      "fontes": [
+        "CCS012",
+        "CCS011"
+      ],
+      "lacunas": [],
+      "conteudo": {
+        "resposta": "Os registros do Senado documentam uma homenagem póstuma a Clara Camarão na entrega do Diploma Bertha Lutz, em 8 de março de 2023. Póstuma significa realizada depois da morte da pessoa homenageada. Rita Potyguara recebeu o diploma como representante de Clara.\n\nAs notas da sessão e a notícia institucional registram o mesmo evento. Elas permitem estudar a homenagem e a memória contemporânea de Clara, mas não são dois testemunhos independentes de seus possíveis feitos coloniais.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS012",
+            "fonte_id": "CCS012",
+            "titulo": "Notas Taquigráficas da 6ª sessão, Sessão de Premiações e Condecorações, de 8 de março de 2023",
+            "url": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/s/25388",
+            "localizador": "sessão de 08/03/2023, bloco 10:08, rubrica de entrega a Rita Potyguara",
+            "uso": "Entrega e fala contemporânea; sem generalização para todo um povo ou comprovação colonial."
+          },
+          {
+            "id": "CCS011",
+            "fonte_id": "CCS011",
+            "titulo": "Empoderamento da mulher é destaque na entrega do Diploma Bertha Lutz",
+            "url": "https://www12.senado.leg.br/noticias/materias/2023/03/08/premio-bertha-lutz-e-entregue-a-sete-mulheres-de-destaque",
+            "localizador": "parágrafo das homenagens in memoriam e legenda textual de Rita Potyguara",
+            "uso": "Homenagem de 2023 e uso de Filipa; não autenticação de nome batismal."
+          }
+        ],
+        "status_verificacao": "documentado_no_escopo_da_fonte"
+      }
+    },
+    {
+      "id": "CCQ019",
+      "tema_id": "CCT05",
+      "pergunta": "Como Rita Potyguara se refere a Clara na sessão de 2023?",
+      "fatos": [
+        "CCF020"
+      ],
+      "fontes": [
+        "CCS012"
+      ],
+      "lacunas": [
+        "CCL003"
+      ],
+      "conteudo": {
+        "resposta": "Na sessão de 2023, Rita Potyguara se refere a Clara como sua parenta potiguara e se apresenta como integrante do povo Potiguara. A fala expressa um vínculo de memória e identificação enunciado por Rita naquela homenagem.\n\nPreservar essa autoria é respeitar o sentido e o contexto da fala. O registro não demonstra uma genealogia nem permite atribuir a mesma posição a todas as pessoas Potiguara. Também não é uma autodeclaração de Clara, que viveu em outra época.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS012",
+            "fonte_id": "CCS012",
+            "titulo": "Notas Taquigráficas da 6ª sessão, Sessão de Premiações e Condecorações, de 8 de março de 2023",
+            "url": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/s/25388",
+            "localizador": "bloco 10:08, fala de Rita Potyguara após a entrega; retomada antes de 10:12",
+            "uso": "Entrega e fala contemporânea; sem generalização para todo um povo ou comprovação colonial."
+          }
+        ],
+        "status_verificacao": "documentado_no_escopo_da_fonte"
+      }
+    },
+    {
+      "id": "CCQ020",
+      "tema_id": "CCT05",
+      "pergunta": "A notícia de Natal de 2017 comprova uma homenagem municipal já concluída?",
+      "fatos": [
+        "CCF018"
+      ],
+      "fontes": [
+        "CCS009"
+      ],
+      "lacunas": [
+        "CCL013"
+      ],
+      "conteudo": {
+        "resposta": "Não. A notícia de 29 de maio de 2017 relata que a proposta de reconhecimento de Clara como Heroína Natalense foi aprovada em comissão e seguiria ao plenário. Portanto, documenta uma etapa da tramitação, isto é, do caminho de análise da proposta.\n\nA aprovação em comissão não demonstra, sozinha, a decisão final ou a realização da homenagem. O título da notícia anuncia um reconhecimento futuro; o desfecho não foi conferido nesta pesquisa.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS009",
+            "fonte_id": "CCS009",
+            "titulo": "Clara Camarão será reconhecida \"Heroína Natalense\" pela Câmara",
+            "url": "https://www.cmnat.rn.gov.br/noticias/238/clara-camaro-ser-reconhecida-herona-natalense-pela-cmara",
+            "localizador": "notícia de 29/05/2017, título e primeiro parágrafo, aprovação em comissão e encaminhamento ao plenário",
+            "uso": "Notícia de tramitação e grafia Felipa; não promulgação final ou prova biográfica."
+          }
+        ],
+        "status_verificacao": "misto"
+      }
+    },
+    {
+      "id": "CCQ021",
+      "tema_id": "CCT05",
+      "pergunta": "O que o Boletim 2839 publica sobre a Comenda Clara Camarão?",
+      "fatos": [
+        "CCF021"
+      ],
+      "fontes": [
+        "CCS013"
+      ],
+      "lacunas": [
+        "CCL013"
+      ],
+      "conteudo": {
+        "resposta": "O Boletim Oficial 2839 publica o Projeto de Resolução 0003/2012, que propõe a Comenda Clara Camarão, e sua justificativa. Um projeto apresenta uma medida para análise; sua publicação não basta para demonstrar que ela se tornou uma resolução final.\n\nO documento traz o cabeçalho de 14 de março de 2012 e uma assinatura interna datada de 8 de março de 2011. Essas informações foram mantidas como aparecem, sem escolher uma correção por suposição. A justificativa da homenagem também não funciona como comprovação automática das alegações sobre a vida colonial de Clara.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS013",
+            "fonte_id": "CCS013",
+            "titulo": "Boletim Oficial nº 2839 — Projeto de Resolução nº 0003/2012 e justificativa",
+            "url": "https://www.al.rn.leg.br/storage/boletins/2014/01/07/bo%202839.pdf",
+            "localizador": "p. impressa 9, título Projeto de Resolução 0003/2012, cabeçalho e assinatura; p. 10, justificativa",
+            "uso": "Proposição e justificativa; não ato final nem prova automática das alegações do século XVII."
+          }
+        ],
+        "status_verificacao": "documentado_no_escopo_da_fonte"
+      }
+    },
+    {
+      "id": "CCQ022",
+      "tema_id": "CCT06",
+      "pergunta": "Podemos conhecer os sentimentos, pensamentos ou a aparência de Clara por esta base?",
+      "fatos": [],
+      "fontes": [],
+      "lacunas": [
+        "CCL011"
+      ],
+      "conteudo": {
+        "resposta": "Esta base não permite conhecer com segurança os sentimentos, pensamentos ou a aparência pessoal de Clara. Não foi estabelecido nela um testemunho autobiográfico ou retrato autenticado que sustente esses detalhes.\n\nUma narrativa plausível ou uma imagem ilustrativa não preenche essa falta de documentação. A representação virtual educativa pode explicar as fontes e suas incertezas, mas não deve criar lembranças, emoções ou características físicas e apresentá-las como se fossem de Clara.",
+        "fontes_utilizadas": [],
+        "status_verificacao": "limitacao_documental"
+      }
+    },
+    {
+      "id": "CCQ023",
+      "tema_id": "CCT06",
+      "pergunta": "O que permanece desconhecido sobre a morte e o destino posterior de Clara?",
+      "fatos": [],
+      "fontes": [
+        "CCS007",
+        "CCS010"
+      ],
+      "lacunas": [
+        "CCL010"
+      ],
+      "conteudo": {
+        "resposta": "Permanecem sem comprovação nesta pesquisa a data e o local de morte de Clara, assim como seu percurso posterior. O verbete Impressões Rebeldes sugere uma vida de anonimato; o Memorial da Assembleia apresenta como possível um retorno à região de Aldeia Velha.\n\nEssas narrativas precisam continuar identificadas como hipóteses. A falta de registros consultados não demonstra que Clara tenha vivido anonimamente, nem permite inventar um lugar, uma causa ou uma data de morte.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS007",
+            "fonte_id": "CCS007",
+            "titulo": "Clara Camarão",
+            "url": "https://www.historia.uff.br/impressoesrebeldes/pessoa/clara-camarao/",
+            "localizador": "Biografia, parágrafo sobre anonimato após a morte do marido",
+            "uso": "Uso editorial, hipóteses e divergências do verbete; não prova colonial individual."
+          },
+          {
+            "id": "CCS010",
+            "fonte_id": "CCS010",
+            "titulo": "Pioneirismo da Mulher Potiguar — seção Clara Camarão, Índia e Guerreira",
+            "url": "https://memorial.al.rn.leg.br/index.php/mulheres-na-politica/pioneirismo-da-mulher",
+            "localizador": "seção Clara Camarão, Índia e Guerreira, parágrafo que apresenta possível retorno a Aldeia Velha",
+            "uso": "Narrativa memorial atribuída a livro de 1999 não consultado; hipóteses não são provas."
+          }
+        ],
+        "status_verificacao": "limitacao_documental"
+      }
+    },
+    {
+      "id": "CCQ024",
+      "tema_id": "CCT06",
+      "pergunta": "A menção a uma refinaria em um verbete basta para confirmar a origem da homenagem?",
+      "fatos": [],
+      "fontes": [
+        "CCS007"
+      ],
+      "lacunas": [
+        "CCL014"
+      ],
+      "conteudo": {
+        "resposta": "Não. A menção à refinaria no verbete Impressões Rebeldes mostra que esse texto associa uma homenagem ao nome de Clara. Ela não basta para estabelecer como e quando ocorreu a denominação formal.\n\nUma fonte pode servir para uma pergunta e não resolver outra. O verbete documenta uma menção; para confirmar a decisão de dar o nome à refinaria, seria necessário examinar um ato ou registro específico dessa denominação. Essa verificação não foi realizada nesta pesquisa, por isso não são fixadas aqui uma data ou uma origem formal para a homenagem.",
+        "fontes_utilizadas": [
+          {
+            "id": "CCS007",
+            "fonte_id": "CCS007",
+            "titulo": "Clara Camarão",
+            "url": "https://www.historia.uff.br/impressoesrebeldes/pessoa/clara-camarao/",
+            "localizador": "Biografia, parágrafo das homenagens que menciona a Refinaria Potiguar Clara Camarão",
+            "uso": "Confirma somente a menção editorial à refinaria; não comprova ato, data ou motivo formal de denominação."
+          }
+        ],
+        "status_verificacao": "limitacao_documental"
+      }
+    },
+    {
+      "id": "CCQ025",
+      "tema_id": "CCT06",
+      "pergunta": "Por que esta representação virtual não pode falar como se tivesse memórias pessoais de Clara?",
+      "fatos": [],
+      "fontes": [],
+      "lacunas": [
+        "CCL011",
+        "CCL012"
+      ],
+      "conteudo": {
+        "resposta": "Esta é uma representação histórica virtual de Clara Camarão, criada pelo projeto MIRA para fins educativos. Ela organiza informações de fontes consultadas; não é a própria mulher histórica nem uma testemunha de sua vida.\n\nExplicar o que um cronista escreveu é diferente de lembrar uma experiência. A base não fornece memórias pessoais autenticadas de Clara que autorizem uma fala autobiográfica. Por isso, a representação deve atribuir os relatos a seus autores e reconhecer as lacunas, sem inventar vivências, pensamentos ou sentimentos.",
+        "fontes_utilizadas": [],
+        "status_verificacao": "orientacao_sobre_representacao"
+      }
+    }
+  ]
+}

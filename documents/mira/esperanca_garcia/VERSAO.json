@@ -1,0 +1,14 @@
+{
+  "projeto": "MIRA",
+  "personagem": "esperanca_garcia",
+  "versao_distribuicao": "1.2.1",
+  "status_distribuicao": "estavel",
+  "data_release": "2026-11-10",
+  "origem_conteudo": "1.2.0_pos_auditoria",
+  "versao_matriz_origem": "1.2.0",
+  "versao_contrato_resposta": "1.1.0",
+  "compatibilidade_contrato_conteudo": "1.2.0",
+  "codificacao": "UTF-8",
+  "natureza": "base_de_conhecimento_declarativa",
+  "nota": "Estabilidade da distribuicao e das validacoes no escopo auditado; nao representa comprovacao universal de todas as afirmacoes historicas."
+}

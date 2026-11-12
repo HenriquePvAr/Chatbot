@@ -1,0 +1,28 @@
+MIRA — Esperança Garcia / distribuição estável 1.2.1
+Data: 10/11/2026
+Comando no workspace: python MIRA_BASE_CONHECIMENTO/esperanca_garcia/validar_consistencia.py
+Execução da suíte original, sem mudança de código; os tempos abaixo são da execução efetiva.
+
+test_backups_sha256 (__main__.Consistencia.test_backups_sha256) ... ok
+test_colecao_60 (__main__.Consistencia.test_colecao_60) ... ok
+test_contrato (__main__.Consistencia.test_contrato) ... ok
+test_json_estrito (__main__.Consistencia.test_json_estrito) ... ok
+test_matriz (__main__.Consistencia.test_matriz) ... ok
+test_pos_auditoria_52_preservadas (__main__.Consistencia.test_pos_auditoria_52_preservadas) ... ok
+test_pos_auditoria_documentos_preservados (__main__.Consistencia.test_pos_auditoria_documentos_preservados) ... ok
+test_pos_auditoria_rastreabilidade (__main__.Consistencia.test_pos_auditoria_rastreabilidade) ... ok
+test_preservacao_historica (__main__.Consistencia.test_preservacao_historica) ... ok
+test_quatro_originais_canonicos (__main__.Consistencia.test_quatro_originais_canonicos) ... ok
+test_rejeita_30_regressoes (__main__.Consistencia.test_rejeita_30_regressoes) ... ok
+test_rejeita_matriz_divergente (__main__.Consistencia.test_rejeita_matriz_divergente) ... ok
+test_rubricas_e_perfil (__main__.Consistencia.test_rubricas_e_perfil) ... ok
+test_textos_sem_corrupcao_conhecida (__main__.Consistencia.test_textos_sem_corrupcao_conhecida) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.125s
+
+OK
+
+Conferência adicional: 60 IDs, seis categorias de dez, dez fatos e cinco fontes.
+Oito registros corrigidos sincronizados com a matriz; quatro exemplos canônicos idênticos à coleção.
+Backups: 7 manifestos e 153 entradas SHA-256 sem divergências.

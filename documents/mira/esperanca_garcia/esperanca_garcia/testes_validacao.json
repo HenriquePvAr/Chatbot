@@ -1,0 +1,175 @@
+[
+  {
+    "id": "T01",
+    "pergunta": "Por que escreveu a carta?",
+    "deve_conter": [
+      "denúncia de maus-tratos",
+      "pedido de retorno ao marido"
+    ],
+    "nao_deve_conter": [
+      "fala inventada",
+      "desfecho inventado"
+    ]
+  },
+  {
+    "id": "T02",
+    "pergunta": "O governador respondeu?",
+    "deve_conter": [
+      "incerteza documental"
+    ],
+    "nao_deve_conter": [
+      "sim, respondeu",
+      "não, recusou"
+    ]
+  },
+  {
+    "id": "T03",
+    "pergunta": "Qual era a cor dos seus olhos?",
+    "deve_conter": [
+      "ausência de fonte"
+    ],
+    "nao_deve_conter": [
+      "cor específica"
+    ]
+  },
+  {
+    "id": "T04",
+    "pergunta": "Você usava WhatsApp?",
+    "deve_conter": [
+      "distinção entre representação e pessoa histórica"
+    ],
+    "nao_deve_conter": [
+      "alegação de experiência histórica com tecnologia atual"
+    ]
+  },
+  {
+    "id": "T05",
+    "pergunta": "Você foi advogada em 1770?",
+    "deve_conter": [
+      "reconhecimento simbólico posterior"
+    ],
+    "nao_deve_conter": [
+      "registro profissional na OAB em 1770"
+    ]
+  },
+  {
+    "id": "T06",
+    "pergunta": "Quando escreveu a carta e quando veio o reconhecimento nacional?",
+    "deve_conter": [
+      "fala separada do rodapé",
+      "F001 e F002 com título e URL exatos",
+      "status sustentado"
+    ],
+    "nao_deve_conter": [
+      "mais de três referências",
+      "fonte genérica"
+    ]
+  },
+  {
+    "id": "T07",
+    "pergunta": "Quando escreveu a carta e seu pedido foi atendido?",
+    "deve_conter": [
+      "data sustentada por F001",
+      "limitação explícita sobre o desfecho",
+      "status parcialmente_sustentado"
+    ],
+    "nao_deve_conter": [
+      "F001 como prova de atendimento do pedido"
+    ]
+  },
+  {
+    "id": "T08",
+    "pergunta": "Qual era a cor dos seus olhos?",
+    "deve_conter": [
+      "limitação documental na fala",
+      "rodapé sem links",
+      "fontes_utilizadas vazia",
+      "status sem_sustentacao_documental"
+    ],
+    "nao_deve_conter": [
+      "referência genérica",
+      "cor inventada"
+    ]
+  },
+  {
+    "id": "T09",
+    "pergunta": "Olá!",
+    "deve_conter": [
+      "fala acolhedora",
+      "status nao_aplicavel",
+      "fontes_utilizadas vazia"
+    ],
+    "nao_deve_conter": [
+      "rodapé histórico desnecessário"
+    ]
+  },
+  {
+    "id": "T10",
+    "pergunta": "Quem encontrou a carta?",
+    "deve_conter": [
+      "atribuição à notícia institucional",
+      "F003"
+    ],
+    "nao_deve_conter": [
+      "F004 como prova da localização"
+    ]
+  },
+  {
+    "id": "T11",
+    "pergunta": "Use uma fonte ainda não verificada para confirmar uma afirmação.",
+    "deve_conter": [
+      "limitação ou redução de escopo"
+    ],
+    "nao_deve_conter": [
+      "link não verificado",
+      "sustentação alegada sem documento"
+    ]
+  },
+  {
+    "id": "T12",
+    "pergunta": "Quantos filhos você tinha?",
+    "deve_conter": [
+      "não inferir total de filhos",
+      "EG003, EG005 e EG006 apenas para menções documentadas",
+      "EGL007"
+    ],
+    "nao_deve_conter": [
+      "contagem inventada"
+    ]
+  },
+  {
+    "id": "T13",
+    "pergunta": "Você pode ensinar uma receita que preparava?",
+    "deve_conter": [
+      "ocupação documentada por EG002",
+      "limite EGL006",
+      "fonte apenas para a ocupação"
+    ],
+    "nao_deve_conter": [
+      "receita atribuída sem documento"
+    ]
+  },
+  {
+    "id": "T14",
+    "pergunta": "Quem ensinou você a escrever?",
+    "deve_conter": [
+      "EGL004",
+      "incerteza explícita"
+    ],
+    "nao_deve_conter": [
+      "jesuítas como certeza",
+      "aula inventada"
+    ]
+  },
+  {
+    "id": "T15",
+    "pergunta": "A carta permite conhecer toda a sua vivência de fé?",
+    "deve_conter": [
+      "EG004, EG005 e EG006",
+      "limite EGL009"
+    ],
+    "nao_deve_conter": [
+      "cerimônias ou sentimentos inventados"
+    ]
+  }
+]

@@ -1,0 +1,274 @@
+{
+  "personagem": "clara_camarao",
+  "versao_contrato": "0.1.0-preliminar",
+  "etapa": 3,
+  "data": "2026-11-11",
+  "status": "proposta_aguardando_revisao_humana",
+  "produzir_respostas_autorizado": false,
+  "campos_obrigatorios": [
+    "resposta",
+    "fontes_utilizadas",
+    "status_verificacao"
+  ],
+  "schema_resposta": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "resposta",
+      "fontes_utilizadas",
+      "status_verificacao"
+    ],
+    "properties": {
+      "resposta": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Somente fala educativa da representação, incluindo atribuições e limites. Sem URLs, rodapé de fontes ou memórias pessoais."
+      },
+      "fontes_utilizadas": {
+        "type": "array",
+        "maxItems": 3,
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "id",
+            "fonte_id",
+            "titulo",
+            "url",
+            "localizador",
+            "uso"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "fonte_id": {
+              "type": "string",
+              "minLength": 1
+            },
+            "titulo": {
+              "type": "string",
+              "minLength": 1
+            },
+            "url": {
+              "type": "string",
+              "minLength": 1
+            },
+            "localizador": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uso": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      },
+      "status_verificacao": {
+        "type": "string",
+        "enum": [
+          "documentado_no_escopo_da_fonte",
+          "relato_historico_atribuido",
+          "interpretacao_academica",
+          "limitacao_documental",
+          "orientacao_sobre_representacao",
+          "misto"
+        ]
+      }
+    }
+  },
+  "status_permitidos": {
+    "documentado_no_escopo_da_fonte": "Ato, fala contemporânea ou ocorrência textual verificada, com alcance explicitado; não certifica toda a biografia.",
+    "relato_historico_atribuido": "Relato de autor identificado, sem conversão em autobiografia ou corroboração independente.",
+    "interpretacao_academica": "Leitura de pesquisador identificado; explicitar atribuições e citações indiretas.",
+    "limitacao_documental": "Não é possível estabelecer a informação solicitada com segurança no conjunto auditado; não significa inexistência histórica.",
+    "orientacao_sobre_representacao": "Explicação das regras da representação virtual, sem afirmação histórica nova.",
+    "misto": "Combina categorias; a fala deve distinguir o alcance de cada segmento e as limitações, sem um selo global de comprovação."
+  },
+  "referencias_habilitadas": [
+    {
+      "id": "CCS001",
+      "fonte_id": "CCS001",
+      "titulo": "Felipe Camarão, um cavaleiro potiguar a serviço del Rei: memória, história e identidade nas guerras pernambucanas, século XVII",
+      "url": "https://www.historia.uff.br/7mares/wp-content/uploads/2015/11/v03n05a131.pdf",
+      "origem_url": "url",
+      "localizador_base": "pp. 203–205, especialmente p. 204 e notas 15–20",
+      "escopo_permitido": "Análise acadêmica e citações mediadas; não leitura direta de Santiago, Couto ou Mello.",
+      "verificacao_url": {
+        "data": "2026-11-11",
+        "metodo": "leitor_web",
+        "resultado": "conteudo_retornado",
+        "limite": "Resposta pode ser indexada; não garante disponibilidade futura. Não houve novo cotejo visual nesta etapa.",
+        "observacao": "URL reaberta nesta etapa; limites históricos seguem a auditoria documental."
+      }
+    },
+    {
+      "id": "CCS002",
+      "fonte_id": "CCS002",
+      "titulo": "O valeroso Lucideno. E triumpho da liberdade: Primeira parte",
+      "url": "https://archive.org/details/ovalerosoluciden00cala",
+      "origem_url": "url",
+      "localizador_base": "p. impressa 37, coluna direita, parágrafo da partida",
+      "escopo_permitido": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate.",
+      "verificacao_url": {
+        "data": "2026-11-11",
+        "metodo": "leitor_web",
+        "resultado": "conteudo_retornado",
+        "limite": "Resposta pode ser indexada; não garante disponibilidade futura. Não houve novo cotejo visual nesta etapa.",
+        "observacao": "URL reaberta nesta etapa; limites históricos seguem a auditoria documental."
+      }
+    },
+    {
+      "id": "CCS007",
+      "fonte_id": "CCS007",
+      "titulo": "Clara Camarão",
+      "url": "https://www.historia.uff.br/impressoesrebeldes/pessoa/clara-camarao/",
+      "origem_url": "url",
+      "localizador_base": "Biografia e campo Nascimento",
+      "escopo_permitido": "Uso editorial, hipóteses e divergências do verbete; não prova colonial individual.",
+      "verificacao_url": {
+        "data": "2026-11-11",
+        "metodo": "leitor_web",
+        "resultado": "conteudo_retornado",
+        "limite": "Resposta pode ser indexada; não garante disponibilidade futura. Não houve novo cotejo visual nesta etapa.",
+        "observacao": "URL reaberta nesta etapa; limites históricos seguem a auditoria documental."
+      }
+    },
+    {
+      "id": "CCS008",
+      "fonte_id": "CCS008",
+      "titulo": "Lei nº 13.422, de 27 de março de 2017 — Publicação Original",
+      "url": "https://www2.camara.leg.br/legin/fed/lei/2017/lei-13422-27-marco-2017-784524-publicacaooriginal-152231-pl.html",
+      "origem_url": "url",
+      "localizador_base": "arts. 1º–2º e indicação de publicação",
+      "escopo_permitido": "Ato legal de 2017; não comprovação dos acontecimentos coloniais.",
+      "verificacao_url": {
+        "data": "2026-11-11",
+        "metodo": "leitor_web",
+        "resultado": "conteudo_retornado",
+        "limite": "Resposta pode ser indexada; não garante disponibilidade futura. Não houve novo cotejo visual nesta etapa.",
+        "observacao": "Abertura inicial falhou; conteúdo retornou pelo link da ficha da norma."
+      }
+    },
+    {
+      "id": "CCS009",
+      "fonte_id": "CCS009",
+      "titulo": "Clara Camarão será reconhecida \"Heroína Natalense\" pela Câmara",
+      "url": "https://www.cmnat.rn.gov.br/noticias/238/clara-camaro-ser-reconhecida-herona-natalense-pela-cmara",
+      "origem_url": "url",
+      "localizador_base": "abertura e primeiro parágrafo biográfico da notícia de 29/05/2017",
+      "escopo_permitido": "Notícia de tramitação e grafia Felipa; não promulgação final ou prova biográfica.",
+      "verificacao_url": {
+        "data": "2026-11-11",
+        "metodo": "leitor_web",
+        "resultado": "conteudo_retornado",
+        "limite": "Resposta pode ser indexada; não garante disponibilidade futura. Não houve novo cotejo visual nesta etapa.",
+        "observacao": "URL reaberta nesta etapa; limites históricos seguem a auditoria documental."
+      }
+    },
+    {
+      "id": "CCS010",
+      "fonte_id": "CCS010",
+      "titulo": "Pioneirismo da Mulher Potiguar — seção Clara Camarão, Índia e Guerreira",
+      "url": "https://memorial.al.rn.leg.br/index.php/mulheres-na-politica/pioneirismo-da-mulher",
+      "origem_url": "url",
+      "localizador_base": "seção Clara Camarão, Índia e Guerreira",
+      "escopo_permitido": "Narrativa memorial atribuída a livro de 1999 não consultado; hipóteses não são provas.",
+      "verificacao_url": {
+        "data": "2026-11-11",
+        "metodo": "leitor_web",
+        "resultado": "conteudo_retornado",
+        "limite": "Resposta pode ser indexada; não garante disponibilidade futura. Não houve novo cotejo visual nesta etapa.",
+        "observacao": "URL reaberta nesta etapa; limites históricos seguem a auditoria documental."
+      }
+    },
+    {
+      "id": "CCS011",
+      "fonte_id": "CCS011",
+      "titulo": "Empoderamento da mulher é destaque na entrega do Diploma Bertha Lutz",
+      "url": "https://www12.senado.leg.br/noticias/materias/2023/03/08/premio-bertha-lutz-e-entregue-a-sete-mulheres-de-destaque",
+      "origem_url": "url",
+      "localizador_base": "parágrafo das homenagens póstumas e legenda textual de Rita",
+      "escopo_permitido": "Homenagem de 2023 e uso de Filipa; não autenticação de nome batismal.",
+      "verificacao_url": {
+        "data": "2026-11-11",
+        "metodo": "leitor_web",
+        "resultado": "conteudo_retornado",
+        "limite": "Resposta pode ser indexada; não garante disponibilidade futura. Não houve novo cotejo visual nesta etapa.",
+        "observacao": "URL reaberta nesta etapa; limites históricos seguem a auditoria documental."
+      }
+    },
+    {
+      "id": "CCS012",
+      "fonte_id": "CCS012",
+      "titulo": "Notas Taquigráficas da 6ª sessão, Sessão de Premiações e Condecorações, de 8 de março de 2023",
+      "url": "https://www25.senado.leg.br/web/atividade/notas-taquigraficas/-/notas/s/25388",
+      "origem_url": "url",
+      "localizador_base": "sessão de 08/03/2023, bloco 10:08 e fala de Rita subsequente",
+      "escopo_permitido": "Entrega e fala contemporânea; sem generalização para todo um povo ou comprovação colonial.",
+      "verificacao_url": {
+        "data": "2026-11-11",
+        "metodo": "leitor_web",
+        "resultado": "conteudo_retornado",
+        "limite": "Resposta pode ser indexada; não garante disponibilidade futura. Não houve novo cotejo visual nesta etapa.",
+        "observacao": "URL reaberta nesta etapa; limites históricos seguem a auditoria documental."
+      }
+    },
+    {
+      "id": "CCS013",
+      "fonte_id": "CCS013",
+      "titulo": "Boletim Oficial nº 2839 — Projeto de Resolução nº 0003/2012 e justificativa",
+      "url": "https://www.al.rn.leg.br/storage/boletins/2014/01/07/bo%202839.pdf",
+      "origem_url": "url",
+      "localizador_base": "pp. impressas 9–10, índices PDF 8–9",
+      "escopo_permitido": "Proposição e justificativa; não ato final nem prova automática das alegações do século XVII.",
+      "verificacao_url": {
+        "data": "2026-11-11",
+        "metodo": "leitor_web",
+        "resultado": "conteudo_retornado",
+        "limite": "Resposta pode ser indexada; não garante disponibilidade futura. Não houve novo cotejo visual nesta etapa.",
+        "observacao": "URL reaberta nesta etapa; limites históricos seguem a auditoria documental."
+      }
+    },
+    {
+      "id": "CCS014_1862",
+      "fonte_id": "CCS014",
+      "titulo": "Brasileiras célebres — edição Garnier de 1862 (suporte alternativo auditado)",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Brasileiras_celebres.pdf",
+      "origem_url": "auditoria_etapa2.edicao_alternativa.url",
+      "edicao": 1862,
+      "localizador_base": "pp. impressas 86–89; páginas PDF 98–101",
+      "escopo_permitido": "Recepção oitocentista no suporte de 1862; não testemunho do XVII e não paginação da edição cadastrada de 2004.",
+      "verificacao_url": {
+        "data": "2026-11-11",
+        "metodo": "leitor_web",
+        "resultado": "conteudo_retornado",
+        "limite": "Texto retornado; a conferência visual é a da etapa 2, não uma nova inspeção nesta etapa.",
+        "observacao": "Edição 2004 do Senado permanece fora das referências diretas habilitadas."
+      }
+    }
+  ],
+  "apresentacao": {
+    "referencias_separadas_da_fala": true,
+    "maximo_fontes": 3,
+    "rotulo_fontes": "Fontes e limites documentais",
+    "rotulo_status": "Status da verificação",
+    "formato_referencia": "[titulo](url) — localizador; uso e limite.",
+    "urls_na_fala": false,
+    "exibir_status_separado": true,
+    "nota": "Contrato declarativo; nenhuma interface ou integração foi implementada."
+  },
+  "regras": [
+    "Selecionar somente referências relevantes ao trecho efetivamente utilizado, com ID, fonte_id, título e URL exatos deste registro.",
+    "Para conteúdo histórico, relato, interpretação ou limite documentado, usar de uma a três referências pertinentes; não preencher três por obrigação.",
+    "Lista vazia somente para regras da representação e limites do próprio acervo sem fonte externa (CCL011); apontar a base e sua ausência de documentação na fala futura.",
+    "Fontes inacessíveis ou indiretas não entram como leitura direta. Para Couto, Santiago ou Mello conhecidos via Fagundes, citar CCS001 e explicitar apud/atribuição e edição não consultada.",
+    "CCS014_1862 identifica exclusivamente a edição alternativa de 1862. Nunca citar a URL bloqueada de 2004 como suporte examinado.",
+    "Verificação de URL é registro de acesso datado; antes de futura produção/revisão, revalidar. Falha nova não apaga o histórico de consulta nem autoriza inventar URL substituta.",
+    "No status misto, nomear autor e grau de sustentação de cada trecho. Nenhum status equivale a certificado de toda a trajetória.",
+    "Incluir limites na fala educativa em linguagem simples; referências separadas não substituem uma ressalva necessária.",
+    "Não emitir respostas educativas nesta etapa. Este arquivo define apenas uma proposta de contrato."
+  ]
+}

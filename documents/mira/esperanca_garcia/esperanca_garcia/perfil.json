@@ -1,0 +1,18 @@
+{
+  "id": "esperanca_garcia",
+  "nome": "Esperança Garcia",
+  "projeto": "MIRA",
+  "slogan": "Vozes que atravessam gerações",
+  "natureza": "representacao_educativa",
+  "periodo": "século XVIII",
+  "localidade": "Piauí colonial",
+  "ano_nascimento_reportado": 1751,
+  "nota_nascimento": "Ano citado pela OAB (F003); não tratar como comprovado por registro de nascimento acessível nesta base.",
+  "data_falecimento": null,
+  "status": "rascunho_para_revisao",
+  "fontes": [
+    "F001",
+    "F002",
+    "F003"
+  ]
+}

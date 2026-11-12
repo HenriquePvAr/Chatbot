@@ -1,0 +1,833 @@
+{
+  "versao_base": "1.2.0",
+  "categorias": [
+    {
+      "id": "carta_pedidos",
+      "titulo": "Carta de 1770 e seus pedidos",
+      "quantidade": 10
+    },
+    {
+      "id": "familia_trabalho",
+      "titulo": "Família, deslocamento e trabalho",
+      "quantidade": 10
+    },
+    {
+      "id": "violencia_reivindicacoes",
+      "titulo": "Violência e reivindicações documentadas",
+      "quantidade": 10
+    },
+    {
+      "id": "religiosidade",
+      "titulo": "Religiosidade na carta",
+      "quantidade": 10
+    },
+    {
+      "id": "reconhecimento_memoria",
+      "titulo": "Reconhecimento e preservação da memória",
+      "quantidade": 10
+    },
+    {
+      "id": "fontes_lacunas",
+      "titulo": "Fontes, lacunas e representação educativa",
+      "quantidade": 10
+    }
+  ],
+  "perguntas": [
+    {
+      "id": "EGQA001",
+      "categoria": "carta_pedidos",
+      "pergunta": "Esperança, por que você escreveu aquela carta?",
+      "objetivo_educativo": "Relacionar denúncia e pedidos sem inventar um resultado.",
+      "fatos": [
+        "EG001",
+        "EG003",
+        "EG006"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA002",
+      "categoria": "carta_pedidos",
+      "pergunta": "Qual é a data da sua carta?",
+      "objetivo_educativo": "Identificar a data e sua fonte publicada.",
+      "fatos": [
+        "EG001"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA003",
+      "categoria": "carta_pedidos",
+      "pergunta": "Quais pedidos você fez na carta?",
+      "objetivo_educativo": "Distinguir os pedidos expressos do resultado da petição.",
+      "fatos": [
+        "EG006"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA004",
+      "categoria": "carta_pedidos",
+      "pergunta": "Você escreveu apenas para falar de si?",
+      "objetivo_educativo": "Reconhecer outras pessoas mencionadas nas reivindicações.",
+      "fatos": [
+        "EG003",
+        "EG004",
+        "EG005"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA005",
+      "categoria": "carta_pedidos",
+      "pergunta": "Para quem a carta foi dirigida?",
+      "objetivo_educativo": "Distinguir identificação secundária e conteúdo da transcrição.",
+      "fatos": [
+        "EG010"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F005"
+      ]
+    },
+    {
+      "id": "EGQA006",
+      "categoria": "carta_pedidos",
+      "pergunta": "Como o deslocamento aparece nos seus pedidos?",
+      "objetivo_educativo": "Conectar o relato de retirada ao pedido de retorno.",
+      "fatos": [
+        "EG002",
+        "EG006"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA007",
+      "categoria": "carta_pedidos",
+      "pergunta": "Você pediu o batismo de sua filha na mesma carta?",
+      "objetivo_educativo": "Localizar um pedido específico dentro do conjunto de reivindicações.",
+      "fatos": [
+        "EG006"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA008",
+      "categoria": "carta_pedidos",
+      "pergunta": "Sabemos o lugar exato onde você escreveu?",
+      "objetivo_educativo": "Reconhecer a falta de evidência sobre a produção material.",
+      "fatos": [],
+      "lacunas": [
+        "EGL008"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA009",
+      "categoria": "carta_pedidos",
+      "pergunta": "Você redigiu a carta sem ajuda de ninguém?",
+      "objetivo_educativo": "Separar autoria atribuída e condições de redação não comprovadas.",
+      "fatos": [],
+      "lacunas": [
+        "EGL004",
+        "EGL008"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA010",
+      "categoria": "carta_pedidos",
+      "pergunta": "O governador leu e respondeu à carta?",
+      "objetivo_educativo": "Não confundir destinatário com recepção comprovada.",
+      "fatos": [],
+      "lacunas": [
+        "EGL010"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA011",
+      "categoria": "familia_trabalho",
+      "pergunta": "Você conseguiu voltar para sua família?",
+      "objetivo_educativo": "Preservar o exemplo original de incerteza sobre o desfecho.",
+      "fatos": [],
+      "lacunas": [
+        "EGL001"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA012",
+      "categoria": "familia_trabalho",
+      "pergunta": "Onde você vivia com seu marido antes do deslocamento?",
+      "objetivo_educativo": "Identificar o lugar mencionado no relato sem ampliar a biografia.",
+      "fatos": [
+        "EG002"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA013",
+      "categoria": "familia_trabalho",
+      "pergunta": "Qual trabalho você relatou realizar?",
+      "objetivo_educativo": "Reconhecer a ocupação mencionada no documento.",
+      "fatos": [
+        "EG002"
+      ],
+      "lacunas": [
+        "EGL006"
+      ],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA014",
+      "categoria": "familia_trabalho",
+      "pergunta": "Você pode ensinar uma receita que preparava?",
+      "objetivo_educativo": "Distinguir ocupação documentada de receita não registrada.",
+      "fatos": [
+        "EG002"
+      ],
+      "lacunas": [
+        "EGL006"
+      ],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA015",
+      "categoria": "familia_trabalho",
+      "pergunta": "Qual era o nome do seu marido?",
+      "objetivo_educativo": "Reconhecer a lacuna de identificação familiar.",
+      "fatos": [],
+      "lacunas": [
+        "EGL007"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA016",
+      "categoria": "familia_trabalho",
+      "pergunta": "Quantos filhos você tinha ao todo?",
+      "objetivo_educativo": "Evitar inferir composição familiar completa de menções parciais.",
+      "fatos": [
+        "EG003",
+        "EG005",
+        "EG006"
+      ],
+      "lacunas": [
+        "EGL007"
+      ],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA017",
+      "categoria": "familia_trabalho",
+      "pergunta": "Sabemos os nomes e as idades dos seus filhos?",
+      "objetivo_educativo": "Reconhecer os limites dos dados familiares.",
+      "fatos": [],
+      "lacunas": [
+        "EGL007"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA018",
+      "categoria": "familia_trabalho",
+      "pergunta": "Seu marido foi levado junto para a casa do capitão?",
+      "objetivo_educativo": "Evitar inventar o destino do marido a partir do deslocamento relatado.",
+      "fatos": [
+        "EG002",
+        "EG006"
+      ],
+      "lacunas": [
+        "EGL011"
+      ],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA019",
+      "categoria": "familia_trabalho",
+      "pergunta": "Como era um dia inteiro do seu trabalho?",
+      "objetivo_educativo": "Não transformar uma ocupação em rotina imaginada.",
+      "fatos": [
+        "EG002"
+      ],
+      "lacunas": [
+        "EGL006"
+      ],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA020",
+      "categoria": "familia_trabalho",
+      "pergunta": "O que a carta permite dizer sobre sua vida familiar?",
+      "objetivo_educativo": "Sintetizar o alcance e os limites das menções familiares.",
+      "fatos": [
+        "EG002",
+        "EG003",
+        "EG006"
+      ],
+      "lacunas": [
+        "EGL007"
+      ],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA021",
+      "categoria": "violencia_reivindicacoes",
+      "pergunta": "Que violência você denunciou na carta?",
+      "objetivo_educativo": "Descrever a denúncia sem dramatização.",
+      "fatos": [
+        "EG003"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA022",
+      "categoria": "violencia_reivindicacoes",
+      "pergunta": "É possível falar dessa violência sem repetir detalhes gráficos?",
+      "objetivo_educativo": "Oferecer uma abordagem educativa respeitosa.",
+      "fatos": [
+        "EG003"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA023",
+      "categoria": "violencia_reivindicacoes",
+      "pergunta": "Você relatou agressões contra uma criança?",
+      "objetivo_educativo": "Identificar o filho na denúncia sem inventar idade ou nome.",
+      "fatos": [
+        "EG003"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA024",
+      "categoria": "violencia_reivindicacoes",
+      "pergunta": "O que você sentiu ao denunciar as agressões?",
+      "objetivo_educativo": "Distinguir denúncia documentada de sentimentos não registrados.",
+      "fatos": [
+        "EG003"
+      ],
+      "lacunas": [
+        "EGL005"
+      ],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA025",
+      "categoria": "violencia_reivindicacoes",
+      "pergunta": "Você pode recriar uma conversa com o capitão?",
+      "objetivo_educativo": "Recusar diálogo privado inventado.",
+      "fatos": [],
+      "lacunas": [
+        "EGL005"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA026",
+      "categoria": "violencia_reivindicacoes",
+      "pergunta": "O administrador foi punido depois da denúncia?",
+      "objetivo_educativo": "Distinguir a denúncia de providências posteriores desconhecidas.",
+      "fatos": [],
+      "lacunas": [
+        "EGL010"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA027",
+      "categoria": "violencia_reivindicacoes",
+      "pergunta": "Quais outras necessidades aparecem junto da denúncia?",
+      "objetivo_educativo": "Relacionar violência, família e práticas religiosas sem criar causalidade.",
+      "fatos": [
+        "EG003",
+        "EG004",
+        "EG005",
+        "EG006"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA028",
+      "categoria": "violencia_reivindicacoes",
+      "pergunta": "Podemos dizer que todas as mulheres mencionadas escreveram a carta?",
+      "objetivo_educativo": "Distinguir pessoas citadas e participação na redação.",
+      "fatos": [
+        "EG004"
+      ],
+      "lacunas": [
+        "EGL008"
+      ],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA029",
+      "categoria": "violencia_reivindicacoes",
+      "pergunta": "O pedido de retorno comprova que o problema foi resolvido?",
+      "objetivo_educativo": "Ensinar a diferença entre pedido e atendimento.",
+      "fatos": [
+        "EG006"
+      ],
+      "lacunas": [
+        "EGL001"
+      ],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA030",
+      "categoria": "violencia_reivindicacoes",
+      "pergunta": "Como podemos ler sua denúncia com responsabilidade?",
+      "objetivo_educativo": "Orientar leitura documental sem memórias inventadas.",
+      "fatos": [
+        "EG003",
+        "EG006"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA031",
+      "categoria": "religiosidade",
+      "pergunta": "O que você relatou sobre a confissão?",
+      "objetivo_educativo": "Identificar a prática religiosa mencionada.",
+      "fatos": [
+        "EG004"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA032",
+      "categoria": "religiosidade",
+      "pergunta": "Há quanto tempo vocês estavam sem se confessar?",
+      "objetivo_educativo": "Distinguir duração relatada de cronologia reconstruída.",
+      "fatos": [
+        "EG004"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA033",
+      "categoria": "religiosidade",
+      "pergunta": "Você mencionou apenas a própria falta de confissão?",
+      "objetivo_educativo": "Identificar a presença de outras mulheres na passagem.",
+      "fatos": [
+        "EG004"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA034",
+      "categoria": "religiosidade",
+      "pergunta": "Quais crianças estavam sem batismo segundo a carta?",
+      "objetivo_educativo": "Retomar as menções sem identificar crianças além da evidência.",
+      "fatos": [
+        "EG005"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA035",
+      "categoria": "religiosidade",
+      "pergunta": "Que pedido religioso você fez para sua filha?",
+      "objetivo_educativo": "Distinguir o pedido específico de batismo.",
+      "fatos": [
+        "EG006"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA036",
+      "categoria": "religiosidade",
+      "pergunta": "Sua filha foi batizada depois da carta?",
+      "objetivo_educativo": "Explicitar a falta de comprovação do atendimento.",
+      "fatos": [
+        "EG006"
+      ],
+      "lacunas": [
+        "EGL001"
+      ],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA037",
+      "categoria": "religiosidade",
+      "pergunta": "Quem seria responsável por realizar o batismo?",
+      "objetivo_educativo": "Reconhecer a ausência de detalhes sobre uma cerimônia.",
+      "fatos": [],
+      "lacunas": [
+        "EGL009"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA038",
+      "categoria": "religiosidade",
+      "pergunta": "Você pode narrar uma confissão daquela época?",
+      "objetivo_educativo": "Evitar reconstrução de experiência religiosa privada.",
+      "fatos": [],
+      "lacunas": [
+        "EGL005",
+        "EGL009"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA039",
+      "categoria": "religiosidade",
+      "pergunta": "A carta permite conhecer toda a sua vivência de fé?",
+      "objetivo_educativo": "Delimitar o alcance de referências religiosas.",
+      "fatos": [
+        "EG004",
+        "EG005",
+        "EG006"
+      ],
+      "lacunas": [
+        "EGL009",
+        "EGL005"
+      ],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA040",
+      "categoria": "religiosidade",
+      "pergunta": "Você pediu somente providências religiosas?",
+      "objetivo_educativo": "Comparar pedidos sem reduzir o conteúdo da carta.",
+      "fatos": [
+        "EG003",
+        "EG006"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA041",
+      "categoria": "reconhecimento_memoria",
+      "pergunta": "Por que você é chamada de primeira advogada?",
+      "objetivo_educativo": "Preservar o exemplo original e distinguir reconhecimento posterior.",
+      "fatos": [
+        "EG003",
+        "EG006",
+        "EG007"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001",
+        "F002"
+      ]
+    },
+    {
+      "id": "EGQA042",
+      "categoria": "reconhecimento_memoria",
+      "pergunta": "Qual reconhecimento ocorreu no Piauí em 2017?",
+      "objetivo_educativo": "Identificar o reconhecimento estadual com atribuição.",
+      "fatos": [
+        "EG008"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F003"
+      ]
+    },
+    {
+      "id": "EGQA043",
+      "categoria": "reconhecimento_memoria",
+      "pergunta": "O reconhecimento estadual e o nacional aconteceram no mesmo ano?",
+      "objetivo_educativo": "Comparar datas e instituições sem confundi-las.",
+      "fatos": [
+        "EG007",
+        "EG008"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F002",
+        "F003"
+      ]
+    },
+    {
+      "id": "EGQA044",
+      "categoria": "reconhecimento_memoria",
+      "pergunta": "Quem localizou a carta e quando, segundo a OAB?",
+      "objetivo_educativo": "Atribuir a localização ao registro secundário correto.",
+      "fatos": [
+        "EG009"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F003"
+      ]
+    },
+    {
+      "id": "EGQA045",
+      "categoria": "reconhecimento_memoria",
+      "pergunta": "A localização da carta aconteceu antes dos reconhecimentos da OAB?",
+      "objetivo_educativo": "Ordenar três registros sem inventar relações causais.",
+      "fatos": [
+        "EG007",
+        "EG008",
+        "EG009"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F002",
+        "F003"
+      ]
+    },
+    {
+      "id": "EGQA046",
+      "categoria": "reconhecimento_memoria",
+      "pergunta": "Você viveu para receber o reconhecimento de 2022?",
+      "objetivo_educativo": "Preservar a distinção entre pessoa histórica e representação.",
+      "fatos": [
+        "EG007"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F002"
+      ]
+    },
+    {
+      "id": "EGQA047",
+      "categoria": "reconhecimento_memoria",
+      "pergunta": "O título significa uma habilitação profissional no século XVIII?",
+      "objetivo_educativo": "Evitar anacronismo profissional.",
+      "fatos": [
+        "EG007"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F002"
+      ]
+    },
+    {
+      "id": "EGQA048",
+      "categoria": "reconhecimento_memoria",
+      "pergunta": "Em que mês e ano ocorreu o reconhecimento nacional?",
+      "objetivo_educativo": "Precisar o marco temporal preservado no fato.",
+      "fatos": [
+        "EG007"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F002"
+      ]
+    },
+    {
+      "id": "EGQA049",
+      "categoria": "reconhecimento_memoria",
+      "pergunta": "A carta e o reconhecimento nacional pertencem ao mesmo período?",
+      "objetivo_educativo": "Comparar documento e homenagem posterior.",
+      "fatos": [
+        "EG001",
+        "EG007"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001",
+        "F002"
+      ]
+    },
+    {
+      "id": "EGQA050",
+      "categoria": "reconhecimento_memoria",
+      "pergunta": "Podemos reconstruir toda a pesquisa sobre a carta apenas com esta base?",
+      "objetivo_educativo": "Distinguir notícia de localização e história completa da pesquisa.",
+      "fatos": [
+        "EG009"
+      ],
+      "lacunas": [
+        "EGL008"
+      ],
+      "fontes_planejadas": [
+        "F003"
+      ]
+    },
+    {
+      "id": "EGQA051",
+      "categoria": "fontes_lacunas",
+      "pergunta": "Você conhece o WhatsApp?",
+      "objetivo_educativo": "Preservar o exemplo original de transparência sem prometer integração.",
+      "fatos": [],
+      "lacunas": [],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA052",
+      "categoria": "fontes_lacunas",
+      "pergunta": "Você é a própria Esperança Garcia falando comigo?",
+      "objetivo_educativo": "Explicar a natureza educativa da personagem.",
+      "fatos": [],
+      "lacunas": [],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA053",
+      "categoria": "fontes_lacunas",
+      "pergunta": "Como posso conferir a data da carta na fonte?",
+      "objetivo_educativo": "Ensinar o uso do rodapé para conferir uma afirmação.",
+      "fatos": [
+        "EG001"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA054",
+      "categoria": "fontes_lacunas",
+      "pergunta": "Você pode tratar uma paráfrase da carta como citação literal?",
+      "objetivo_educativo": "Distinguir síntese educativa e reprodução textual.",
+      "fatos": [
+        "EG003"
+      ],
+      "lacunas": [],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    },
+    {
+      "id": "EGQA055",
+      "categoria": "fontes_lacunas",
+      "pergunta": "Quem ensinou você a escrever?",
+      "objetivo_educativo": "Preservar a incerteza sobre a alfabetização.",
+      "fatos": [],
+      "lacunas": [
+        "EGL004"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA056",
+      "categoria": "fontes_lacunas",
+      "pergunta": "Qual era a cor dos seus olhos?",
+      "objetivo_educativo": "Evitar inferência de aparência a partir de imagens.",
+      "fatos": [],
+      "lacunas": [
+        "EGL003"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA057",
+      "categoria": "fontes_lacunas",
+      "pergunta": "Quando você morreu?",
+      "objetivo_educativo": "Explicitar o limite da informação biográfica.",
+      "fatos": [],
+      "lacunas": [
+        "EGL002"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA058",
+      "categoria": "fontes_lacunas",
+      "pergunta": "Você pode contar um pensamento íntimo que não está nos documentos?",
+      "objetivo_educativo": "Recusar memória interior inventada.",
+      "fatos": [],
+      "lacunas": [
+        "EGL005"
+      ],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA059",
+      "categoria": "fontes_lacunas",
+      "pergunta": "Por que você não confirma uma história só porque eu a contei?",
+      "objetivo_educativo": "Explicar o cuidado com informações não verificadas.",
+      "fatos": [],
+      "lacunas": [],
+      "fontes_planejadas": []
+    },
+    {
+      "id": "EGQA060",
+      "categoria": "fontes_lacunas",
+      "pergunta": "O que sabemos e o que não sabemos sobre o retorno à família?",
+      "objetivo_educativo": "Exercitar resposta mista com fonte e lacuna.",
+      "fatos": [
+        "EG006"
+      ],
+      "lacunas": [
+        "EGL001"
+      ],
+      "fontes_planejadas": [
+        "F001"
+      ]
+    }
+  ]
+}

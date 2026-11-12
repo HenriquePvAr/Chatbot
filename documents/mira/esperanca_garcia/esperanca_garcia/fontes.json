@@ -1,0 +1,98 @@
+[
+  {
+    "id": "F001",
+    "instituicao": "Ordem dos Advogados do Brasil",
+    "titulo": "Leia a Carta de Esperança Garcia, a primeira advogada do Brasil",
+    "ano": 2023,
+    "url": "https://www.oab.org.br/noticia/60795/leia-a-carta-de-esperanca-garcia-a-primeira-advogada-do-brasil",
+    "tipo": "transcricao_publicada_de_fonte_primaria",
+    "status_verificacao": "verificada",
+    "verificacao": {
+      "data": "2026-11-10",
+      "metodo": "Consulta da página institucional via navegador de pesquisa; conferência de título, instituição, ano e conteúdo.",
+      "escopo": "Página publicada; não autentica o manuscrito nem comprova todas as afirmações da página.",
+      "fatos_sustentados": [
+        "EG001",
+        "EG002",
+        "EG003",
+        "EG004",
+        "EG005",
+        "EG006"
+      ]
+    },
+    "instituicao_exibicao": "OAB"
+  },
+  {
+    "id": "F002",
+    "instituicao": "Ordem dos Advogados do Brasil",
+    "titulo": "Esperança Garcia é reconhecida pelo Conselho Pleno como a primeira advogada brasileira",
+    "ano": 2022,
+    "url": "https://www.oab.org.br/noticia/60503/esperanca-garcia-e-reconhecida-pelo-conselho-pleno-como-a-primeira-advogada-brasileira",
+    "tipo": "registro_institucional",
+    "status_verificacao": "verificada",
+    "verificacao": {
+      "data": "2026-11-10",
+      "metodo": "Consulta da página institucional via navegador de pesquisa; conferência de título, instituição, ano e conteúdo.",
+      "escopo": "Página publicada; não autentica o manuscrito nem comprova todas as afirmações da página.",
+      "fatos_sustentados": [
+        "EG007"
+      ]
+    },
+    "instituicao_exibicao": "OAB"
+  },
+  {
+    "id": "F003",
+    "instituicao": "Ordem dos Advogados do Brasil",
+    "titulo": "Juristas que marcaram a história do país: Esperança Garcia",
+    "ano": 2022,
+    "url": "https://www.oab.org.br/noticia/59999/juristas-que-marcaram-a-historia-do-pais-esperanca-garcia",
+    "tipo": "biografia_institucional",
+    "status_verificacao": "verificada",
+    "verificacao": {
+      "data": "2026-11-10",
+      "metodo": "Consulta da página institucional via navegador de pesquisa; conferência de título, instituição, ano e conteúdo.",
+      "escopo": "Página publicada; não autentica o manuscrito nem comprova todas as afirmações da página.",
+      "fatos_sustentados": [
+        "EG008",
+        "EG009"
+      ],
+      "ressalva": "A página contém referência anacrônica a decreto de 1869; não utilizar esse trecho para explicar a carta de 1770. A conferência nesta base limita-se a EG008 e EG009."
+    },
+    "instituicao_exibicao": "OAB"
+  },
+  {
+    "id": "F004",
+    "instituicao": "Ordem dos Advogados do Brasil",
+    "titulo": "OAB celebra memória de Esperança Garcia com lançamento de duas obras",
+    "ano": 2024,
+    "url": "https://www.oab.org.br/noticia/62673/oab-celebra-memoria-de-esperanca-garcia-com-lancamento-de-duas-obras",
+    "tipo": "noticia_sobre_pesquisa",
+    "status_verificacao": "verificada",
+    "verificacao": {
+      "data": "2026-11-10",
+      "metodo": "Consulta da página institucional via navegador de pesquisa; conferência de título, instituição, ano e conteúdo.",
+      "escopo": "Página publicada; não autentica o manuscrito nem comprova todas as afirmações da página.",
+      "fatos_sustentados": [],
+      "ressalva": "Notícia sobre lançamento de obras; não sustenta EG009 e não deve ser citada para esse fato."
+    },
+    "instituicao_exibicao": "OAB"
+  },
+  {
+    "id": "F005",
+    "instituicao": "Ordem dos Advogados do Brasil",
+    "titulo": "Desembargador Federal parabeniza Beto Simonetti por reconhecimento a Esperança Garcia",
+    "ano": 2022,
+    "url": "https://www.oab.org.br/noticia/60509/desembargador-federal-parabeniza-beto-simonetti-por-reconhecimento-a-esperanca-garcia",
+    "tipo": "noticia_institucional",
+    "status_verificacao": "verificada",
+    "verificacao": {
+      "data": "2026-11-10",
+      "metodo": "Consulta da página institucional via navegador de pesquisa; conferência de título, instituição, ano e conteúdo.",
+      "escopo": "Página publicada; não autentica o manuscrito nem comprova todas as afirmações da página.",
+      "fatos_sustentados": [
+        "EG010"
+      ]
+    },
+    "instituicao_exibicao": "OAB"
+  }
+]

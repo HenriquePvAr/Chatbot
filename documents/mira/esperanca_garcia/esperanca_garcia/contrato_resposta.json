@@ -1,0 +1,62 @@
+{
+  "versao": "1.1.0",
+  "campos": {
+    "resposta": {
+      "tipo": "string",
+      "regra": "Fala sem rodapé; explicitar lacunas."
+    },
+    "fontes_utilizadas": {
+      "tipo": "array",
+      "max_itens": 3,
+      "campos_obrigatorios": [
+        "id",
+        "titulo",
+        "url"
+      ],
+      "regra": "IDs únicos e metadados exatos do cadastro verificado; sustentação direta."
+    },
+    "status_verificacao": {
+      "tipo": "string",
+      "valores": {
+        "sustentado": "Todas as afirmações históricas sustentadas pelas fontes listadas.",
+        "parcialmente_sustentado": "Parte sustentada; lacunas explícitas sem afirmar o desconhecido.",
+        "sem_sustentacao_documental": "Limitação histórica, sem afirmação positiva sem prova; fontes vazias.",
+        "nao_aplicavel": "Sem conteúdo histórico; fontes vazias."
+      }
+    }
+  },
+  "apresentacao": {
+    "cabecalho": "📚 **Fontes históricas:**",
+    "referencia": "🔗 {instituicao_exibicao} — {titulo}  \n[{url}]({url})",
+    "separador": "\n\n",
+    "sem_fontes": "Para questão histórica sem sustentação, manter cabeçalho e nota de limitação sem links.",
+    "regra_montagem": "resposta + separador + cabeçalho + separador + referências separadas por linha em branco; acrescentar nota_limitacao como último bloco se presente. Sem referências e sem nota, exibir somente resposta."
+  },
+  "limite": "Contrato declarativo; revisão semântica humana necessária.",
+  "versao_base_compativel": "1.2.0",
+  "campos_obrigatorios": [
+    "resposta",
+    "fontes_utilizadas",
+    "status_verificacao"
+  ],
+  "exemplos_educativos": {
+    "campos_obrigatorios": [
+      "id",
+      "categoria",
+      "pergunta",
+      "objetivo_educativo",
+      "tipo",
+      "fatos",
+      "lacunas",
+      "resposta",
+      "fontes_utilizadas",
+      "status_verificacao",
+      "nota_limitacao",
+      "resposta_modelo"
+    ],
+    "regra_estado": "Fatos e lacunas: parcialmente_sustentado; só fatos: sustentado; só lacunas: sem_sustentacao_documental; nenhum: nao_aplicavel.",
+    "nota_limitacao": "String não vazia quando houver lacunas; vazia nos demais casos. A fala também deve explicitar a limitação.",
+    "ids": "EGQA001–EGQA060; IDs de lacunas EGL001–EGL011.",
+    "duplicacao": "Os quatro exemplos originais são cópias canônicas dos registros correspondentes, não quatro perguntas adicionais."
+  }
+}

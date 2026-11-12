@@ -34,9 +34,15 @@ from neonize import extract_text
 from agentes_autonomos import (
     _consultas_contexto,
     _separar_perguntas,
+    chamar_ia,
     pesquisar_com_ia,
     responder_com_ia,
     registrar_trace,
+)
+from mira_personagens import (
+    preview_habilitado,
+    responder_personagem,
+    slug_personagem,
 )
 from busca_web import pesquisar_web
 from rag_local import listar_documentos
@@ -152,7 +158,9 @@ def obter_conversa(identificador):
             "historico": [],
             "plano": None,
             "resultados": None,
-            "ultima_pergunta": None
+            "ultima_pergunta": None,
+            "mira_personagem": None,
+            "mira_historicos": {},
         }
 
     return conversas[identificador]
@@ -171,9 +179,14 @@ def gerar_menu():
         "• Quem foi Tereza de Benguela?\n"
         "• Como os povos indígenas preservam suas línguas?\n\n"
         "Voce tambem pode perguntar: O que e a ESBAM? Qual o telefone ou o Instagram?\n\n"
-        "/menu — mostrar este menu\n"
-        "/web pergunta — pesquisar na internet\n"
-        "/fontes — buscar referências da última resposta\n\n"
+        "/menu: mostrar este menu\n"
+        "/web pergunta: pesquisar na internet\n"
+        "/fontes: buscar referências da última resposta\n\n"
+        "MIRA: Vozes que atravessam gerações é outro projeto com duas personagens educativas:\n"
+        "• /mira esperanca: Esperança Garcia\n"
+        "• /mira clara: Clara Camarão\n"
+        "• /mira sair: voltar ao assistente geral\n"
+        "Digite /mira para ver as orientações. A prévia precisa estar habilitada nesta instalação.\n\n"
         "Pode escrever normalmente; não precisa usar comandos."
     )
 
@@ -181,6 +194,58 @@ def gerar_menu():
 def gerar_ajuda():
     return (
         gerar_menu()
+    )
+
+
+def gerar_menu_mira():
+    return (
+        "MIRA: Vozes que atravessam gerações\n\n"
+        "MIRA é o nome do projeto; suas duas personagens são Esperança Garcia e Clara Camarão.\n"
+        "As personagens são representações educativas virtuais, não as mulheres "
+        "históricas nem testemunhas de suas memórias.\n\n"
+        "/mira esperanca: conversar sobre Esperança Garcia\n"
+        "/mira clara: conversar sobre Clara Camarão\n"
+        "/mira sair: voltar ao assistente geral\n\n"
+        "As perguntas podem ser livres. As respostas usam a base histórica da personagem "
+        "selecionada e reconhecem quando falta evidência. A prévia precisa estar habilitada "
+        "nesta instalação."
+    )
+
+
+def _comando_mira(texto, identificador):
+    comando = texto.strip()
+    if not re.match(r"(?i)^/mira(?:\s|$)", comando):
+        return None
+    argumento = re.sub(r"(?i)^/mira\s*", "", comando, count=1).strip()
+    if not argumento:
+        return gerar_menu_mira()
+    if normalizar(argumento) in {"sair", "off", "voltar", "desativar"}:
+        with bloqueio:
+            obter_conversa(identificador)["mira_personagem"] = None
+        return "Pronto. Voltamos ao assistente geral do projeto."
+    personagem = slug_personagem(argumento)
+    if not personagem:
+        return "Escolha /mira esperanca, /mira clara ou /mira sair."
+    if not preview_habilitado(personagem):
+        with bloqueio:
+            obter_conversa(identificador)["mira_personagem"] = None
+        if personagem == "clara_camarao":
+            return (
+                "A base textual de Clara Camarão foi integrada, mas a própria entrega "
+                "marca a personagem como não aprovada para conversa pública. A prévia "
+                "permanece desativada até a avaliação e liberação do projeto."
+            )
+        return (
+            "A prévia MIRA está desativada nesta instalação. Ela só pode ser ativada "
+            "depois da avaliação das respostas da base."
+        )
+    with bloqueio:
+        obter_conversa(identificador)["mira_personagem"] = personagem
+    nome = "Esperança Garcia" if personagem == "esperanca_garcia" else "Clara Camarão"
+    return (
+        f"Prévia MIRA ativada: {nome}. Sou uma representação virtual educativa, "
+        "não a personagem histórica. Pode perguntar livremente sobre sua trajetória; "
+        "vou me limitar às evidências e lacunas da base. Digite /mira sair para voltar."
     )
 
 
@@ -211,13 +276,55 @@ def gerar_lista_documentos():
 # PESQUISAR FONTES E RESPONDER
 # ==========================================
 
-def processar_pergunta(pergunta, identificador, forcar_web=False):
+def processar_pergunta(pergunta, identificador, forcar_web=False, personagem_mira=None):
     inicio = time.perf_counter()
     # A fila ja serializa cada conversa. O lock protege apenas a memoria curta,
     # sem segurar os outros usuarios enquanto o Ollama ou a web respondem.
     with bloqueio:
         conversa = obter_conversa(identificador)
-        historico = list(conversa["historico"])
+        if personagem_mira:
+            historicos_mira = conversa.setdefault("mira_historicos", {})
+            historico = list(historicos_mira.get(personagem_mira, []))
+        else:
+            historico = list(conversa["historico"])
+
+    if personagem_mira:
+        print(f"\n[MIRA] Consultando base de {personagem_mira}...", flush=True)
+        resultado_mira = responder_personagem(
+            personagem_mira,
+            pergunta,
+            historico,
+            chamar_modelo=chamar_ia,
+        )
+        pesquisa_mira = {
+            "categoria": "mira_local",
+            "consultas": 1,
+            "evidencias": [{
+                "ferramenta": "mira_base",
+                "consulta": pergunta,
+                "resultado": {
+                    "fontes": resultado_mira.get("fontes", []),
+                    "status_verificacao": resultado_mira.get("status"),
+                    "score_recuperacao": (resultado_mira.get("evidencias") or {}).get("score"),
+                },
+            }],
+        }
+        resposta = resultado_mira["resposta"]
+        with bloqueio:
+            conversa = obter_conversa(identificador)
+            historicos_mira = conversa.setdefault("mira_historicos", {})
+            historicos_mira[personagem_mira] = (
+                historico
+                + [
+                    {"role": "user", "content": pergunta},
+                    {"role": "assistant", "content": resposta},
+                ]
+            )[-12:]
+            conversa["plano"] = pesquisa_mira
+            conversa["resultados"] = pesquisa_mira["evidencias"]
+            conversa["ultima_pergunta"] = pergunta
+        print(f"[MIRA] Resposta preparada em {time.perf_counter() - inicio:.2f}s", flush=True)
+        return resposta
 
     print("\n[FONTES] Consultando documentos e pesquisa...", flush=True)
     pesquisa = pesquisar_com_ia(
@@ -531,6 +638,9 @@ def responder_mensagem(texto, identificador):
             "violência. Posso explicar um tema histórico de forma adequada e sem "
             "detalhes gráficos."
         )
+    resposta_comando_mira = _comando_mira(texto, identificador)
+    if resposta_comando_mira is not None:
+        return resposta_comando_mira
     texto_normalizado = normalizar(texto)
     pergunta_fontes = bool(re.search(
         r"\b(fontes?|referencias?|links?|artigos?|leituras?|materiais?|"
@@ -572,12 +682,43 @@ def responder_mensagem(texto, identificador):
     if forcar_web and not pergunta:
         return "Envie a pergunta depois de /web. Exemplo: /web historia do Quilombo dos Palmares"
 
+    with bloqueio:
+        personagem_mira = obter_conversa(identificador).get("mira_personagem")
+    if personagem_mira:
+        if not preview_habilitado(personagem_mira):
+            with bloqueio:
+                obter_conversa(identificador)["mira_personagem"] = None
+            return "A prévia MIRA foi desativada. Você voltou ao assistente geral do projeto."
+        if forcar_web:
+            return "No modo MIRA uso as fontes cadastradas na base da personagem. Digite /mira sair para usar a pesquisa geral."
+        if eh_cumprimento(pergunta):
+            nome = "Esperança Garcia" if personagem_mira == "esperanca_garcia" else "Clara Camarão"
+            return (
+                f"Olá! Sou uma representação virtual educativa de {nome}, personagem do projeto MIRA: "
+                "Vozes que atravessam gerações. Também há a prévia de "
+                f"{'Clara Camarão' if personagem_mira == 'esperanca_garcia' else 'Esperança Garcia'}. "
+                "Pode perguntar livremente sobre a trajetória registrada nas fontes. "
+                "Use /mira esperanca ou /mira clara para trocar; /mira sair volta ao assistente geral."
+            )
+        tipo_social_mira = tipo_mensagem_social(pergunta)
+        if tipo_social_mira == "agradecimento":
+            return "Por nada! Se quiser, pode perguntar mais sobre os registros e as fontes da base."
+        if tipo_social_mira == "confirmacao" or eh_reacao_curta(pergunta):
+            return None
+        return processar_pergunta(
+            pergunta,
+            identificador,
+            personagem_mira=personagem_mira,
+        )
+
     if eh_cumprimento(pergunta):
         return (
             "Oi! 😊 Posso explicar histórias e culturas afro-brasileiras e indígenas. "
             "Por exemplo: “O que são povos afro-brasileiros?”, “Qual é a função "
             "do berimbau na capoeira?” ou “Quem foi Tereza de Benguela?”. "
-            "Digite /menu para ver mais exemplos."
+            "Também há as personagens educativas do projeto MIRA: Esperança Garcia e Clara Camarão. "
+            "Use /mira esperanca ou /mira clara para chamá-las; /mira sair volta para cá. "
+            "Digite /menu para ver exemplos e orientações."
         )
     tipo_social = tipo_mensagem_social(pergunta)
     if tipo_social == "agradecimento":
@@ -703,6 +844,20 @@ def gerar_fontes(evidencias):
     fontes = []
     vistas = set()
     for evidencia in evidencias:
+        if evidencia.get("ferramenta") == "mira_base":
+            resultado = evidencia.get("resultado") or {}
+            for item in resultado.get("fontes") or []:
+                titulo = str(item.get("titulo") or "Fonte MIRA").strip()
+                url = str(item.get("url") or "").strip()
+                localizador = str(item.get("localizador") or "").strip()
+                if not url or url in vistas:
+                    continue
+                vistas.add(url)
+                detalhe = f" ({localizador})" if localizador else ""
+                fontes.append(f"{len(fontes) + 1}. {titulo}: {url}{detalhe}")
+                if len(fontes) >= 5:
+                    break
+            continue
         if evidencia.get("ferramenta") != "web_busca":
             continue
         resultado = evidencia.get("resultado") or {}
@@ -730,6 +885,10 @@ def pesquisar_fontes_ultima_resposta(identificador):
         return "Ainda nao tenho uma pergunta anterior para buscar fontes. Qual assunto voce quer pesquisar?"
 
     fontes_anteriores = gerar_fontes(evidencias_anteriores)
+    if any(evidencia.get("ferramenta") == "mira_base" for evidencia in evidencias_anteriores):
+        if fontes_anteriores:
+            return "Fontes registradas na base MIRA para a resposta anterior:\n\n" + fontes_anteriores
+        return "A base MIRA não registrou fontes específicas para a resposta anterior."
     ja_tem_fontes_web = any(
         evidencia.get("ferramenta") == "web_busca"
         and (evidencia.get("resultado") or {}).get("resultados")

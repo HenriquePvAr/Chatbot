@@ -1,0 +1,182 @@
+[
+  {
+    "id": "EG001",
+    "afirmacao": "A carta de Esperança Garcia é datada de 6 de setembro de 1770.",
+    "status": "documentado",
+    "fontes": [
+      "F001"
+    ],
+    "uso_em_primeira_pessoa": true,
+    "observacao": "Parafrasear; não inventar detalhes ou citações literais.",
+    "status_verificacao": "sustentado",
+    "sustentacao": [
+      {
+        "fonte_id": "F001",
+        "localizador": "Transcrição publicada da carta e data no cabeçalho.",
+        "natureza": "transcricao_publicada"
+      }
+    ]
+  },
+  {
+    "id": "EG002",
+    "afirmacao": "Na carta, Esperança afirma ter sido retirada da Fazenda Algodões, onde vivia com o marido, para trabalhar como cozinheira na casa do capitão Antônio Vieira do Couto.",
+    "status": "documentado",
+    "fontes": [
+      "F001"
+    ],
+    "uso_em_primeira_pessoa": true,
+    "observacao": "Parafrasear; não inventar detalhes ou citações literais.",
+    "status_verificacao": "sustentado",
+    "sustentacao": [
+      {
+        "fonte_id": "F001",
+        "localizador": "Transcrição publicada da carta e data no cabeçalho.",
+        "natureza": "transcricao_publicada"
+      }
+    ]
+  },
+  {
+    "id": "EG003",
+    "afirmacao": "Na carta, Esperança denuncia agressões contra si e contra um filho.",
+    "status": "documentado",
+    "fontes": [
+      "F001"
+    ],
+    "uso_em_primeira_pessoa": true,
+    "observacao": "Parafrasear; não inventar detalhes ou citações literais.",
+    "status_verificacao": "sustentado",
+    "sustentacao": [
+      {
+        "fonte_id": "F001",
+        "localizador": "Transcrição publicada da carta e data no cabeçalho.",
+        "natureza": "transcricao_publicada"
+      }
+    ]
+  },
+  {
+    "id": "EG004",
+    "afirmacao": "Na carta, Esperança relata que ela e outras mulheres estavam havia três anos sem se confessar.",
+    "status": "documentado",
+    "fontes": [
+      "F001"
+    ],
+    "uso_em_primeira_pessoa": true,
+    "observacao": "Parafrasear; não inventar detalhes ou citações literais.",
+    "status_verificacao": "sustentado",
+    "sustentacao": [
+      {
+        "fonte_id": "F001",
+        "localizador": "Transcrição publicada da carta e data no cabeçalho.",
+        "natureza": "transcricao_publicada"
+      }
+    ]
+  },
+  {
+    "id": "EG005",
+    "afirmacao": "Na carta, Esperança relata que uma criança sua e outras duas ainda não tinham sido batizadas.",
+    "status": "documentado",
+    "fontes": [
+      "F001"
+    ],
+    "uso_em_primeira_pessoa": true,
+    "observacao": "Parafrasear; não inventar detalhes ou citações literais.",
+    "status_verificacao": "sustentado",
+    "sustentacao": [
+      {
+        "fonte_id": "F001",
+        "localizador": "Transcrição publicada da carta e data no cabeçalho.",
+        "natureza": "transcricao_publicada"
+      }
+    ]
+  },
+  {
+    "id": "EG006",
+    "afirmacao": "Na carta, Esperança pede retorno à fazenda onde vivia com o marido e o batismo da filha.",
+    "status": "documentado",
+    "fontes": [
+      "F001"
+    ],
+    "uso_em_primeira_pessoa": true,
+    "observacao": "Parafrasear; não inventar detalhes ou citações literais.",
+    "status_verificacao": "sustentado",
+    "sustentacao": [
+      {
+        "fonte_id": "F001",
+        "localizador": "Transcrição publicada da carta e data no cabeçalho.",
+        "natureza": "transcricao_publicada"
+      }
+    ]
+  },
+  {
+    "id": "EG007",
+    "afirmacao": "Em novembro de 2022, o Conselho Pleno da OAB reconheceu Esperança Garcia como primeira advogada brasileira, em reconhecimento histórico e simbólico.",
+    "status": "documentado",
+    "fontes": [
+      "F002"
+    ],
+    "uso_em_primeira_pessoa": false,
+    "observacao": "Parafrasear; não inventar detalhes ou citações literais.",
+    "status_verificacao": "sustentado",
+    "sustentacao": [
+      {
+        "fonte_id": "F002",
+        "localizador": "Notícia de 25/11/2022, abertura e seção História de Esperança.",
+        "natureza": "registro_institucional_secundario"
+      }
+    ]
+  },
+  {
+    "id": "EG008",
+    "afirmacao": "A OAB-PI reconheceu Esperança Garcia como primeira advogada piauiense em 2017.",
+    "status": "documentado",
+    "fontes": [
+      "F003"
+    ],
+    "uso_em_primeira_pessoa": false,
+    "observacao": "Parafrasear; não inventar detalhes ou citações literais.",
+    "status_verificacao": "sustentado",
+    "sustentacao": [
+      {
+        "fonte_id": "F003",
+        "localizador": "Primeiro parágrafo.",
+        "natureza": "registro_institucional_secundario"
+      }
+    ]
+  },
+  {
+    "id": "EG009",
+    "afirmacao": "A OAB relata que a carta foi localizada em 1979 pelo historiador Luiz Mott no Arquivo Público do Piauí.",
+    "status": "registro_secundario",
+    "fontes": [
+      "F003"
+    ],
+    "uso_em_primeira_pessoa": false,
+    "observacao": "Parafrasear; não inventar detalhes ou citações literais.",
+    "status_verificacao": "sustentado",
+    "sustentacao": [
+      {
+        "fonte_id": "F003",
+        "localizador": "Último parágrafo do corpo: localização em 1979, Luiz Mott e arquivo público do Piauí.",
+        "natureza": "registro_institucional_secundario"
+      }
+    ]
+  },
+  {
+    "id": "EG010",
+    "afirmacao": "A OAB identifica Gonçalo Lourenço Botelho de Castro como governador destinatário da carta.",
+    "status": "registro_secundario",
+    "fontes": [
+      "F005"
+    ],
+    "uso_em_primeira_pessoa": false,
+    "observacao": "Parafrasear; não inventar detalhes ou citações literais.",
+    "status_verificacao": "sustentado",
+    "sustentacao": [
+      {
+        "fonte_id": "F005",
+        "localizador": "Declaração atribuída a Carlos Augusto Pires Brandão, com identificação do governador.",
+        "natureza": "registro_institucional_secundario"
+      }
+    ]
+  }
+]

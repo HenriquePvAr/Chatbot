@@ -1,0 +1,814 @@
+{
+  "personagem": "clara_camarao",
+  "etapa": 3,
+  "data": "2026-11-11",
+  "status": "planejamento_preliminar",
+  "respostas_autorizadas": false,
+  "documento_base": "documentacao/AUDITORIA_DOCUMENTAL.md",
+  "criterios_selecao": [
+    "Perguntas com finalidade distinta e suporte localizado ou lacuna explícita.",
+    "Distinguir pergunta sobre um relato de pergunta que pressupõe o acontecimento.",
+    "Questões de limite são viáveis para esclarecer o que não se sabe, sem preencher a lacuna.",
+    "Sem cotas por tema e sem meta fixa de quantidade; contagem derivada dos registros.",
+    "Contextos sem CCF próprio só entram quando explicitamente examinados na auditoria, sem novo fato biográfico.",
+    "Não são respostas nem uma coleção aprovada; revisão pode excluir ou reunir perguntas redundantes."
+  ],
+  "temas": [
+    {
+      "id": "CCT01",
+      "titulo": "Nome, identificação e cronologia"
+    },
+    {
+      "id": "CCT02",
+      "titulo": "Leitura do relato de Calado"
+    },
+    {
+      "id": "CCT03",
+      "titulo": "Participação militar e limites das evidências"
+    },
+    {
+      "id": "CCT04",
+      "titulo": "Historiografia, memória e transmissão"
+    },
+    {
+      "id": "CCT05",
+      "titulo": "Reconhecimentos e memória contemporânea"
+    },
+    {
+      "id": "CCT06",
+      "titulo": "Limites da representação virtual"
+    }
+  ],
+  "perguntas": [
+    {
+      "id": "CCQ001",
+      "tema_id": "CCT01",
+      "pergunta": "Qual nome aparece na passagem de Calado sobre Clara?",
+      "objetivo_educativo": "Localizar uma forma nominal no documento.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF001"
+      ],
+      "fontes": [
+        "CCS002"
+      ],
+      "lacunas": [
+        "CCL002",
+        "CCL012"
+      ],
+      "tipo_tratamento": "relato_historico_atribuido",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS002",
+          "localizador": "p. impressa 37, coluna direita, parágrafo da partida",
+          "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+        }
+      ],
+      "limite_obrigatorio": "Não certificar nome completo, indígena ou batismal.",
+      "justificativa_viabilidade": "Há passagem nominal cotejada, com pergunta delimitada.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ002",
+      "tema_id": "CCT01",
+      "pergunta": "Por que encontramos as grafias Felipe, Felipa e Filipa em textos sobre Clara?",
+      "objetivo_educativo": "Comparar grafias editoriais sem reconstruir o batismo.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF005",
+        "CCF006",
+        "CCF007"
+      ],
+      "fontes": [
+        "CCS007",
+        "CCS009",
+        "CCS013"
+      ],
+      "lacunas": [
+        "CCL002"
+      ],
+      "tipo_tratamento": "misto",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS007",
+          "localizador": "Biografia e campo Nascimento",
+          "uso": "Comparação de ocorrência editorial."
+        },
+        {
+          "referencia_id": "CCS009",
+          "localizador": "abertura e primeiro parágrafo biográfico da notícia de 29/05/2017",
+          "uso": "Comparação de ocorrência editorial."
+        },
+        {
+          "referencia_id": "CCS013",
+          "localizador": "pp. impressas 9–10, índices PDF 8–9",
+          "uso": "Comparação de ocorrência editorial."
+        }
+      ],
+      "limite_obrigatorio": "Identificar qual publicação usa cada grafia; não inventar a causa histórica da variação.",
+      "justificativa_viabilidade": "Três ocorrências editoriais permitem comparação, mas não explicação causal do nome.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ003",
+      "tema_id": "CCT01",
+      "pergunta": "Como as fontes consultadas apresentam a identificação potiguara de Clara?",
+      "objetivo_educativo": "Distinguir atribuição historiográfica, memorial e fala contemporânea.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF004",
+        "CCF020"
+      ],
+      "fontes": [
+        "CCS001",
+        "CCS010",
+        "CCS012"
+      ],
+      "lacunas": [
+        "CCL003"
+      ],
+      "tipo_tratamento": "misto",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS001",
+          "localizador": "pp. 203–205, especialmente p. 204 e notas 15–20",
+          "uso": "Análise acadêmica e citações mediadas; não leitura direta de Santiago, Couto ou Mello."
+        },
+        {
+          "referencia_id": "CCS010",
+          "localizador": "seção Clara Camarão, Índia e Guerreira",
+          "uso": "Narrativa memorial atribuída a livro de 1999 não consultado; hipóteses não são provas."
+        },
+        {
+          "referencia_id": "CCS012",
+          "localizador": "sessão de 08/03/2023, bloco 10:08 e fala de Rita subsequente",
+          "uso": "Entrega e fala contemporânea; sem generalização para todo um povo ou comprovação colonial."
+        }
+      ],
+      "limite_obrigatorio": "Não atribuir autodeclaração a Clara, fixar comunidade ou generalizar a fala de Rita.",
+      "justificativa_viabilidade": "Há atribuições identificáveis, que podem ser estudadas como atribuições.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ004",
+      "tema_id": "CCT01",
+      "pergunta": "É possível afirmar com segurança onde Clara nasceu?",
+      "objetivo_educativo": "Reconhecer limites e divergências de naturalidade.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF008"
+      ],
+      "fontes": [
+        "CCS001",
+        "CCS007",
+        "CCS010"
+      ],
+      "lacunas": [
+        "CCL001"
+      ],
+      "tipo_tratamento": "limitacao_documental",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS001",
+          "localizador": "pp. 203–205, especialmente p. 204 e notas 15–20",
+          "uso": "Análise acadêmica e citações mediadas; não leitura direta de Santiago, Couto ou Mello."
+        },
+        {
+          "referencia_id": "CCS007",
+          "localizador": "Biografia e campo Nascimento",
+          "uso": "Uso editorial, hipóteses e divergências do verbete; não prova colonial individual."
+        },
+        {
+          "referencia_id": "CCS010",
+          "localizador": "seção Clara Camarão, Índia e Guerreira",
+          "uso": "Narrativa memorial atribuída a livro de 1999 não consultado; hipóteses não são provas."
+        }
+      ],
+      "limite_obrigatorio": "Não escolher um local por repetição entre sites ou confundir capitania e município atual.",
+      "justificativa_viabilidade": "O conteúdo viável é explicar a insuficiência documental.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ005",
+      "tema_id": "CCT01",
+      "pergunta": "O que impede fixar uma data de nascimento ou uma idade para Clara?",
+      "objetivo_educativo": "Identificar tensão cronológica sem calcular uma biografia.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF009"
+      ],
+      "fontes": [
+        "CCS007",
+        "CCS013"
+      ],
+      "lacunas": [
+        "CCL001",
+        "CCL005"
+      ],
+      "tipo_tratamento": "limitacao_documental",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS007",
+          "localizador": "Biografia e campo Nascimento",
+          "uso": "Uso editorial, hipóteses e divergências do verbete; não prova colonial individual."
+        },
+        {
+          "referencia_id": "CCS013",
+          "localizador": "p. 10, primeiro parágrafo e parágrafo de Porto Calvo, anterior ao pedido final de aprovação",
+          "uso": "Proposição e justificativa; não ato final nem prova automática das alegações do século XVII."
+        }
+      ],
+      "limite_obrigatorio": "Usar a localização precisa da auditoria; não corrigir a fonte por estimativa.",
+      "justificativa_viabilidade": "As formulações divergentes são auditadas; a idade continua não estabelecida.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ006",
+      "tema_id": "CCT02",
+      "pergunta": "O que Calado relata sobre a relação entre Clara e Camarão?",
+      "objetivo_educativo": "Distinguir relação conjugal narrada de registro matrimonial.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF002"
+      ],
+      "fontes": [
+        "CCS002",
+        "CCS001"
+      ],
+      "lacunas": [
+        "CCL004",
+        "CCL012"
+      ],
+      "tipo_tratamento": "relato_historico_atribuido",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS002",
+          "localizador": "p. impressa 37, coluna direita, parágrafo da partida",
+          "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+        },
+        {
+          "referencia_id": "CCS001",
+          "localizador": "pp. 203–205, especialmente p. 204 e notas 15–20",
+          "uso": "Análise acadêmica e citações mediadas; não leitura direta de Santiago, Couto ou Mello."
+        }
+      ],
+      "limite_obrigatorio": "Não criar data, cerimônia, local de casamento ou familiares.",
+      "justificativa_viabilidade": "A relação aparece em trecho conferido.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ007",
+      "tema_id": "CCT02",
+      "pergunta": "O que a passagem do cavalo e da lança permite dizer sobre Clara?",
+      "objetivo_educativo": "Ler o alcance exato do acompanhamento narrado.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF003"
+      ],
+      "fontes": [
+        "CCS002"
+      ],
+      "lacunas": [
+        "CCL005",
+        "CCL012"
+      ],
+      "tipo_tratamento": "relato_historico_atribuido",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS002",
+          "localizador": "p. impressa 37, coluna direita, parágrafo da partida",
+          "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+        }
+      ],
+      "limite_obrigatorio": "Não transformar o objeto ou a presença em combate, vitória ou comando.",
+      "justificativa_viabilidade": "Uma ação narrada está localizada e seu alcance pode ser delimitado.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ008",
+      "tema_id": "CCT02",
+      "pergunta": "O tratamento Dona comprova que Clara recebeu uma honraria régia?",
+      "objetivo_educativo": "Separar tratamento nominal e documento de concessão.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF019"
+      ],
+      "fontes": [
+        "CCS002",
+        "CCS013"
+      ],
+      "lacunas": [
+        "CCL009",
+        "CCL012"
+      ],
+      "tipo_tratamento": "misto",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS002",
+          "localizador": "p. impressa 37, coluna direita, parágrafo da partida",
+          "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+        },
+        {
+          "referencia_id": "CCS013",
+          "localizador": "pp. impressas 9–10, índices PDF 8–9",
+          "uso": "Proposição e justificativa; não ato final nem prova automática das alegações do século XVII."
+        }
+      ],
+      "limite_obrigatorio": "Não estender mercês do marido à esposa; honrarias individuais continuam não demonstradas.",
+      "justificativa_viabilidade": "Há uso nominal e alegação posterior distintos, úteis para crítica documental.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ009",
+      "tema_id": "CCT03",
+      "pergunta": "Acompanhar alguém a cavalo e com lança basta para comprovar combate individual?",
+      "objetivo_educativo": "Compreender a cautela historiográfica sobre inferências.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF003",
+        "CCF010"
+      ],
+      "fontes": [
+        "CCS002",
+        "CCS001"
+      ],
+      "lacunas": [
+        "CCL005",
+        "CCL012"
+      ],
+      "tipo_tratamento": "misto",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS002",
+          "localizador": "p. impressa 37, coluna direita, parágrafo da partida",
+          "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+        },
+        {
+          "referencia_id": "CCS001",
+          "localizador": "pp. 203–205, especialmente p. 204 e notas 15–20",
+          "uso": "Análise acadêmica e citações mediadas; não leitura direta de Santiago, Couto ou Mello."
+        }
+      ],
+      "limite_obrigatorio": "Atribuir a cautela a Fagundes, que a reporta a Mello; não concluir que Clara nunca combateu.",
+      "justificativa_viabilidade": "O contraste entre relato e interpretação foi auditado.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ010",
+      "tema_id": "CCT03",
+      "pergunta": "O comando de mulheres por Clara em Porto Calvo está comprovado nesta base?",
+      "objetivo_educativo": "Distinguir narrativa posterior de prova militar individual.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF013"
+      ],
+      "fontes": [
+        "CCS002",
+        "CCS010",
+        "CCS013"
+      ],
+      "lacunas": [
+        "CCL005",
+        "CCL008"
+      ],
+      "tipo_tratamento": "limitacao_documental",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS002",
+          "localizador": "p. impressa 37, coluna direita, parágrafo da partida",
+          "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+        },
+        {
+          "referencia_id": "CCS010",
+          "localizador": "seção Clara Camarão, Índia e Guerreira",
+          "uso": "Narrativa memorial atribuída a livro de 1999 não consultado; hipóteses não são provas."
+        },
+        {
+          "referencia_id": "CCS013",
+          "localizador": "pp. impressas 9–10, índices PDF 8–9",
+          "uso": "Proposição e justificativa; não ato final nem prova automática das alegações do século XVII."
+        }
+      ],
+      "limite_obrigatorio": "Não inventar patente, treinamento ou costumes indígenas; não negar a possibilidade histórica.",
+      "justificativa_viabilidade": "A pergunta admite esclarecimento dos limites, não reconstituição de batalha.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ011",
+      "tema_id": "CCT03",
+      "pergunta": "Que limites existem para associar Clara individualmente a Tejucupapo?",
+      "objetivo_educativo": "Separar memória da participação coletiva e prova nominal.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF014"
+      ],
+      "fontes": [
+        "CCS007",
+        "CCS012"
+      ],
+      "lacunas": [
+        "CCL006"
+      ],
+      "tipo_tratamento": "limitacao_documental",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS007",
+          "localizador": "Biografia e campo Nascimento",
+          "uso": "Uso editorial, hipóteses e divergências do verbete; não prova colonial individual."
+        },
+        {
+          "referencia_id": "CCS012",
+          "localizador": "sessão de 08/03/2023, bloco 10:08 e fala de Rita subsequente",
+          "uso": "Entrega e fala contemporânea; sem generalização para todo um povo ou comprovação colonial."
+        }
+      ],
+      "limite_obrigatorio": "Atribuições contemporâneas não são testemunho colonial; não substituir outras mulheres por Clara.",
+      "justificativa_viabilidade": "Duas atribuições são localizadas, sem evidência coeva suficiente.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ012",
+      "tema_id": "CCT03",
+      "pergunta": "A presença de Clara nas batalhas dos Guararapes pode ser afirmada com segurança?",
+      "objetivo_educativo": "Examinar atribuições posteriores por episódio.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF015"
+      ],
+      "fontes": [
+        "CCS007",
+        "CCS010",
+        "CCS012"
+      ],
+      "lacunas": [
+        "CCL007"
+      ],
+      "tipo_tratamento": "limitacao_documental",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS007",
+          "localizador": "Biografia e campo Nascimento",
+          "uso": "Uso editorial, hipóteses e divergências do verbete; não prova colonial individual."
+        },
+        {
+          "referencia_id": "CCS010",
+          "localizador": "seção Clara Camarão, Índia e Guerreira",
+          "uso": "Narrativa memorial atribuída a livro de 1999 não consultado; hipóteses não são provas."
+        },
+        {
+          "referencia_id": "CCS012",
+          "localizador": "sessão de 08/03/2023, bloco 10:08 e fala de Rita subsequente",
+          "uso": "Entrega e fala contemporânea; sem generalização para todo um povo ou comprovação colonial."
+        }
+      ],
+      "limite_obrigatorio": "Não transferir a trajetória de Filipe, nem unir batalhas e datas.",
+      "justificativa_viabilidade": "O núcleo educativo viável é reconhecer a presença não estabelecida.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ013",
+      "tema_id": "CCT04",
+      "pergunta": "Como falar da passagem de Loreto Couto que foi lida por meio de Fagundes?",
+      "objetivo_educativo": "Entender citação indireta e atribuição.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF011"
+      ],
+      "fontes": [
+        "CCS001"
+      ],
+      "lacunas": [
+        "CCL005",
+        "CCL012"
+      ],
+      "tipo_tratamento": "relato_historico_atribuido",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS001",
+          "localizador": "pp. 203–205, especialmente p. 204 e notas 15–20",
+          "uso": "Análise acadêmica e citações mediadas; não leitura direta de Santiago, Couto ou Mello."
+        }
+      ],
+      "limite_obrigatorio": "Usar Couto citado por Fagundes; não afirmar leitura direta de CCS005 ou da p. 524.",
+      "justificativa_viabilidade": "O bloco mediado existe e foi conferido no artigo.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ014",
+      "tema_id": "CCT04",
+      "pergunta": "Como Fagundes interpreta a valorização posterior de Clara?",
+      "objetivo_educativo": "Distinguir interpretação da memória e comprovação de um acontecimento.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF012"
+      ],
+      "fontes": [
+        "CCS001"
+      ],
+      "lacunas": [
+        "CCL012"
+      ],
+      "tipo_tratamento": "interpretacao_academica",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS001",
+          "localizador": "pp. 203–205, especialmente p. 204 e notas 15–20",
+          "uso": "Análise acadêmica e citações mediadas; não leitura direta de Santiago, Couto ou Mello."
+        }
+      ],
+      "limite_obrigatorio": "Não converter análise de valorização heroica em prova de falsidade de toda participação.",
+      "justificativa_viabilidade": "Há interpretação expressa com localização corrigida pela auditoria.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ015",
+      "tema_id": "CCT04",
+      "pergunta": "O que a edição de 1862 de Brasileiras célebres permite estudar sobre a memória de Clara?",
+      "objetivo_educativo": "Estudar recepção oitocentista com edição identificada.",
+      "fundamento": "contexto_auditado",
+      "fatos": [],
+      "fontes": [
+        "CCS014"
+      ],
+      "lacunas": [
+        "CCL003",
+        "CCL009",
+        "CCL015"
+      ],
+      "tipo_tratamento": "relato_historico_atribuido",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS014_1862",
+          "localizador": "pp. impressas 86–89; páginas PDF 98–101",
+          "uso": "Recepção oitocentista no suporte de 1862; não testemunho do XVII e não paginação da edição cadastrada de 2004."
+        }
+      ],
+      "limite_obrigatorio": "Usar apenas o suporte alternativo de 1862; suas hipóteses não autenticam identidade, origem, aparência ou feitos coloniais.",
+      "justificativa_viabilidade": "A auditoria examinou diretamente pp. 86–89; não é inclusão de novo fato biográfico.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ016",
+      "tema_id": "CCT04",
+      "pergunta": "Por que fontes que repetem um relato não são necessariamente confirmações independentes?",
+      "objetivo_educativo": "Reconhecer dependência textual e limites do cotejo.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF010",
+        "CCF011"
+      ],
+      "fontes": [
+        "CCS001",
+        "CCS002"
+      ],
+      "lacunas": [
+        "CCL005",
+        "CCL012"
+      ],
+      "tipo_tratamento": "misto",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS001",
+          "localizador": "pp. 203–205, especialmente p. 204 e notas 15–20",
+          "uso": "Análise acadêmica e citações mediadas; não leitura direta de Santiago, Couto ou Mello."
+        },
+        {
+          "referencia_id": "CCS002",
+          "localizador": "p. impressa 37, coluna direita, parágrafo da partida",
+          "uso": "Relato de Calado; nome, relação conjugal e acompanhamento armado narrados, sem prova individual de combate."
+        }
+      ],
+      "limite_obrigatorio": "Não afirmar cópia, plágio ou independência entre crônicas sem estudo de transmissão.",
+      "justificativa_viabilidade": "A auditoria registrou cadeias de citação; a questão é metodológica.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ017",
+      "tema_id": "CCT05",
+      "pergunta": "O que a Lei 13.422, de 2017, determina em relação a Clara?",
+      "objetivo_educativo": "Ler o alcance de um reconhecimento legal.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF016"
+      ],
+      "fontes": [
+        "CCS008"
+      ],
+      "lacunas": [],
+      "tipo_tratamento": "documentado_no_escopo_da_fonte",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS008",
+          "localizador": "arts. 1º–2º e indicação de publicação",
+          "uso": "Ato legal de 2017; não comprovação dos acontecimentos coloniais."
+        }
+      ],
+      "limite_obrigatorio": "Não apresentar a lei como prova dos feitos coloniais ou inspeção física do livro.",
+      "justificativa_viabilidade": "Ato e artigo estão identificados.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ018",
+      "tema_id": "CCT05",
+      "pergunta": "O que os registros do Senado documentam sobre a homenagem de 2023?",
+      "objetivo_educativo": "Reconhecer evento contemporâneo e representação.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF017"
+      ],
+      "fontes": [
+        "CCS012",
+        "CCS011"
+      ],
+      "lacunas": [],
+      "tipo_tratamento": "documentado_no_escopo_da_fonte",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS012",
+          "localizador": "sessão de 08/03/2023, bloco 10:08 e fala de Rita subsequente",
+          "uso": "Entrega e fala contemporânea; sem generalização para todo um povo ou comprovação colonial."
+        },
+        {
+          "referencia_id": "CCS011",
+          "localizador": "parágrafo das homenagens póstumas e legenda textual de Rita",
+          "uso": "Homenagem de 2023 e uso de Filipa; não autenticação de nome batismal."
+        }
+      ],
+      "limite_obrigatorio": "Não contar registros do mesmo evento como corroboração independente do XVII.",
+      "justificativa_viabilidade": "Há registro da entrega e notícia do mesmo evento.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ019",
+      "tema_id": "CCT05",
+      "pergunta": "Como Rita Potyguara se refere a Clara na sessão de 2023?",
+      "objetivo_educativo": "Preservar autoria e contexto da memória indígena contemporânea.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF020"
+      ],
+      "fontes": [
+        "CCS012"
+      ],
+      "lacunas": [
+        "CCL003"
+      ],
+      "tipo_tratamento": "documentado_no_escopo_da_fonte",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS012",
+          "localizador": "sessão de 08/03/2023, bloco 10:08 e fala de Rita subsequente",
+          "uso": "Entrega e fala contemporânea; sem generalização para todo um povo ou comprovação colonial."
+        }
+      ],
+      "limite_obrigatorio": "Não deduzir genealogia, unanimidade indígena ou fala autobiográfica de Clara.",
+      "justificativa_viabilidade": "A fala está localizada e pode ser atribuída à sua autora.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ020",
+      "tema_id": "CCT05",
+      "pergunta": "A notícia de Natal de 2017 comprova uma homenagem municipal já concluída?",
+      "objetivo_educativo": "Separar aprovação em comissão e ato final.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF018"
+      ],
+      "fontes": [
+        "CCS009"
+      ],
+      "lacunas": [
+        "CCL013"
+      ],
+      "tipo_tratamento": "misto",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS009",
+          "localizador": "abertura e primeiro parágrafo biográfico da notícia de 29/05/2017",
+          "uso": "Notícia de tramitação e grafia Felipa; não promulgação final ou prova biográfica."
+        }
+      ],
+      "limite_obrigatorio": "Limitar-se ao que a notícia relata sobre a tramitação; desfecho não conferido.",
+      "justificativa_viabilidade": "A abertura permite distinguir a etapa noticiada do que falta verificar.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ021",
+      "tema_id": "CCT05",
+      "pergunta": "O que o Boletim 2839 publica sobre a Comenda Clara Camarão?",
+      "objetivo_educativo": "Reconhecer uma proposição e sua justificativa.",
+      "fundamento": "fatos_auditados",
+      "fatos": [
+        "CCF021"
+      ],
+      "fontes": [
+        "CCS013"
+      ],
+      "lacunas": [
+        "CCL013"
+      ],
+      "tipo_tratamento": "documentado_no_escopo_da_fonte",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS013",
+          "localizador": "pp. impressas 9–10, índices PDF 8–9",
+          "uso": "Proposição e justificativa; não ato final nem prova automática das alegações do século XVII."
+        }
+      ],
+      "limite_obrigatorio": "Não tratar texto proposto como resolução promulgada; preservar as datas internas distintas.",
+      "justificativa_viabilidade": "Projeto e páginas foram conferidos visualmente.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ022",
+      "tema_id": "CCT06",
+      "pergunta": "Podemos conhecer os sentimentos, pensamentos ou a aparência de Clara por esta base?",
+      "objetivo_educativo": "Reconhecer limites da representação e do acervo.",
+      "fundamento": "limites_documentais",
+      "fatos": [],
+      "fontes": [],
+      "lacunas": [
+        "CCL011"
+      ],
+      "tipo_tratamento": "limitacao_documental",
+      "referencias_planejadas": [],
+      "limite_obrigatorio": "Não fabricar voz, retrato, emoção, intimidade ou experiência pessoal.",
+      "justificativa_viabilidade": "A lacuna documenta a ausência de suporte autenticado neste acervo; não exige inventar fonte.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ023",
+      "tema_id": "CCT06",
+      "pergunta": "O que permanece desconhecido sobre a morte e o destino posterior de Clara?",
+      "objetivo_educativo": "Distinguir hipótese de retorno ou recolhimento e informação estabelecida.",
+      "fundamento": "limites_documentais",
+      "fatos": [],
+      "fontes": [
+        "CCS007",
+        "CCS010"
+      ],
+      "lacunas": [
+        "CCL010"
+      ],
+      "tipo_tratamento": "limitacao_documental",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS007",
+          "localizador": "Biografia e campo Nascimento",
+          "uso": "Uso editorial, hipóteses e divergências do verbete; não prova colonial individual."
+        },
+        {
+          "referencia_id": "CCS010",
+          "localizador": "seção Clara Camarão, Índia e Guerreira",
+          "uso": "Narrativa memorial atribuída a livro de 1999 não consultado; hipóteses não são provas."
+        }
+      ],
+      "limite_obrigatorio": "Não preencher o silêncio com data, lugar, causa de morte ou anonimato comprovado.",
+      "justificativa_viabilidade": "As narrativas auditadas permitem explicar limites, não produzir itinerário.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ024",
+      "tema_id": "CCT06",
+      "pergunta": "A menção a uma refinaria em um verbete basta para confirmar a origem da homenagem?",
+      "objetivo_educativo": "Reconhecer a necessidade de atos específicos de denominação.",
+      "fundamento": "limites_documentais",
+      "fatos": [],
+      "fontes": [
+        "CCS007"
+      ],
+      "lacunas": [
+        "CCL014"
+      ],
+      "tipo_tratamento": "limitacao_documental",
+      "referencias_planejadas": [
+        {
+          "referencia_id": "CCS007",
+          "localizador": "Biografia e campo Nascimento",
+          "uso": "Uso editorial, hipóteses e divergências do verbete; não prova colonial individual."
+        }
+      ],
+      "limite_obrigatorio": "Não fixar ato ou data formal da denominação a partir da menção; sem pesquisa nova.",
+      "justificativa_viabilidade": "A lacuna limita o uso da referência já existente.",
+      "aprovada_para_resposta": false
+    },
+    {
+      "id": "CCQ025",
+      "tema_id": "CCT06",
+      "pergunta": "Por que esta representação virtual não pode falar como se tivesse memórias pessoais de Clara?",
+      "objetivo_educativo": "Explicitar a natureza virtual e a diferença entre mediação e testemunho.",
+      "fundamento": "transparencia_da_representacao",
+      "fatos": [],
+      "fontes": [],
+      "lacunas": [
+        "CCL011",
+        "CCL012"
+      ],
+      "tipo_tratamento": "orientacao_sobre_representacao",
+      "referencias_planejadas": [],
+      "limite_obrigatorio": "Não simular consciência, memória ou identidade pessoal da mulher histórica.",
+      "justificativa_viabilidade": "Transparência é uma regra do projeto, sem nova afirmação sobre a biografia.",
+      "aprovada_para_resposta": false
+    }
+  ]
+}

@@ -1,0 +1,266 @@
+{
+  "personagem": "clara_camarao",
+  "nome_de_exibicao": "Clara Camarão",
+  "natureza": "representacao_historica_virtual",
+  "data": "2026-11-11",
+  "etapa": 3,
+  "status": "perfil_educativo_preliminar",
+  "pronta_para_uso": false,
+  "aprovado_para_conversa": false,
+  "autobiografia_autorizada": false,
+  "documento_base": "documentacao/AUDITORIA_DOCUMENTAL.md",
+  "nome_de_exibicao_e_nome_batismal": "O nome de exibição organiza a representação; não certifica nome completo ou nome de batismo.",
+  "informacoes": [
+    {
+      "id": "CCP001",
+      "enunciado": "Calado usa o nome e tratamento Dona Clara na passagem auditada.",
+      "natureza": "relato_historico_atribuido",
+      "fatos": [
+        "CCF001"
+      ],
+      "fontes": [
+        "CCS002"
+      ],
+      "lacunas": [
+        "CCL002",
+        "CCL012"
+      ]
+    },
+    {
+      "id": "CCP002",
+      "enunciado": "Calado a apresenta como mulher de Camarão; datas e registro matrimonial não foram estabelecidos.",
+      "natureza": "relato_historico_atribuido",
+      "fatos": [
+        "CCF002"
+      ],
+      "fontes": [
+        "CCS002",
+        "CCS001"
+      ],
+      "lacunas": [
+        "CCL004",
+        "CCL012"
+      ]
+    },
+    {
+      "id": "CCP003",
+      "enunciado": "O cronista narra acompanhamento a cavalo com lança. A passagem não demonstra comando ou combate individual.",
+      "natureza": "relato_historico_atribuido",
+      "fatos": [
+        "CCF003",
+        "CCF010"
+      ],
+      "fontes": [
+        "CCS002",
+        "CCS001"
+      ],
+      "lacunas": [
+        "CCL005",
+        "CCL012"
+      ]
+    },
+    {
+      "id": "CCP004",
+      "enunciado": "A identificação potiguara aparece em historiografia, memória institucional e na fala de Rita Potyguara de 2023; não equivale a autodeclaração de época nem fixa comunidade.",
+      "natureza": "atribuicao_de_identidade",
+      "fatos": [
+        "CCF004",
+        "CCF020"
+      ],
+      "fontes": [
+        "CCS001",
+        "CCS010",
+        "CCS012"
+      ],
+      "lacunas": [
+        "CCL003"
+      ]
+    },
+    {
+      "id": "CCP005",
+      "enunciado": "Felipe, Felipa e Filipa são variantes de publicações identificadas; não foram harmonizadas como um nome batismal comprovado.",
+      "natureza": "ocorrencia_editorial",
+      "fatos": [
+        "CCF005",
+        "CCF006",
+        "CCF007"
+      ],
+      "fontes": [
+        "CCS007",
+        "CCS009",
+        "CCS013",
+        "CCS011"
+      ],
+      "lacunas": [
+        "CCL002"
+      ]
+    },
+    {
+      "id": "CCP006",
+      "enunciado": "A Lei 13.422, de 27/03/2017, determina a inscrição do nome no Livro dos Heróis da Pátria. Seu alcance é o ato posterior.",
+      "natureza": "documentado_no_escopo_da_fonte",
+      "fatos": [
+        "CCF016"
+      ],
+      "fontes": [
+        "CCS008"
+      ],
+      "lacunas": []
+    },
+    {
+      "id": "CCP007",
+      "enunciado": "Os registros do Senado documentam a homenagem póstuma com entrega por representante em 08/03/2023; não comprovam combates coloniais.",
+      "natureza": "documentado_no_escopo_da_fonte",
+      "fatos": [
+        "CCF017"
+      ],
+      "fontes": [
+        "CCS012",
+        "CCS011"
+      ],
+      "lacunas": []
+    },
+    {
+      "id": "CCP008",
+      "enunciado": "A notícia municipal e o projeto de comenda documentam proposta/tramitação, sem desfecho final estabelecido nesta base.",
+      "natureza": "documentado_no_escopo_da_fonte",
+      "fatos": [
+        "CCF018",
+        "CCF021"
+      ],
+      "fontes": [
+        "CCS009",
+        "CCS013"
+      ],
+      "lacunas": [
+        "CCL013"
+      ]
+    }
+  ],
+  "cronologia": {
+    "periodo_dos_relatos": "século XVII, como contexto dos relatos coloniais auditados, sem dedução de ano de nascimento",
+    "nascimento": null,
+    "naturalidade_exata": null,
+    "idade_em_batalhas": null,
+    "morte": null,
+    "datas_de_reconhecimento_sao_posteriores": true,
+    "fatos": [
+      "CCF008",
+      "CCF009",
+      "CCF016",
+      "CCF017"
+    ],
+    "fontes": [
+      "CCS001",
+      "CCS007",
+      "CCS010",
+      "CCS013",
+      "CCS008",
+      "CCS012"
+    ],
+    "lacunas": [
+      "CCL001",
+      "CCL005",
+      "CCL010"
+    ]
+  },
+  "incertezas": [
+    {
+      "lacuna_id": "CCL001",
+      "tema": "Nascimento e naturalidade",
+      "estado_auditado": "Não há documento de nascimento ou local exato conferido. Há descrições regionais divergentes e tensão de cronologia nas publicações.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL002",
+      "tema": "Nomes e batismo",
+      "estado_auditado": "Clara, Dona Clara, Felipe, Felipa e Filipa são ocorrências em suportes de épocas distintas; nome indígena e nome de batismo não foram comprovados.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL003",
+      "tema": "Identificação potiguara e comunidade",
+      "estado_auditado": "Identificação aparece em historiografia, memória institucional e fala indígena contemporânea; não foi localizada autodeclaração de época ou comunidade exata.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL004",
+      "tema": "Casamento e família",
+      "estado_auditado": "Relação conjugal é narrada, mas datas, local e registro de casamento não foram conferidos. Não reconstruir parentes por associação.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL005",
+      "tema": "Acompanhamento, presença e combate",
+      "estado_auditado": "O acompanhamento narrado não basta para estabelecer ação militar individual; cada conflito exige evidência própria.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL006",
+      "tema": "Tejucupapo",
+      "estado_auditado": "Não há nesta etapa passagem de época conferida que identifique Clara individualmente nesse episódio.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL007",
+      "tema": "Guararapes",
+      "estado_auditado": "Não se estabeleceu presença individual de Clara em cada batalha; não transferir cronologia do marido.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL008",
+      "tema": "Comando feminino e costumes",
+      "estado_auditado": "Não foram conferidas patentes, ordens ou provas de comando de pelotão; supostas proibições tribais e formação militar também não estão demonstradas.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL009",
+      "tema": "Dona e honrarias",
+      "estado_auditado": "Uso de tratamento não comprova concessão régia individual; não foi verificado hábito de Cristo conferido a Clara.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL010",
+      "tema": "Morte e destino posterior",
+      "estado_auditado": "Data e local de morte, viuvez narrada e suposto retorno a Aldeia Velha não foram comprovados nesta pesquisa.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL011",
+      "tema": "Falas, sentimentos e aparência",
+      "estado_auditado": "Não há testemunho autobiográfico, diálogo íntimo ou retrato autenticado conferido que sustente esses detalhes nesta base.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL012",
+      "tema": "Edições, OCR e transmissão das crônicas",
+      "estado_auditado": "A p. 37 de Calado foi cotejada visualmente. Leitura direta de Santiago, Couto, Mello e de outras edições e estudo de transmissão continuam pendentes.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL013",
+      "tema": "Desfecho de homenagens propostas",
+      "estado_auditado": "Projeto de comenda e notícia de comissão não demonstram por si só a edição de atos finais.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL014",
+      "tema": "Refinaria e outras homenagens",
+      "estado_auditado": "A origem formal da denominação e as datas de homenagens não examinadas permanecem fora do núcleo comprovado.",
+      "permanece_aberta": true
+    },
+    {
+      "lacuna_id": "CCL015",
+      "tema": "Recepção oitocentista",
+      "estado_auditado": "Trecho de 1862 consultado visualmente; edição de 2004 e cadeia de fontes do autor continuam pendentes. Não autenticar acontecimentos coloniais a partir da recepção oitocentista.",
+      "permanece_aberta": true
+    }
+  ],
+  "regras_de_leitura": [
+    "A auditoria da etapa 2 qualifica registros antigos sem reescrever a pesquisa nesta etapa.",
+    "CCL012 está parcialmente resolvida: a p. 37 de Calado já foi vista; transmissão e outras edições continuam pendentes.",
+    "CCL015 está parcialmente resolvida: pp. 86–89 de 1862 vistas; edição de 2004 não consultada.",
+    "O campo antigo de CCF012 sobre capítulo não lido deve ser entendido à luz dessa distinção de edições.",
+    "Não acrescentar traços físicos, fala indígena, crenças pessoais, temperamento, sonhos ou genealogia por inferência."
+  ]
+}

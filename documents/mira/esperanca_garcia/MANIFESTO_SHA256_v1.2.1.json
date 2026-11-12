@@ -1,0 +1,187 @@
+{
+  "versao_distribuicao": "1.2.1",
+  "algoritmo": "SHA-256",
+  "data": "2026-11-10",
+  "escopo": "Arquivos ativos finais da base, excluindo backups e o próprio manifesto. Artefatos de distribuição ficam fora da base.",
+  "raiz_origem": "MIRA_BASE_CONHECIMENTO",
+  "raiz_pacote": "MIRA_Esperanca_Garcia_v1.2.1",
+  "manifesto_autoexcluido": true,
+  "arquivos": [
+    {
+      "caminho_origem": "esperanca_garcia/ALTERACOES_2026-11-10.md",
+      "tamanho_bytes": 3659,
+      "sha256": "f93c58fce88552939d6ed60b6ae403d11f8689111131d400104d92f4f3dc34a9",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "documentacao/historico/ALTERACOES_2026-11-10.md",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/ALTERACOES_v1.2.0.md",
+      "tamanho_bytes": 8167,
+      "sha256": "9fb7603f230c841738da919546eba390a39648db6eab05214de95e9805db2367",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "documentacao/historico/ALTERACOES_v1.2.0.md",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/AUDITORIA_V1.2.0.md",
+      "tamanho_bytes": 35009,
+      "sha256": "a6abd815bad643b2528a2de29c7ca001420c67d187a49010c23afd02579ae171",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "documentacao/historico/AUDITORIA_V1.2.0.md",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/contrato_resposta.json",
+      "tamanho_bytes": 2474,
+      "sha256": "b7554cac674ba9ab664dfdf221eed0c47b2ccdb4e6a9b633388317c2bef60b64",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "esperanca_garcia/contrato_resposta.json",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/CORRECOES_POS_AUDITORIA_V1.2.0.md",
+      "tamanho_bytes": 16009,
+      "sha256": "2cca70d8008e1747a02ad2d173fa9870160b154b861d0791b03903b9ed60943f",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "documentacao/historico/CORRECOES_POS_AUDITORIA_V1.2.0.md",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/documentos/carta_1770_REFERENCIA.md",
+      "tamanho_bytes": 542,
+      "sha256": "84ba283751b23763fe400dea0e96c4331cda2d81ff79891449dfae213b0ac31c",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "esperanca_garcia/documentos/carta_1770_REFERENCIA.md",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/fatos_historicos.json",
+      "tamanho_bytes": 5988,
+      "sha256": "cdf9554623c4de2e156f6c4ce7f212c88c0734768909e7fd1f4f291c0f0996ef",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "esperanca_garcia/fatos_historicos.json",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/fontes.json",
+      "tamanho_bytes": 4419,
+      "sha256": "945fbbaf604bb4f204c0b3a3cbcfc151311250a4588bcd0fcc05927248fcf8bb",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "esperanca_garcia/fontes.json",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/lacunas_e_hipoteses.json",
+      "tamanho_bytes": 2774,
+      "sha256": "8c7fba25057b8fbb873206bb27a8ddd1fbbff0fa63ddf3bd52101d617b8b3910",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "esperanca_garcia/lacunas_e_hipoteses.json",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/matriz_perguntas_v1.2.0.json",
+      "tamanho_bytes": 22889,
+      "sha256": "1a4ef01cf3a3237012eaaf538083de4e23f189aa37678510ba2a637bb2fc01ab",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "esperanca_garcia/matriz_perguntas_v1.2.0.json",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/perfil.json",
+      "tamanho_bytes": 539,
+      "sha256": "54b04a4ee37df729fac3d470a196cb54e88ef9a3e58d55c698b91f3e271fd33f",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "esperanca_garcia/perfil.json",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/perguntas_respostas.json",
+      "tamanho_bytes": 6486,
+      "sha256": "e6c957216b3319d0b44de442f66d253b30addadabb89b2dd13886983eca18151",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "esperanca_garcia/perguntas_respostas.json",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/perguntas_respostas_expandidas.json",
+      "tamanho_bytes": 104470,
+      "sha256": "78872c5a407ff827f3c26e3894db20599498848cb1fe17930d29d50c171c7246",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "esperanca_garcia/perguntas_respostas_expandidas.json",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/personalidade.md",
+      "tamanho_bytes": 5442,
+      "sha256": "effd081f84dfcb2ee615d37afe3ef7d12c014f606b5edc21a7195bbc603dd42e",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "esperanca_garcia/personalidade.md",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/regras_de_seguranca.md",
+      "tamanho_bytes": 875,
+      "sha256": "79155cf34066ea1c718dcc88f7f003941b0ce7faf06853fa982ec8c6fa026e2a",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "esperanca_garcia/regras_de_seguranca.md",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/REVISAO_2026-11-06.md",
+      "tamanho_bytes": 11503,
+      "sha256": "05d9ff9b332614fa448812af62fbf030bd7034431155967701fdf0c7241c07d6",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "documentacao/historico/REVISAO_2026-11-06.md",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/testes_validacao.json",
+      "tamanho_bytes": 4106,
+      "sha256": "68d8bbd2818cf68a74a302bfa5c71589d760a79b44d321745d1578798fba5811",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "esperanca_garcia/testes_validacao.json",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "esperanca_garcia/validar_consistencia.py",
+      "tamanho_bytes": 22755,
+      "sha256": "36fc93a3ec7150d22c7b4fc71221f94d4448756088508e44d301c5d249bcd83a",
+      "incluido_no_zip": false,
+      "caminho_no_pacote": null,
+      "motivo_exclusao": "Suíte completa dependente dos backups históricos, preservada somente no workspace."
+    },
+    {
+      "caminho_origem": "README.md",
+      "tamanho_bytes": 8535,
+      "sha256": "c51f539c4ede43b533e7e012f4536ade599b09686d92609e59727669bb495488",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "README.md",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "RELEASE_NOTES_v1.2.1.md",
+      "tamanho_bytes": 9479,
+      "sha256": "0eeb84e90dbefd32d9ca6d469e9e770d394f744e385017f4a93ab003a6cf80bb",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "RELEASE_NOTES_v1.2.1.md",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "RESULTADO_VALIDACAO_v1.2.1.txt",
+      "tamanho_bytes": 1838,
+      "sha256": "d29eb9403f523b32f9e248709a7c8941dc6b9fb08bbff86bd74bc91c945de4e0",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "documentacao/validacao/RESULTADO_VALIDACAO_v1.2.1.txt",
+      "motivo_exclusao": null
+    },
+    {
+      "caminho_origem": "VERSAO.json",
+      "tamanho_bytes": 555,
+      "sha256": "08d01e98e3f30afa6d715b1ae48ed055e65b1579c449dc8fa56bfe39649995b0",
+      "incluido_no_zip": true,
+      "caminho_no_pacote": "VERSAO.json",
+      "motivo_exclusao": null
+    }
+  ]
+}

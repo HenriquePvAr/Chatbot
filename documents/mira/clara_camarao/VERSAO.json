@@ -1,0 +1,23 @@
+{
+  "projeto": "MIRA",
+  "personagem": "clara_camarao",
+  "versao": "1.0.0",
+  "natureza_artefato": "base_textual",
+  "status": "base_textual_estavel_preparada",
+  "data": "2026-11-11",
+  "etapa": 8,
+  "base_textual_revisada": true,
+  "escopo_estabilidade": "colecao_fixa_de_textos_revisados_com_limites_documentais",
+  "comportamento_modelo_ia_validado": false,
+  "integracao_realizada": false,
+  "personagem_liberada_uso_publico": false,
+  "conteudo_aprovado_para_conversa": false,
+  "entrega_equipe_autorizada": false,
+  "estado_entrega": "aguardando_aprovacao_humana_para_equipe",
+  "quantidade_respostas": 25,
+  "quantidade_lacunas": 15,
+  "versao_pesquisa_preservada": "0.1.0-pesquisa",
+  "autorizacao": "Etapa 8: preparacao estavel da base textual, sem liberacao publica do chatbot.",
+  "nota_precedencia": "Metadados desta distribuicao descrevem a base textual revisada. Avisos e flags das etapas de pesquisa/producao permanecem historicos, sem alteracao de textos ou regras. Nao autorizam uso conversacional.",
+  "guia": "documentacao/GUIA_INTEGRACAO_BASE_TEXTUAL_v1.0.0.md"
+}
