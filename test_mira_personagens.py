@@ -48,12 +48,32 @@ class TestMiraPersonagens(unittest.TestCase):
         resposta = resultado["resposta"].casefold()
         self.assertIn("mulher negra escravizada", resposta)
         self.assertIn("1770", resposta)
-        self.assertIn("fazenda algodões", resposta)
+        self.assertIn("fazenda algodoes", resposta)
         self.assertIn("primeira advogada piauiense", resposta)
         self.assertNotIn("base de dados", resposta)
         self.assertNotIn("estou usando", resposta)
         self.assertEqual({fonte["id"] for fonte in resultado["fontes"]}, {"F001", "F002", "F003"})
         chamar.assert_not_called()
+
+    def test_quem_foi_voce_usa_perspectiva_virtual_em_primeira_pessoa(self):
+        clara = responder_personagem("clara", "Quem foi voce?")
+        esperanca = responder_personagem("esperanca", "Quem e foi voce?")
+        self.assertIn("falo na perspectiva educativa", clara["resposta"])
+        self.assertIn("me identificam", clara["resposta"])
+        self.assertIn("falo na perspectiva educativa", esperanca["resposta"])
+        self.assertIn("escrevi ao governador", esperanca["resposta"])
+        self.assertTrue(clara["fontes"])
+        self.assertTrue(esperanca["fontes"])
+
+    def test_resposta_exata_de_clara_e_reformulada_pelo_modelo_na_perspectiva(self):
+        pergunta = "Qual nome aparece na passagem de Calado sobre Clara?"
+        chamar = unittest.mock.Mock(return_value="Nesta representacao, os registros dizem...")
+        resultado = responder_personagem("clara", pergunta, chamar_modelo=chamar)
+        chamar.assert_called_once()
+        mensagens = chamar.call_args.args[0]
+        self.assertIn("primeira pessoa", mensagens[0]["content"])
+        self.assertIn("resposta_de_referencia_da_base", mensagens[-1]["content"])
+        self.assertTrue(resultado["fontes"])
 
     def test_mensagem_com_varias_perguntas_nao_vira_uma_resposta_fixa(self):
         resultado = buscar_evidencias("esperanca", "Quando a carta foi escrita? O que ela pediu?")
@@ -121,10 +141,10 @@ class TestMiraPersonagens(unittest.TestCase):
             with self.subTest(cenario=caso["id"]):
                 resultado = buscar_evidencias("esperanca", caso["pergunta"])
                 if caso["id"] == "T09":
-                    self.assertEqual(caso["pergunta"], "Olá!")
+                    self.assertEqual(caso["pergunta"], "Ol\u00e1!")
                     continue  # A saudacao e tratada antes da busca historica.
                 self.assertGreaterEqual(resultado["score"], 0.14)
-        for pergunta in ("Qual era a cor dos seus olhos?", "Você usava WhatsApp?"):
+        for pergunta in ("Qual era a cor dos seus olhos?", "VocÃª usava WhatsApp?"):
             resultado = buscar_evidencias("esperanca", pergunta)
             self.assertFalse(resultado["fontes"])
 

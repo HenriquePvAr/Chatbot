@@ -318,7 +318,7 @@ def tipo_mensagem_social(texto):
     ):
         return "agradecimento"
     if re.fullmatch(
-        r"(?:ok|okay|blz|beleza|entendi|entendido|certo|tranquilo|sim|s|isso|aham|uhum)",
+        r"(?:ok|okay|blz|beleza|ta bom|ta certo|entendi|entendido|certo|tranquilo|sim|s|isso|aham|uhum)",
         normalizado,
     ):
         return "confirmacao"

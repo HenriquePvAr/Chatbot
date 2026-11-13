@@ -331,17 +331,15 @@ def gerar_menu_mira():
     return (
         "MIRA: Vozes que atravessam gerações\n\n"
         "MIRA é o nome do projeto; suas duas personagens são Esperança Garcia e Clara Camarão.\n"
-        "As personagens são representações educativas virtuais, não as mulheres "
-        "históricas nem testemunhas de suas memórias.\n\n"
+        "As personagens sao representacoes educativas virtuais, nao as mulheres historicas nem testemunhas de suas memorias.\n\n"
+        "Na conversa, elas podem falar em primeira pessoa como recurso de representacao, sempre com base nos registros; nao inventam lembrancas, pensamentos ou sentimentos.\n\n"
         "Envie somente um destes comandos, sem nome ou texto depois dele:\n"
         "/mira esperanca\n"
-        "  Conversar sobre Esperança Garcia\n"
+        "  Conversar com a representacao de Esperanca Garcia\n"
         "/mira clara\n"
-        "  Conversar sobre Clara Camarão\n"
+        "  Conversar com a representacao de Clara Camarao\n"
         "/mira sair: voltar ao assistente geral\n\n"
-        "As perguntas podem ser livres. As respostas usam a base histórica da personagem "
-        "selecionada e reconhecem quando falta evidência. A prévia precisa estar habilitada "
-        "nesta instalação."
+        "As perguntas podem ser livres. As respostas usam a base historica da personagem selecionada e reconhecem quando falta evidencia. A previa precisa estar habilitada nesta instalacao."
     )
 
 
@@ -380,9 +378,7 @@ def _comando_mira(texto, identificador):
     _definir_personagem_mira(identificador, personagem)
     nome = "Esperança Garcia" if personagem == "esperanca_garcia" else "Clara Camarão"
     return (
-        f"Prévia MIRA ativada: {nome}. Sou uma representação virtual educativa, "
-        "não a personagem histórica. Pode perguntar livremente sobre sua trajetória; "
-        "vou me limitar às evidências e lacunas da base. Digite /mira sair para voltar."
+        f"Previa MIRA ativada: {nome}. Nesta conversa, falo na perspectiva educativa da personagem, em primeira pessoa quando os registros permitem. Sou uma representacao virtual, nao a mulher historica, e nao invento memorias. Pergunte livremente; /mira sair volta ao assistente geral."
     )
 
 
@@ -847,28 +843,53 @@ def responder_mensagem(texto, identificador):
         if not preview_habilitado(personagem_mira):
             with bloqueio:
                 obter_conversa(identificador)["mira_personagem"] = None
-            return "A prévia MIRA foi desativada. Você voltou ao assistente geral do projeto."
+            return "A previa MIRA foi desativada. Voce voltou ao assistente geral do projeto."
         if forcar_web:
-            return "No modo MIRA uso as fontes cadastradas na base da personagem. Digite /mira sair para usar a pesquisa geral."
-        nome = "Esperança Garcia" if personagem_mira == "esperanca_garcia" else "Clara Camarão"
+            return "No modo MIRA uso as fontes cadastradas para a personagem. Digite /mira sair para usar a pesquisa geral."
+        nome = "Esperanca Garcia" if personagem_mira == "esperanca_garcia" else "Clara Camarao"
         if eh_cumprimento(pergunta):
             return (
-                f"Olá! Sou uma representação virtual educativa de {nome}, personagem do projeto MIRA: "
-                "Vozes que atravessam gerações. Também há a prévia de "
-                f"{'Clara Camarão' if personagem_mira == 'esperanca_garcia' else 'Esperança Garcia'}. "
-                "Pode perguntar livremente sobre a trajetória registrada nas fontes. "
+                f"Ola! Nesta conversa, falo na perspectiva educativa de {nome}. Sou uma "
+                "representacao virtual, nao a mulher historica, e nao invento lembrancas. "
+                f"Tambem existe a representacao de {'Clara Camarao' if personagem_mira == 'esperanca_garcia' else 'Esperanca Garcia'}. "
+                "Pode conversar comigo e perguntar livremente sobre minha trajetoria nos registros. "
                 "Use /mira esperanca ou /mira clara para trocar; /mira sair volta ao assistente geral."
             )
         tipo_social_mira = tipo_mensagem_social(pergunta)
         if tipo_social_mira == "agradecimento":
-            return "Por nada! Se quiser, pode perguntar mais sobre os registros e as fontes da base."
+            return "Por nada! Fico feliz em continuar essa conversa. O que mais voce gostaria de saber?"
         if tipo_social_mira == "confirmacao":
-            return "Certo. Pode continuar perguntando sobre a trajetoria de " + nome + "."
+            return "Certo. Pode continuar; tambem posso explicar algum ponto de outro jeito."
+        pergunta_social = normalizar(pergunta).strip(" .!?\t\n")
+        if re.search(r"\b(representacao virtual|primeira pessoa|falar em primeira pessoa|conversar em primeira pessoa)\b", pergunta_social):
+            return (
+                f"Entendi. Posso conversar na perspectiva educativa de {nome} e usar a primeira pessoa "
+                "quando os registros sustentarem o que digo. Vou deixar claro que sou uma representacao "
+                "virtual e nao inventar lembrancas, pensamentos ou sentimentos da mulher historica."
+            )
+        if re.search(r"\b(filha|filho) de clara\b", pergunta_social) and re.search(
+            r"\b(posso|quero|vou) (?:te )?(?:contar|fornecer|passar|dar|compartilhar)\b|\bmais informacoes\b",
+            pergunta_social,
+        ):
+            return (
+                "Agradeco por se oferecer para compartilhar essas informacoes. Pode me contar "
+                "o que sabe e, se tiver, indicar documentos, publicacoes, links ou de quem veio "
+                "o relato. Vou tratar isso como uma contribuicao familiar a ser conferida, "
+                "nao como fato comprovado automaticamente; a base nao e alterada so com uma mensagem."
+            )
+        if re.search(r"\bso fala quando (?:eu )?falo\b|\bresponde so quando eu mando\b", pergunta_social):
+            return (
+                "Voce tem razao em esperar uma conversa mais natural. Eu respondo quando recebo "
+                "uma mensagem, mas posso conversar com voce por aqui. Como foi seu dia?"
+            )
+        if re.search(r"\b(comentei|perguntei|falei|mandei)\b.*\bcedo|\bmais cedo\b", pergunta_social):
+            return "Desculpa por nao ter respondido antes. Estou aqui agora; pode me mandar de novo o que queria comentar."
+        if re.search(r"\bamo (?:vc|voce)|\bte amo\b|\bamo voce\b", pergunta_social):
+            return "Que carinho, obrigada pela mensagem. Sou uma representacao educativa, mas posso seguir conversando com voce."
+        if re.fullmatch(r"fznd|faznd|fazendo", pergunta_social):
+            return "Voce quis dizer 'fazendo'? Me explica um pouquinho melhor para eu entender."
         if eh_reacao_curta(pergunta):
-            return None
-        status_curto = normalizar(pergunta).strip(" .!?\t\n")
-        if re.fullmatch(r"(?:deu ruim|deu erro|bugou|travou|falhou|lascou|deu problema)", status_curto):
-            return "Parece que uma resposta falhou. Estou aqui; pode reenviar a pergunta que eu tento de novo."
+            return "Hehe. Estou por aqui. Quer continuar falando sobre a minha historia ou mudar de assunto?"
         return processar_pergunta(
             pergunta,
             identificador,
